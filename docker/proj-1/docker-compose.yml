@@ -1,0 +1,15 @@
+mysql:
+ image: mysql:latest
+ environment:
+  MYSQL_ROOT_PASSWORD: root
+ container_name: mysql
+ubuntu:
+ build: .
+ dockerfile: Dockerfile
+ container_name: ubuntu
+ links:
+  - mysql
+ stdin_open: true
+ tty: true
+ volumes:
+  - ./tmp:/home/volume_tmp:rw
