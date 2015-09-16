@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>This is start page of the application</title>
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+	<div data-ng-app="application">
+		<div data-ng-controller="mainCtrl">
+			<div data-ng-repeat="u in user"><span data-ng-bind="u.name"></span><span data-ng-bind="u.surname"></span></div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js"></script>
+	<script>
+	(function (angular) {
+		var application = angular.module('application', []);
+		application.controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
+			var self = this;
+			$http.get('/1').then(function (resp) {
+				$scope.user = resp.data;
+			});
+		}]);
+	})(angular);
+	</script>
+</body>
+</html>

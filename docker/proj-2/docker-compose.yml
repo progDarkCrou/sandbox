@@ -1,0 +1,13 @@
+app:
+ build: .
+ dockerfile: Dockerfile-app
+ links:
+  - mysql:mysql
+ ports:
+  - "8080"
+mysql:
+ image: mysql
+ container_name: mysql
+ environment:
+  - MYSQL_ROOT_PASSWORD=root
+  - MYSQL_DATABASE=hibernate
