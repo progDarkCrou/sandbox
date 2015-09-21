@@ -12,9 +12,24 @@
 </head>
 
 <body>
-  <div data-ng-app="application">
+  <div data-ng-app="application" class="container">
     <div data-ng-controller="mainCtrl">
-      <span data-ng-bind="user.name"></span><span data-ng-bind="user.surname"></span>
+      <table class="table">
+        <thead>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Login</th>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="u in users">
+            <td data-ng-bind="u.id"></td>
+            <td data-ng-bind="u.name"></td>
+            <td data-ng-bind="u.surname"></td>
+            <td data-ng-bind="u.login"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <!-- inject:js -->
@@ -24,8 +39,9 @@
     var application = angular.module('application', []);
     application.controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
       var self = this;
-      $http.get('http://localhost:8082/user/1').then(function (resp) {
-        $scope.user = resp.data;
+      $scope.users = {};
+      $http.get('http://localhost:8082/user/').then(function (resp) {
+        $scope.users = resp.data;
       });
     }]);
   })(angular);
