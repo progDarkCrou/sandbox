@@ -1,0 +1,22 @@
+{
+  "name": "proj-2",
+  "version": "0.0.0",
+  "description": "This is my GUI application for Users service backend application",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "crou (Andriy Vorona)",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "gulp": "~3.9.0",
+    "bower": "~1.5.2"
+  },
+  "devDependencies": {
+    "gulp-serve": "~1.2.0",
+    "gulp-webserver": "~0.9.1",
+    "gulp-watch": "~4.3.5",
+    "main-bower-files": "~2.9.0",
+    "gulp-inject": "~2.2.0"
+  }
+}

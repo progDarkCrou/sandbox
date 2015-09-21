@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>This is start page of the application</title>
+  <!-- inject:css -->
+  <link rel="stylesheet"
+    href="/vendor/bootstrap.min.css">
+  <!-- endinject -->
+  <!-- inject:less -->
+  <!-- endinject -->
+  <link rel="stylesheet"
+    href="css/main.css">
+</head>
+
+<body>
+  <div class="container">
+    <div data-ng-app="application">
+      <div data-ng-controller="mainCtrl">
+        <span data-ng-bind="user.name"></span><span data-ng-bind="user.surname"></span>
+      </div>
+    </div>
+  </div>
+  <!-- inject:js -->
+  <script src="/vendor/angular.js"></script>
+  <script src="/vendor/bootstrap.min.js"></script>
+  <script src="/vendor/jquery.js"></script>
+  <!-- endinject -->
+  <script>
+  (function (angular) {
+    var application = angular.module('application', []);
+    application.controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
+      var self = this;
+      $http.get('http://localhost:8082/user/1').then(function (resp) {
+        $scope.user = resp.data;
+      });
+    }]);
+  })(angular);
+  </script>
+</body>
+
+</html>
