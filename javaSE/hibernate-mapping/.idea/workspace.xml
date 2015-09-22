@@ -7,139 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f44cfa5a-cd53-45e9-9b99-554d8f771f3a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/artifacts/hibernate_mapping_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__com_fasterxml_classmate_0_8_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_4_6.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__javax_el_javax_el_api_2_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__junit_junit_3_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_36.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_logging_juli_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_0_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_glassfish_web_javax_el_2_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_hibernate_hibernate_core_5_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_javassist_javassist_3_18_1_GA.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_jboss_jandex_1_2_2_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_1_2_5_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_aop_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_beans_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_context_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_core_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_expression_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_web_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_springframework_spring_webmvc_4_1_7_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__org_yaml_snakeyaml_1_14.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/rebel_project.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/hibernate-mapping.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/out/artifacts/hibernate_mapping_jar/hibernate-mapping.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/java/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/java/hibernate/tutorial/App.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/java/hibernate/tutorial/UserController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/java/hibernate/tutorial/model/User.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/resources/META-INF/persistence.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/resources/hibernate.cfg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/resources/rebel.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/main/resources/user.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/src/test/java/hibernate/tutorial/AppTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/META-INF/persistence.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/hibernate.cfg.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/hibernate/tutorial/App.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/hibernate/tutorial/UserController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/hibernate/tutorial/model/User.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/rebel.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/classes/user.hbm.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/antlr-2.7.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/aopalliance-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/classmate-0.8.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/dom4j-1.6.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/geronimo-jta_1.1_spec-1.1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/hibernate-commons-annotations-5.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/hibernate-core-5.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/hibernate-entitymanager-5.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/hibernate-jpa-2.1-api-1.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/hibernate-validator-5.0.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jackson-annotations-2.4.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jackson-core-2.4.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jackson-databind-2.4.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jandex-1.2.2.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/javassist-3.18.1-GA.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/javax.el-2.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/javax.el-api-2.2.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jboss-logging-3.3.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jcl-over-slf4j-1.7.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/jul-to-slf4j-1.7.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/junit-3.8.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/log4j-over-slf4j-1.7.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/logback-classic-1.1.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/logback-core-1.1.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/mysql-connector-java-5.1.36.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/slf4j-api-1.7.12.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/snakeyaml-1.14.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-aop-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-beans-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-1.2.5.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-autoconfigure-1.2.5.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-starter-1.2.5.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-starter-logging-1.2.5.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-starter-tomcat-1.2.5.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-boot-starter-web-1.1.2.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-context-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-core-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-expression-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-web-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/spring-webmvc-4.1.7.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/tomcat-embed-core-8.0.23.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/tomcat-embed-el-8.0.23.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/tomcat-embed-logging-juli-8.0.23.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/tomcat-embed-websocket-8.0.23.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/validation-api-1.1.0.Final.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/dependency/xml-apis-1.0.b2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/hibernate-mapping-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/maven-archiver/pom.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/surefire-reports/TEST-hibernate.tutorial.AppTest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/surefire-reports/hibernate.tutorial.AppTest.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/hibernate-mapping/target/test-classes/hibernate/tutorial/AppTest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj2/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/css/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/templates/main.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/angular.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/tmp/css/main.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/gulpfile.js" afterPath="$PROJECT_DIR$/../../www/proj-2/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/css/main.css" afterPath="$PROJECT_DIR$/../../www/proj-2/app/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hibernate-mapping.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -214,7 +93,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -825,7 +706,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13535737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.6407337" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.6407337" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.772296" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20303605" sideWeight="0.4936306" order="0" side_tool="false" content_ui="combo" />
@@ -1249,7 +1130,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
