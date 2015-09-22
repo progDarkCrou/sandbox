@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Login</th>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="u in users track by $index">
+      <td data-ng-bind="u.id"></td>
+      <td data-ng-bind="u.name"></td>
+      <td data-ng-bind="u.surname"></td>
+      <td data-ng-bind="u.login"></td>
+    </tr>
+  </tbody>
+</table>

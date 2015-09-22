@@ -34,6 +34,7 @@ gulp.task('clean', function(cb) {
     force: true
   });
   d.then(function () {
+  	console.log('End of the cleaning..');
   	cb();
   });
 });
@@ -58,7 +59,11 @@ gulp.task('js', function(cb) {
   gulp.src('./app/js/**/*.js').pipe(concat('main.js')).pipe(gulp.dest('.tmp/js')).on('end', cb);
 });
 
-gulp.task('package', gulpSync.sync(['clean', 'js', 'css', 'bower-css', 'bower-js', 'wiredep']));
+gulp.task('html', function(cb) {
+  gulp.src('app/**/*.html').pipe(gulp.dest('./.tmp')).on('end', cb);
+});
+
+gulp.task('package', gulpSync.sync(['clean', 'js', 'css', 'bower-css', 'bower-js', 'html', 'wiredep']));
 
 gulp.task('wiredep', function(cb) {
   var target = gulp.src('app/index.html');
