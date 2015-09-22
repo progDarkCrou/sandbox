@@ -17,52 +17,64 @@ var bowerFiles = require('main-bower-files');
 var concat = require('gulp-concat');
 var del = require('del');
 var concatCss = require('gulp-concat-css');
+var gulpSync = require('gulp-sync')(gulp);
 
 gulp.task('serve', ['watch'], function() {
-  gulp.src(devDestSrc)
+  gulp.src('.tmp/')
     .pipe(serve({
       host: '0.0.0.0',
       port: 9000,
       livereload: true,
       directoryListen: true
-    }))
+    }));
 });
 
-gulp.task('clean', function() {
-  del(['./.tmp/**', './dest/**'], {
+gulp.task('clean', function(cb) {
+  var d = del(['.tmp'], {
     force: true
+  });
+  d.then(function () {
+  	cb();
   });
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['package'], function() {
   gulp.watch('./app/**/*', ['package']);
 });
 
-gulp.task('bower-css', function() {
-  gulp.src(bowerCss()).pipe(concat('vendor.css')).pipe(gulp.dest('./.tmp/vendor/css'));
+gulp.task('bower-css', function(cb) {
+  gulp.src(bowerCss()).pipe(concat('vendor.css')).pipe(gulp.dest('.tmp/vendor/css')).on('end', cb);
 });
 
-gulp.task('css', function() {
-  gulp.src('./app/css/**/*.css').pipe(concat('main.css')).pipe(gulp.dest('./.tmp/css'));
+gulp.task('css', function(cb) {
+  gulp.src('./app/css/**/*.css').pipe(concat('main.css')).pipe(gulp.dest('.tmp/css')).on('end', cb);
 });
 
-gulp.task('bower-js', function() {
-  gulp.src(bowerJs()).pipe(concat('vendor.js')).pipe(gulp.dest('./.tmp/vendor/js'));
+gulp.task('bower-js', function(cb) {
+  gulp.src(bowerJs()).pipe(concat('vendor.js')).pipe(gulp.dest('.tmp/vendor/js')).on('end', cb);
 });
 
-gulp.task('js', function() {
-  gulp.src('./app/js/**/*.js').pipe(concat('main.js')).pipe(gulp.dest('./.tmp/js'));
+gulp.task('js', function(cb) {
+  gulp.src('./app/js/**/*.js').pipe(concat('main.js')).pipe(gulp.dest('.tmp/js')).on('end', cb);
 });
 
-gulp.task('package', ['bower-css', 'bower-js', 'js', 'css'], function() {
-  var target = gulp.src('./app/index.html');
-  var sources = gulp.src(['./.tmp/vendor/*.js', './.tmp/css/*.css'], {
-    read: false,
-    base: './.tmp'
-  });
+gulp.task('package', gulpSync.sync(['clean', 'js', 'css', 'bower-css', 'bower-js', 'wiredep']));
 
-  return target.pipe(inject(sources))
-    .pipe(gulp.dest('./.tmp'));
+gulp.task('wiredep', function(cb) {
+  var target = gulp.src('app/index.html');
+  var sourcesVendor = gulp.src(['.tmp/vendor/**/*.js', '.tmp/vendor/**/*.css']);
+  var sources = gulp.src(['.tmp/js/**/*.js', '.tmp/css/**/*.css']);
+
+  target.pipe(inject(sourcesVendor, {
+      ignorePath: '.tmp',
+      name: 'vendor'
+    }))
+    .pipe(gulp.dest('.tmp'))
+    .pipe(inject(sources, {
+      ignorePath: '.tmp'
+    }))
+    .pipe(gulp.dest('.tmp'))
+    .on('end', cb);
 });
 
 function bowerCss() {

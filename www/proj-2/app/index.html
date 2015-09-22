@@ -3,13 +3,15 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>This is start page of the application</title>
+  <title>This is start page</title>
+  <!-- vendor:css -->
+  <!-- endinject -->
   <!-- inject:css -->
   <!-- endinject -->
 </head>
 
 <body>
-  <div data-ng-app="application" class="container">
+  <div data-ng-app="app" class="container">
     <div data-ng-controller="mainCtrl">
       <table class="table">
         <thead>
@@ -19,7 +21,7 @@
           <th>Login</th>
         </thead>
         <tbody>
-          <tr data-ng-repeat="u in users">
+          <tr data-ng-repeat="u in users track by $index">
             <td data-ng-bind="u.id"></td>
             <td data-ng-bind="u.name"></td>
             <td data-ng-bind="u.surname"></td>
@@ -29,20 +31,10 @@
       </table>
     </div>
   </div>
+  <!-- vendor:js -->
+  <!-- endinject -->
   <!-- inject:js -->
   <!-- endinject -->
-  <script>
-  (function (angular) {
-    var application = angular.module('application', []);
-    application.controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
-      var self = this;
-      $scope.users = {};
-      $http.get('http://localhost:8082/user/').then(function (resp) {
-        $scope.users = resp.data;
-      });
-    }]);
-  })(angular);
-  </script>
 </body>
 
 </html>
