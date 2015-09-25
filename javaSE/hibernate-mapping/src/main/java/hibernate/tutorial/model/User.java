@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     private Long id;
-    private long age;
+    private Long age;
     private String name;
     private String surname;
     private String login;
@@ -51,5 +51,16 @@ public class User implements Serializable{
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", login='" + login + '\'' +
+                '}';
     }
 }

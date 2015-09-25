@@ -45,4 +45,7 @@
   Array.prototype.addAll = function (array) {
     Array.prototype.push.apply(this, array);
   }
+  Array.prototype.remove = function (e) {
+    this.splice(this.indexOf(e), 1);
+  }
 })(angular);

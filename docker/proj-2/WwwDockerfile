@@ -1,6 +1,6 @@
 FROM nginx
 WORKDIR /home/www
-COPY [".tmp", "/home/www/www/"]
+COPY ["www", "/home/www/www"]
 COPY ["start.sh", "/home/www/start.sh"]
 COPY ["andriy.backend.conf", "/etc/nginx/conf.d/andriy.backend.conf"]
 COPY ["andriy.upstream.conf", "/etc/nginx/conf.d/andriy.upstream.c"]

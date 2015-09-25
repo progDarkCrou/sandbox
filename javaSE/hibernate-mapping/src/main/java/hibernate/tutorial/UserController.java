@@ -3,16 +3,17 @@ package hibernate.tutorial;
 import hibernate.tutorial.model.User;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Created by avorona on 18.09.15.
  */
 @RestController
 @RequestMapping("/user")
+@Transactional
 public class UserController {
 
     @Autowired
@@ -21,43 +22,42 @@ public class UserController {
     private Session tmp;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Callable<List<User>> users() {
-        return () -> {
-            Thread.currentThread().sleep((long) (Math.random() * 1000));
-            return session.createQuery("from User").list();
-        };
+    public List<User> users() {
+        List list = session.createQuery("from User").list();
+        System.out.println("Find users: " + list);
+        return list;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Callable<User> definedUser(@PathVariable Long id) {
-        return () -> session.get(User.class, id);
+    public User definedUser(@PathVariable Long id) {
+        return session.get(User.class, id);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public User createUser(@RequestParam("name") String name,
-                           @RequestParam("surname") String surname,
-                           @RequestParam("age") Long age,
-                           @RequestParam(value = "login", required = false) String login) {
-        User user = new User();
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public User createUser(@RequestBody User user, User user1) {
+        System.out.println(user1);
+        System.out.println(user);
 
-        if (login == null) {
-            login = name + " " + surname;
+        if (user.getLogin() == null) {
+            user.setLogin(user.getName() + " " + user.getSurname());
         }
-        user.setAge(age);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setLogin(login);
+
         session.saveOrUpdate(user);
-        if(user.getId() != null) {
+        if (user.getId() != null) {
             return user;
         }
         return null;
     }
 
-    @RequestMapping(value = "/session", method = RequestMethod.GET)
-    public Boolean sessionChesh() {
-        Boolean result = session == tmp;
-        tmp = session;
-        return result;
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public boolean removeUser(@PathVariable Long id) {
+        User u = session.get(User.class, id);
+        if (u != null) {
+            session.delete(u);
+            session.flush();
+            System.out.println("Deleted user: " + u.getId());
+            return session.get(User.class, id) == null;
+        }
+        return false;
     }
 }

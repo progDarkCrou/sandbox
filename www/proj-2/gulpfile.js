@@ -33,9 +33,8 @@ gulp.task('clean', function(cb) {
   var d = del(['.tmp'], {
     force: true
   });
-  d.then(function () {
-  	console.log('End of the cleaning..');
-  	cb();
+  d.then(function() {
+    cb();
   });
 });
 
@@ -47,25 +46,33 @@ gulp.task('bower-css', function(cb) {
   gulp.src(bowerCss()).pipe(concat('vendor.css')).pipe(gulp.dest('.tmp/vendor/css')).on('end', cb);
 });
 
-gulp.task('css', function(cb) {
+gulp.task('dev-css', function(cb) {
   gulp.src('./app/css/**/*.css').pipe(concat('main.css')).pipe(gulp.dest('.tmp/css')).on('end', cb);
 });
+
+gulp.task('css', ['bower-css', 'dev-css']);
 
 gulp.task('bower-js', function(cb) {
   gulp.src(bowerJs()).pipe(concat('vendor.js')).pipe(gulp.dest('.tmp/vendor/js')).on('end', cb);
 });
 
-gulp.task('js', function(cb) {
+gulp.task('dev-js', function(cb) {
   gulp.src('./app/js/**/*.js').pipe(concat('main.js')).pipe(gulp.dest('.tmp/js')).on('end', cb);
 });
+
+gulp.task('js', ['bower-js','dev-js']);
 
 gulp.task('html', function(cb) {
   gulp.src('app/**/*.html').pipe(gulp.dest('./.tmp')).on('end', cb);
 });
 
-gulp.task('package', gulpSync.sync(['clean', 'js', 'css', 'bower-css', 'bower-js', 'html', 'wiredep']));
+gulp.task('json', function(cb) {
+  gulp.src('app/**/*.json').pipe(gulp.dest('./.tmp')).on('end', cb);
+});
 
-gulp.task('wiredep', function(cb) {
+gulp.task('package', gulpSync.sync(['clean', 'wiredep']));
+
+gulp.task('wiredep', ['js', 'css', 'html', 'json'], function(cb) {
   var target = gulp.src('app/index.html');
   var sourcesVendor = gulp.src(['.tmp/vendor/**/*.js', '.tmp/vendor/**/*.css']);
   var sources = gulp.src(['.tmp/js/**/*.js', '.tmp/css/**/*.css']);

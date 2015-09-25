@@ -7,6 +7,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f44cfa5a-cd53-45e9-9b99-554d8f771f3a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/Dockerfile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/Dockerfile-app" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/antlr-2.7.7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/aopalliance-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/classmate-0.8.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/dom4j-1.6.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/geronimo-jta_1.1_spec-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/hibernate-commons-annotations-5.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/hibernate-core-5.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/hibernate-entitymanager-5.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/hibernate-jpa-2.1-api-1.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/hibernate-validator-5.0.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jackson-annotations-2.4.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jackson-core-2.4.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jackson-databind-2.4.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jandex-1.2.2.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/javassist-3.18.1-GA.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/javax.el-2.2.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/javax.el-api-2.2.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jboss-logging-3.3.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jcl-over-slf4j-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/jul-to-slf4j-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/junit-3.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/log4j-over-slf4j-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/logback-classic-1.1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/logback-core-1.1.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/mysql-connector-java-5.1.36.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/slf4j-api-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/snakeyaml-1.14.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-aop-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-beans-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-1.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-autoconfigure-1.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-starter-1.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-starter-logging-1.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-starter-tomcat-1.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-boot-starter-web-1.1.2.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-context-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-core-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-expression-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-web-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/spring-webmvc-4.1.7.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/tomcat-embed-core-8.0.23.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/tomcat-embed-el-8.0.23.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/tomcat-embed-logging-juli-8.0.23.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/tomcat-embed-websocket-8.0.23.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/validation-api-1.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/dependency/xml-apis-1.0.b2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/hibernate-mapping-1.0-jar-with-dependencies.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/hibernate-mapping-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/hibernate-mapping.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/hosts.conf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/nginx.conf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../docker/proj-2/stream.conf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0-jar-with-dependencies.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0.jar.original" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/css/main.css" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/index.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/templates/main.html" afterPath="" />
@@ -14,10 +72,68 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.css" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/index.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/tmp/css/main.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/App.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/App.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/CORSFilter.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/CORSFilter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/model/User.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/model/User.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/UserController.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/UserController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/app.jar" afterPath="$PROJECT_DIR$/../../docker/proj-2/app.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/hibernate_mapping_jar/hibernate-mapping.jar" afterPath="$PROJECT_DIR$/out/artifacts/hibernate_mapping_jar/hibernate-mapping.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/AppDockerfile" afterPath="$PROJECT_DIR$/../../docker/proj-2/AppDockerfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hibernate.tutorial.AppTest.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hibernate.tutorial.AppTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/WwwDockerfile" afterPath="$PROJECT_DIR$/../../docker/proj-2/WwwDockerfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/bower.json" afterPath="$PROJECT_DIR$/../../www/proj-2/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/docker-compose.yml" afterPath="$PROJECT_DIR$/../../docker/proj-2/docker-compose.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/gulpfile.js" afterPath="$PROJECT_DIR$/../../www/proj-2/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hibernate-mapping.iml" afterPath="$PROJECT_DIR$/hibernate-mapping.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/hibernate.tutorial.AppTest.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/hibernate.tutorial.AppTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/index.html" afterPath="$PROJECT_DIR$/../../www/proj-2/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/css/main.css" afterPath="$PROJECT_DIR$/../../www/proj-2/app/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/js/main.js" afterPath="$PROJECT_DIR$/../../www/proj-2/app/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/js/controllers/mainCtrl.js" afterPath="$PROJECT_DIR$/../../www/proj-2/app/js/controllers/mainCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/connect-livereload/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/connect-livereload/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash._shimkeys/node_modules/lodash._objecttypes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash._shimkeys/node_modules/lodash._objecttypes/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash.isobject/node_modules/lodash._objecttypes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash.isobject/node_modules/lodash._objecttypes/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/node_modules/is/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/node_modules/is/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/proxy-middleware/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/proxy-middleware/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/debug/node_modules/ms/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/debug/node_modules/ms/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/node_modules/mime-db/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/node_modules/mime-db/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/mime/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/mime/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/statuses/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/statuses/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/bytes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/bytes/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/depd/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/depd/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/iconv-lite/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/iconv-lite/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/node_modules/ee-first/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/node_modules/ee-first/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/qs/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/qs/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/raw-body/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/raw-body/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/type-is/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/type-is/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/node_modules/websocket-extensions/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/node_modules/websocket-extensions/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/qs/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/qs/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/watch/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/watch/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/css/style.css" afterPath="$PROJECT_DIR$/../../www/proj-2/app/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/templates/user/user-list.html" afterPath="$PROJECT_DIR$/../../www/proj-2/app/templates/user/user-list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/js/utils.js" afterPath="$PROJECT_DIR$/../../www/proj-2/app/js/utils.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hibernate-mapping.iws" />
@@ -45,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+              <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -55,7 +171,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,23 +182,10 @@
       <file leaf-file-name="CORSFilter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5970149">
-              <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.49253732">
+              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Arrays.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Arrays.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2377" column="22" selection-start-line="2377" selection-start-column="22" selection-end-line="2377" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#227755#0" expanded="false" />
-                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -92,10 +195,30 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hibernate.cfg.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.hbm.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/user.hbm.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="61" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -104,7 +227,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -133,15 +256,15 @@
         <option value="$PROJECT_DIR$/src/main/resources/user.cfg.xml" />
         <option value="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/user.hbm.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/user.hbm.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" />
       </list>
     </option>
   </component>
@@ -150,6 +273,11 @@
       <MavenGeneralSettings>
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenProjectNavigator">
@@ -162,6 +290,28 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="hibernate-mapping" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="org.springframework:spring-tx:4.0.5.RELEASE" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependencyNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="hibernate-mapping" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -176,6 +326,16 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="Run Configurations" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RunConfigurationsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="hibernate-mapping" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -226,6 +386,28 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="hibernate-mapping">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -406,28 +588,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="hibernate-mapping">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -451,6 +611,7 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="hibernate-mapping" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -695,7 +856,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1737" y="21" width="1623" height="1029" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -703,13 +864,14 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.35926628" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13535737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2808349" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.6407337" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.772296" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.6407337" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30490404" sideWeight="0.772296" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20303605" sideWeight="0.4936306" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24984187" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20303605" sideWeight="0.5063694" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -719,7 +881,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -749,32 +910,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="20" selection-start-line="71" selection-start-column="20" selection-end-line="71" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1044,14 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/hibernate/tutorial/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73">
@@ -1063,22 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15">
           <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/user.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18">
-          <caret line="6" column="60" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1118,21 +1229,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.0.23/tomcat-embed-core-8.0.23.jar!/javax/servlet/FilterChain.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="31" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.21837088">
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/5.0.0.Final/hibernate-core-5.0.0.Final.jar!/org/hibernate/Session.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.34835356">
+          <caret line="105" column="9" selection-start-line="105" selection-start-column="9" selection-end-line="105" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1140,17 +1249,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2377" column="22" selection-start-line="2377" selection-start-column="22" selection-end-line="2377" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#227755#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-oscache/3.6.10.Final/hibernate-oscache-3.6.10.Final.jar!/org/hibernate/cache/OSCacheProvider.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1803005">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/user.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="61" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/App.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1159,8 +1315,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hibernate/tutorial/CORSFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5970149">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.49253732">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
