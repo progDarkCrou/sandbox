@@ -132,6 +132,26 @@ public class VectorizedNetwork {
         return resultsContainer;
     }
 
+    public static double [][][] changeWeights(double [][][] weights, double [][][] nablaWeights) {
+        double [][][] result = new double[weights.length][][];
+        for (int i = 0; i < weights.length; i++) {
+            result[i] = new double[weights[i].length][];
+            for (int j = 0; j < weights[i].length; j++) {
+                result[i][j] = VectorizedNetwork.arraysSum(weights[i][j], nablaWeights[i][j]);
+            }
+        }
+        return result;
+    }
+
+    public static double [][] changeBiases(double [][] biases, double [][] nablaBiases) {
+        double [][] result = new double[biases.length][];
+        for (int i = 0; i < biases.length; i++) {
+            result[i] = VectorizedNetwork.arraysSum(biases[i], nablaBiases[i]);
+        }
+        return result;
+    }
+
+
     public static double dotProduct(double[] first, double[] second) {
         if (first.length != second.length) {
             throw new RuntimeException("DotProduct: cannot product arrays with different size");
