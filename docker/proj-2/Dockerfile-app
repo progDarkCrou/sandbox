@@ -1,5 +1,0 @@
-FROM java:8
-ADD ./hibernate-mapping-1.0.jar /home/
-ADD ./dependency /home/dependency
-ENTRYPOINT ["java", "-jar", "hibernate-mapping-1.0.jar"]
-WORKDIR /home

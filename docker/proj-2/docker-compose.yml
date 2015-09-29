@@ -1,10 +1,17 @@
 app:
  build: .
- dockerfile: Dockerfile-app
+ dockerfile: AppDockerfile
  links:
   - mysql:mysql
- ports:
+ expose:
   - "8080"
+www:
+ build: .
+ dockerfile: WwwDockerfile
+ links:
+  - app:app
+ ports:
+  - "8080:8080"
 mysql:
  image: mysql
  container_name: mysql

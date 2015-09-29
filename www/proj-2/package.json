@@ -17,6 +17,11 @@
     "gulp-webserver": "~0.9.1",
     "gulp-watch": "~4.3.5",
     "main-bower-files": "~2.9.0",
-    "gulp-inject": "~2.2.0"
+    "gulp-inject": "~2.2.0",
+    "gulp-concat": "~2.6.0",
+    "del": "~2.0.2",
+    "gulp-clean": "~0.3.1",
+    "gulp-concat-css": "~2.2.0",
+    "gulp-sync": "~0.1.4"
   }
 }

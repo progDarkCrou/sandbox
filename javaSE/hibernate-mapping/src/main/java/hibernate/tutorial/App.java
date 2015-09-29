@@ -15,6 +15,7 @@ import org.springframework.core.env.StandardEnvironment;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.naming.NamingException;
+import javax.transaction.TransactionManager;
 import java.util.Arrays;
 
 /**
@@ -29,11 +30,16 @@ import java.util.Arrays;
 public class App {
 
     @Bean
-    @Profile(value = "dev")
+    @Profile(value = {"dev", "hell"})
     public Session session() {
         Configuration config = new Configuration().configure();
         SessionFactory sessionFactory = config.buildSessionFactory();
         return sessionFactory.openSession();
+    }
+
+    @Bean
+    public TransactionManager transactionManager () {
+        return  null;
     }
 
     public static void main(String[] args) throws InterruptedException, NamingException {

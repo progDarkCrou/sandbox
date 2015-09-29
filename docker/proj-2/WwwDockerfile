@@ -1,0 +1,9 @@
+FROM nginx
+WORKDIR /home/www
+COPY ["www", "/home/www/www"]
+COPY ["start.sh", "/home/www/start.sh"]
+COPY ["andriy.backend.conf", "/etc/nginx/conf.d/andriy.backend.conf"]
+COPY ["andriy.upstream.conf", "/etc/nginx/conf.d/andriy.upstream.c"]
+COPY ["start.sh", "/home/www/start.sh"]
+RUN ["chmod", "+x", "/home/www/start.sh"]
+ENTRYPOINT ["/bin/bash", "/home/www/start.sh"]
