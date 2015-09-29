@@ -7,59 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f44cfa5a-cd53-45e9-9b99-554d8f771f3a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0-jar-with-dependencies.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/hibernate-mapping-1.0.jar.original" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../www/proj-2/dest/vendor/jquery.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/App.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/CORSFilter.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/CORSFilter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/model/User.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/model/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate/tutorial/UserController.class" afterPath="$PROJECT_DIR$/target/classes/hibernate/tutorial/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/app.jar" afterPath="$PROJECT_DIR$/../../docker/proj-2/app.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/hibernate_mapping_jar/hibernate-mapping.jar" afterPath="$PROJECT_DIR$/out/artifacts/hibernate_mapping_jar/hibernate-mapping.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../.gitignore" afterPath="$PROJECT_DIR$/../../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hibernate.tutorial.AppTest.xml" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hibernate.tutorial.AppTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/hibernate/tutorial/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/surefire-reports/hibernate.tutorial.AppTest.txt" afterPath="$PROJECT_DIR$/target/surefire-reports/hibernate.tutorial.AppTest.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/www/js/main.js" afterPath="$PROJECT_DIR$/../../docker/proj-2/www/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/connect-livereload/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/connect-livereload/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash._shimkeys/node_modules/lodash._objecttypes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash._shimkeys/node_modules/lodash._objecttypes/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash.isobject/node_modules/lodash._objecttypes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/gulp-util/node_modules/lodash.template/node_modules/lodash.keys/node_modules/lodash.isobject/node_modules/lodash._objecttypes/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/node_modules/is/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/node.extend/node_modules/is/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/proxy-middleware/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/proxy-middleware/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/debug/node_modules/ms/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/debug/node_modules/ms/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/node_modules/mime-db/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-index/node_modules/mime-types/node_modules/mime-db/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/mime/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/mime/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/statuses/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/serve-static/node_modules/send/node_modules/statuses/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/bytes/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/bytes/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/depd/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/depd/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/iconv-lite/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/iconv-lite/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/node_modules/ee-first/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/on-finished/node_modules/ee-first/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/qs/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/qs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/raw-body/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/raw-body/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/type-is/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/body-parser/node_modules/type-is/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/node_modules/websocket-extensions/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/faye-websocket/node_modules/websocket-driver/node_modules/websocket-extensions/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/qs/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/tiny-lr/node_modules/qs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/watch/package.json" afterPath="$PROJECT_DIR$/../../www/proj-2/node_modules/gulp-webserver/node_modules/watch/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docker/proj-2/www/templates/user/user-list.html" afterPath="$PROJECT_DIR$/../../docker/proj-2/www/templates/user/user-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../www/proj-2/app/templates/user/user-list.html" afterPath="$PROJECT_DIR$/../../www/proj-2/app/templates/user/user-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nnet/src/main/java/VectorizedNetwork.java" afterPath="$PROJECT_DIR$/../nnet/src/main/java/VectorizedNetwork.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../nnet/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../nnet/.idea/workspace.xml" />
     </list>
     <ignored path="hibernate-mapping.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -301,6 +250,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -311,6 +261,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Changed Files">
           <PATH>
@@ -331,8 +282,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -608,7 +557,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.35926628" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28399748" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28716004" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30490404" sideWeight="0.772296" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -701,7 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -751,7 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -935,7 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15">
           <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>

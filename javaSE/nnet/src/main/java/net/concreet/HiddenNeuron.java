@@ -3,12 +3,14 @@ package net.concreet;
 import net.Neuron;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by avorona on 28.09.15.
  */
 public class HiddenNeuron extends Neuron {
 
+    private ReentrantLock lock = new ReentrantLock();
     private ArrayList<? extends HiddenNeuron> outer;
     private ArrayList<? extends Neuron> inner;
     private ArrayList<Double> weights;
@@ -20,34 +22,46 @@ public class HiddenNeuron extends Neuron {
 
     @Override
     public double active() {
+        lock.lock();
         if (this.getOutput() == null) {
             this.mistake = null;
             this.getInput().clear();
-            this.getInner().stream().forEach(neuron -> this.getInput().add(neuron.active()));
+            this.getInner().parallelStream().forEach(neuron -> this.getInput().add(neuron.active()));
             this.summedInput = HiddenNeuron.dotProduct(this.getInput(), this.getWeights()) + this.bias; //TODO apply bias
             this.setOutput(HiddenNeuron.sigmoid(this.summedInput));
+        }
+        if (lock.isLocked()) {
+            lock.unlock();
         }
         return this.getOutput();
     }
 
     public double getMistake() {
+        lock.lock();
         if (this.mistake == null) {
             this.mistake = this.getOuter().stream().mapToDouble(value -> {
                 return value.getWeightFor(this) * value.getMistake();
             }).sum() * HiddenNeuron.sigmoidDeriative(this.getSummedInput());
         }
+        if (lock.isLocked()) {
+            lock.unlock();
+        }
         return this.mistake;
     }
 
     public void updateWeightsAndBias(double learningRate) {
+        lock.lock();
         for (int i = 0; i < this.getInner().size(); i++) {
             double oldWeight = this.getWeights().get(i);
-            double newWeight = oldWeight + learningRate * this.getInput().get(i) * this.getMistake();
+            double newWeight = oldWeight - learningRate * this.getInput().get(i) * this.getMistake();
             this.getWeights().set(i, newWeight);
         }
-        this.bias = this.bias + this.getMistake();
+        this.bias = this.bias - this.getMistake();
         this.summedInput = null;
         this.setOutput(null);
+        if (lock.isLocked()) {
+            lock.unlock();
+        }
     }
 
     public void initialize(ArrayList<? extends Neuron> inner) {
@@ -101,12 +115,16 @@ public class HiddenNeuron extends Neuron {
     }
 
     public void setInnerAndWeights(ArrayList<? extends Neuron> inner) {
+        lock.tryLock();
         this.inner = inner;
         ArrayList<Double> weights = new ArrayList<>(inner.size());
         for (int i = 0; i < inner.size(); i++) {
             weights.add(Math.random() - 0.5);
         }
         this.setWeights(weights);
+        if (lock.isLocked()) {
+            lock.unlock();
+        }
     }
 
     public static double sigmoid(double in) {

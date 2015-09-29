@@ -1,7 +1,11 @@
+import javafx.util.Pair;
 import net.concreet.HiddenNeuron;
+import org.apache.commons.lang3.ArrayUtils;
+import util.MNISTImagesLoader;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 /**
@@ -9,26 +13,28 @@ import java.util.function.Function;
  */
 public class VectorizedNetwork {
     public static void main(String[] args) throws IOException {
-        int showStepPercent = 100;
 
-        double learningRate = 1.0;
-        int learningCount = 90000;
-        int testOnCont = learningCount / showStepPercent;
+        int[] netStructure = {784, 40, 10};
+
+        double learningRate = 3.0;
+        int epochs = 30;
+        int learnTimes = 100;
+        int miniBatchSize = 10;
+        int testCount = 1;
 
         int testDataCount = 1000;
         int learnDataCount = 40000;
 
-        int[] netStructure = {3, 5, 5, 3};
 
-//        ArrayList<Pair<double [], double[]>> learnData =
-//                MNISTImagesLoader.loadImages("train-images.idx3-ubyte",
-//                        "train-labels.idx1-ubyte", learnDataCount);
-//        System.out.println("Learning data loaded (" + learnDataCount + ")...");
-//
-//        ArrayList<Pair<double [], double[]>> testData =
-//                MNISTImagesLoader.loadImages("t10k-images.idx3-ubyte",
-//                        "t10k-labels.idx1-ubyte", testDataCount);
-//        System.out.println("Testing data loaded (" + testDataCount + ")...");
+        ArrayList<Pair<double [], double[]>> learnData =
+                MNISTImagesLoader.loadImages("train-images.idx3-ubyte",
+                        "train-labels.idx1-ubyte", learnDataCount);
+        System.out.println("Learning data loaded (" + learnDataCount + ")...");
+
+        ArrayList<Pair<double [], double[]>> testData =
+                MNISTImagesLoader.loadImages("t10k-images.idx3-ubyte",
+                        "t10k-labels.idx1-ubyte", testDataCount);
+        System.out.println("Testing data loaded (" + testDataCount + ")...");
 
         double[][][] weights = new double[netStructure.length - 1][][];
         double[][] biases = new double[netStructure.length - 1][];
@@ -49,14 +55,58 @@ public class VectorizedNetwork {
             biases[i - 1] = layerBiases;
             weights[i - 1] = layer;
         }
+        System.out.println("Network constructed: " + Arrays.toString(netStructure));
 
-        double[][] feedforward = VectorizedNetwork.feedforward(new double[]{1, 2, 3}, weights, biases);
-        double[][][][] back = VectorizedNetwork.backprop(new double[]{1, 0, 0}, weights, biases, new double[]{1, 0, 0});
 
-        double [][][] deltaWeights = back[0];
-        double [][] deltaBiases = back[0][0];
+        for (int i = 0; i < epochs; i++) {
+            for (int time = 0; time < learnTimes; time++) {
+                double[][][] deltaWeights = weights.clone();
+                double[][] deltaBiases = biases.clone();
 
-        System.out.println(Arrays.toString(feedforward[feedforward.length - 1]));
+                Set<Integer> randomLearningPos = new HashSet<>((int) (learnDataCount * 0.5));
+
+                for (int s = 0; s < miniBatchSize; s++) {
+                    int pos;
+                    do {
+                        pos = (int) Math.floor(Math.random() * learnDataCount);
+                    } while (randomLearningPos.contains(pos));
+                    randomLearningPos.add(pos);
+
+                    double[][][][] back = VectorizedNetwork.backprop(learnData.get(pos).getKey(), weights, biases, learnData.get(pos).getValue());
+                    double[][] nablaBiases = back[1][0];
+                    double[][][] nablaWeights = back[0];
+                    deltaBiases = VectorizedNetwork.updateBiases(deltaBiases, nablaBiases, VectorizedNetwork::arraysSum);
+                    deltaWeights = VectorizedNetwork.updateWeights(deltaWeights, nablaWeights, VectorizedNetwork::arraysSum);
+                }
+                weights = VectorizedNetwork.updateWeights(weights, deltaWeights, (ws, dWs) -> {
+                    return VectorizedNetwork.arraysDif(ws, VectorizedNetwork.arraysDo(dWs, d -> d * (learningRate / miniBatchSize)));
+                });
+                biases = VectorizedNetwork.updateBiases(biases, deltaBiases, (bs, dBs) -> {
+                    return VectorizedNetwork.arraysDif(bs, VectorizedNetwork.arraysDo(dBs, d -> d * (learningRate / miniBatchSize)));
+                });
+            }
+            System.out.println("Epoch #" + i + " ended");
+            for (int t = 0; t < testCount; t++) {
+                int pos = (int) Math.floor(Math.random() * testDataCount);
+
+                double[] input = testData.get(pos).getKey();
+                double[][] feedforwardResult = VectorizedNetwork.feedforward(input, weights, biases);
+                double[] testResult = feedforwardResult[feedforwardResult.length - 1];
+
+                List<Double> result = Arrays.asList(ArrayUtils.toObject(testResult));
+
+                double max = result.parallelStream().max(Comparator.<Double>naturalOrder()).get();
+                int resulDigit = result.indexOf(max);
+
+                int digit =  ArrayUtils.indexOf(testData.get(pos).getValue(), 1);
+
+                System.out.println("Test digit: " + digit);
+                System.out.println("Network result: \t" + resulDigit);
+            }
+
+        }
+
+
     }
 
     public static double[][] feedforward(double[] input, double[][][] weights, double[][] biases) {
@@ -68,10 +118,10 @@ public class VectorizedNetwork {
 
         for (int i = 0; i < weights.length; i++) {
             double[][] layerWeights = weights[i];
-            double[] layerActivations = new double[weights[i].length];
             double[] curLayerBiases = biases[i];
+            double[] layerActivations = new double[weights[i].length];
             for (int cnw = 0; cnw < layerWeights.length; cnw++) {
-                double[] curNeuronWeights = new double[layerWeights[i].length];
+                double[] curNeuronWeights = layerWeights[cnw];
                 layerActivations[cnw] = HiddenNeuron.sigmoid(
                         VectorizedNetwork.dotProduct(curNeuronWeights, activations[i]) + curLayerBiases[cnw]);
             }
@@ -85,6 +135,10 @@ public class VectorizedNetwork {
                                           double[][][] weights,
                                           double[][] biases,
                                           double[] propperOutput) {
+        if (weights[weights.length - 1].length != propperOutput.length) {
+            throw new RuntimeException("BackProp: cannot back propagate, because proper output " +
+                    "array size is different form output neurons");
+        }
         double[][][][] resultsContainer = new double[2][][][];
 
         double[][][] nablaW = new double[weights.length][][];
@@ -115,8 +169,8 @@ public class VectorizedNetwork {
         nablaW[nablaW.length - 1] = VectorizedNetwork.matrixMult(
                 VectorizedNetwork.matrixTranspose(new double[][]{delta}), new double[][]{activations[activations.length - 2]});
         for (int ir = weights.length - 2; ir >= 0; ir--) {
-            double [][] d = new double[][]{delta};
-            double[] sigDer = VectorizedNetwork.arraysDo(inputs[ir+1], HiddenNeuron::sigmoidDeriative);
+            double[][] d = new double[][]{delta};
+            double[] sigDer = VectorizedNetwork.arraysDo(inputs[ir + 1], HiddenNeuron::sigmoidDeriative);
             double[][] weightsTransposed = VectorizedNetwork.matrixTranspose(weights[ir + 1]);
             double[][] deltaTransposed = VectorizedNetwork.matrixTranspose(d);
             double[][] multipliedMatrix = VectorizedNetwork.matrixMult(weightsTransposed, deltaTransposed);
@@ -132,21 +186,21 @@ public class VectorizedNetwork {
         return resultsContainer;
     }
 
-    public static double [][][] changeWeights(double [][][] weights, double [][][] nablaWeights) {
-        double [][][] result = new double[weights.length][][];
+    public static double[][][] updateWeights(double[][][] weights, double[][][] nablaWeights, BinaryOperator<double[]> operation) {
+        double[][][] result = new double[weights.length][][];
         for (int i = 0; i < weights.length; i++) {
             result[i] = new double[weights[i].length][];
             for (int j = 0; j < weights[i].length; j++) {
-                result[i][j] = VectorizedNetwork.arraysSum(weights[i][j], nablaWeights[i][j]);
+                result[i][j] = operation.apply(weights[i][j], nablaWeights[i][j]);
             }
         }
         return result;
     }
 
-    public static double [][] changeBiases(double [][] biases, double [][] nablaBiases) {
-        double [][] result = new double[biases.length][];
+    public static double[][] updateBiases(double[][] biases, double[][] nablaBiases, BinaryOperator<double[]> operation) {
+        double[][] result = new double[biases.length][];
         for (int i = 0; i < biases.length; i++) {
-            result[i] = VectorizedNetwork.arraysSum(biases[i], nablaBiases[i]);
+            result[i] = operation.apply(biases[i], nablaBiases[i]);
         }
         return result;
     }

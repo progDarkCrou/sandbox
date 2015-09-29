@@ -20,7 +20,7 @@ public class OutputNeuron extends HiddenNeuron {
             if (this.properOutput == null) {
                 throw new RuntimeException("OutputNeuron: cannot compute mistake. Proper output is NULL.");
             }
-            this.mistake = (this.properOutput - this.getOutput()) * HiddenNeuron.sigmoidDeriative(this.getSummedInput());
+            this.mistake = (this.getOutput() - this.properOutput) * HiddenNeuron.sigmoidDeriative(this.getSummedInput());
         }
         return this.mistake;
     }

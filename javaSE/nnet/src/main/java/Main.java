@@ -1,4 +1,3 @@
-import com.sun.deploy.util.ArrayUtil;
 import javafx.util.Pair;
 import net.Network;
 import org.apache.commons.lang3.ArrayUtils;
@@ -38,7 +37,6 @@ public class Main {
         System.out.println("Network constructed: " + Arrays.toString(netStructure));
 
         Set<Integer> randomLearningPos = new HashSet<>((int) (learnDataCount * 0.5));
-        Set<Integer> randomTestingPos = new HashSet<>((int) (testDataCount * 0.5));
 
         int rightResults = 0;
 

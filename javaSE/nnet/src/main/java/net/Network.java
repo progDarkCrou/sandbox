@@ -66,7 +66,7 @@ public class Network {
             this.outputLayer.get(i).setProperOutput(desireOutput[i]);
         }
         for (int i = this.net.size() - 1; i > 0; i--) {
-            this.net.get(i).stream().forEach(neuron -> ((HiddenNeuron) neuron).updateWeightsAndBias(learningRate));
+            this.net.get(i).parallelStream().forEach(neuron -> ((HiddenNeuron) neuron).updateWeightsAndBias(learningRate));
         } //Most of the learning process is done here
         return result;
     }
@@ -80,7 +80,7 @@ public class Network {
             this.inputLayer.get(i).setIn(input[i]);
         }
 
-        return this.outputLayer.stream().mapToDouble(outputNeuron -> outputNeuron.active()).toArray();
+        return this.outputLayer.parallelStream().mapToDouble(outputNeuron -> outputNeuron.active()).toArray();
     }
 
     private void backprop() {
