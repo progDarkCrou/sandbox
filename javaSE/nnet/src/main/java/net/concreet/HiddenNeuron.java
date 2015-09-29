@@ -129,5 +129,4 @@ public class HiddenNeuron extends Neuron {
         return result;
     }
 
-
 }

@@ -1,3 +1,4 @@
 hibernate/tutorial/UserController.class
 hibernate/tutorial/model/User.class
 hibernate/tutorial/App.class
+hibernate/tutorial/CORSFilter.class

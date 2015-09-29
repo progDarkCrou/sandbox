@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-xs-2 col-xs-offset-10">
     <button class="btn btn-primary pull-right"
-      data-ng-click="users.reload()">Users reload</button>
+      data-ng-click="users.load()">Users reload</button>
   </div>
 </div>
 <div class="row">
-  <form data-ng-submit="users.add(newUser)"
+  <form data-ng-submit="users.create(newUser)"
     name="form"
     class="col-xs-6 col-xs-offset-3">
     <div class="form-group">
@@ -66,7 +66,7 @@
           <td><p data-ng-bind="u.name"></p></td>
           <td><p data-ng-bind="u.surname"></p></td>
           <td><p data-ng-bind="u.login"></p></td>
-          <td><p data-ng-bind="u.age"></p><span class="remove-user" data-ng-click="users.remove(u)">X</span></td>
+          <td><p data-ng-bind="u.age"></p><span class="remove-user" data-ng-click="users.delete(u)">X</span></td>
         </tr>
       </tbody>
     </table>

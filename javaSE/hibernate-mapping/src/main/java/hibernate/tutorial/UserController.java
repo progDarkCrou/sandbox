@@ -34,8 +34,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public User createUser(@RequestBody User user, User user1) {
-        System.out.println(user1);
+    public User createUser(@RequestBody User user) {
         System.out.println(user);
 
         if (user.getLogin() == null) {
