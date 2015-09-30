@@ -1,3 +1,4 @@
+import imgLoader.ImageLoader;
 import javafx.util.Pair;
 import net.Network;
 import org.apache.commons.lang3.ArrayUtils;
@@ -23,15 +24,17 @@ public class Main {
 
         int [] netStructure = {784, 100, 10};
 
-        ArrayList<Pair<double [], double[]>> learnData =
-                MNISTImagesLoader.loadImages("train-images.idx3-ubyte",
-                        "train-labels.idx1-ubyte", learnDataCount);
-        System.out.println("Learning data loaded (" + learnDataCount + ")...");
+        ImageLoader loader = new MNISTImagesLoader();
 
-        ArrayList<Pair<double [], double[]>> testData =
-                MNISTImagesLoader.loadImages("t10k-images.idx3-ubyte",
+        ArrayList<Pair<double[], double[]>> learnData =
+                loader.loadImages("train-images.idx3-ubyte",
+                        "train-labels.idx1-ubyte", learnDataCount);
+        System.out.println("Learning data loaded (" + learnDataCount + ")");
+
+        ArrayList<Pair<double[], double[]>> testData =
+                loader.loadImages("t10k-images.idx3-ubyte",
                         "t10k-labels.idx1-ubyte", testDataCount);
-        System.out.println("Testing data loaded (" + testDataCount + ")...");
+        System.out.println("Testing data loaded (" + testDataCount + ")");
 
         Network net = new Network(netStructure, learningRate);
         System.out.println("Network constructed: " + Arrays.toString(netStructure));
