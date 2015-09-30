@@ -1,11 +1,8 @@
-import imgLoader.ImageLoader;
 import javafx.util.Pair;
 import net.concreet.HiddenNeuron;
 import org.apache.commons.lang3.ArrayUtils;
 import util.ArraysUtils;
-import util.MNISTImagesLoader;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.function.BinaryOperator;
 
@@ -40,33 +37,6 @@ public class VectorizedNetwork {
         }
         System.out.println("Network constructed: " + Arrays.toString(netStructure));
         System.out.println();
-    }
-
-    public static void main(String[] args) throws IOException {
-
-        int[] netStructure = {784, 40, 10};
-
-        double learningRate = 3.0;
-        int epochs = 30;
-        int learnTimes = 100;
-        int miniBatchSize = 10;
-        int testCount = 1;
-
-        int testDataCount = 1000;
-        int learnDataCount = 40000;
-
-        ImageLoader loader = new MNISTImagesLoader();
-
-        ArrayList<Pair<double[], double[]>> learnData =
-                loader.loadImages("train-images.idx3-ubyte",
-                        "train-labels.idx1-ubyte", learnDataCount);
-
-        ArrayList<Pair<double[], double[]>> testData =
-                loader.loadImages("t10k-images.idx3-ubyte",
-                        "t10k-labels.idx1-ubyte", testDataCount);
-
-        VectorizedNetwork net = new VectorizedNetwork(netStructure);
-
     }
 
     public void learn(ArrayList<Pair<double[], double[]>> learnData,

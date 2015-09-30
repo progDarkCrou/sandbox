@@ -53,13 +53,24 @@ public class VectorizedNetworkTest {
     }
 
     @Test
-    public void tird() {
+    public void third() {
+        int[] netStructure = {784, 100, 40, 10, 10};
+
+        double learningRate = 3.0;
+
+        VectorizedNetwork net = new VectorizedNetwork(netStructure);
+
+        net.learn(learnData, learningRate, 30, 300, 10, testData);
+    }
+
+    @Test
+    public void fourth() {
         int[] netStructure = {784, 100, 10};
 
         double learningRate = 3.0;
 
         VectorizedNetwork net = new VectorizedNetwork(netStructure);
 
-        net.learn(learnData, learningRate, 100, 300, 10, testData);
+        net.learn(learnData, learningRate, 30, 300, 10, testData);
     }
 }
