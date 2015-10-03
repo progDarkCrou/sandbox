@@ -1,6 +1,7 @@
-www/proj-2/.sublime-gulp.cache
-www/proj-2/.tmp/
-www/proj-2/node_modules/
+www/*/.sublime-gulp.cache
+www/*/.tmp/
+www/*/node_modules/
 www/proj-2/dest/
-docker/proj-2/app.jar
-javaSE/hibernate-mapping/.idea/libraries/Maven__net_sf_ehcache_ehcache_core_2_6_11.xml
+docker/*/*.jar
+javaSE/hibernate-mapping/.idea/
+javaSE/*/target/

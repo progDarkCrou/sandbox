@@ -60,18 +60,17 @@ public class VectorizedNetwork {
                     } while (randomLearningPos.contains(pos));
                     randomLearningPos.add(pos);
 
-                    double[][][][] nablaWeightAndBiases = this.backpropagation(learnData.get(pos).getKey(), this.weights, this.biases, learnData.get(pos).getValue());
+                    Pair<double[], double[]> learningEntry = learnData.get(pos);
+                    double[][][][] nablaWeightAndBiases = this.backpropagation(learningEntry.getKey(), this.weights, this.biases, learningEntry.getValue());
                     double[][] nablaBiases = nablaWeightAndBiases[1][0];
                     double[][][] nablaWeights = nablaWeightAndBiases[0];
                     deltaBiases = this.updateBiases(deltaBiases, nablaBiases, ArraysUtils::arraysSum);
                     deltaWeights = this.updateWeights(deltaWeights, nablaWeights, ArraysUtils::arraysSum);
                 }
-                this.weights = this.updateWeights(this.weights, deltaWeights, (ws, dWs) -> {
-                    return ArraysUtils.arraysDif(ws, ArraysUtils.arrayDo(dWs, d -> d * (learningRate / miniBatchSize)));
-                });
-                this.biases = this.updateBiases(this.biases, deltaBiases, (bs, dBs) -> {
-                    return ArraysUtils.arraysDif(bs, ArraysUtils.arrayDo(dBs, d -> d * (learningRate / miniBatchSize)));
-                });
+                this.weights = this.updateWeights(this.weights, deltaWeights, (ws, dWs) ->
+                        ArraysUtils.arraysDif(ws, ArraysUtils.arrayDo(dWs, d -> d * (learningRate / miniBatchSize))));
+                this.biases = this.updateBiases(this.biases, deltaBiases, (bs, dBs) ->
+                        ArraysUtils.arraysDif(bs, ArraysUtils.arrayDo(dBs, b -> b * (learningRate / miniBatchSize))));
             }
             System.out.println("Epoch #" + i + " ended");
             if (testData != null) {
@@ -145,14 +144,14 @@ public class VectorizedNetwork {
         netActivations[0] = input;
 
         for (int i = 0; i < weights.length; i++) {
-            double[][] currLayerWeights = weights[i];
-            double[] currLayerBiases = biases[i];
+            double[][] curLayerWeights = weights[i];
+            double[] curLayerBiases = biases[i];
 
-            double[] layerInputs = new double[currLayerWeights.length];
-            double[] layerActivations = new double[currLayerWeights.length];
-            for (int cn = 0; cn < currLayerWeights.length && currLayerBiases.length == currLayerWeights.length; cn++) {
-                double[] curNeuronWeights = currLayerWeights[cn];
-                layerInputs[cn] = ArraysUtils.dotProduct(curNeuronWeights, netActivations[i]) + currLayerBiases[cn];
+            double[] layerInputs = new double[curLayerWeights.length];
+            double[] layerActivations = new double[curLayerWeights.length];
+            for (int cn = 0; cn < curLayerWeights.length && curLayerBiases.length == curLayerWeights.length; cn++) {
+                double[] curNeuronWeights = curLayerWeights[cn];
+                layerInputs[cn] = ArraysUtils.dotProduct(curNeuronWeights, netActivations[i]) + curLayerBiases[cn];
                 layerActivations[cn] = HiddenNeuron.sigmoid(layerInputs[cn]);
             }
             netInputs[i + 1] = layerInputs;
