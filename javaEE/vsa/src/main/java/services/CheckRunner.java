@@ -11,6 +11,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import services.dto.CheckResult;
+import utils.InstallCert;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -18,6 +19,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.cert.CertPathBuilderException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -52,7 +54,7 @@ public class CheckRunner {
 
         Thread checker = new Thread(() -> {
             int fails = 0;
-            logger.info("Checker started: " + Thread.currentThread().getName());
+            logger.info("Checker started: " + checkerName);
 
             while (!Thread.currentThread().isInterrupted()) {
                 DataOutputStream outStream = null;
@@ -104,22 +106,30 @@ public class CheckRunner {
 
                     Element searchElement = searchElements.first();
 
-                    if (searchElement.html().matches(".*\\d\\..+?\\.\\d.*")) {
+                    if (searchElement.html().matches(".*[0-9]{1,2}..+?.[0-9]{2,4}.*")) {
                         checkerResults.add(new CheckResult(searchElement.html()));
+                        logger.info("Success check result: " + searchElement.html());
+                    } else {
+                        logger.info("Checker \"" + checkerName + "\" result: " + searchElement.html());
                     }
-
-                    logger.info("Check result: " + searchElement.html());
 
                     fails = 0;
 
                     Thread.currentThread().sleep(latency);
+                } catch (CertPathBuilderException e) {
+                    try {
+                        InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 } catch (IOException e) {
-                    fails = 0;
                     if (fails >= maxFails) {
                         logger.error("Max fails count was reached. Please reinitialize checker.");
+                        stop(checkerName);
                         break;
                     }
                     fails++;
+                    logger.error("Some connectivity error occurred.", e);
                     continue;
                 } catch (InterruptedException e) {
                     logger.error("Checker stopped: " + checkerName, e);

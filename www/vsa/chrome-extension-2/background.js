@@ -1,3 +1,5 @@
+var url = 'http://localhost:8080/checker/init';
+
 chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
@@ -38,8 +40,6 @@ chrome.runtime.onMessage.addListener(function(msg) {
     });
   }
 });
-
-var url = 'http://104.131.78.225:8080/checker/init';
 
 chrome.runtime.onMessage.addListener(function(msg) {
   if (msg.type === 'gatheredRequest') {

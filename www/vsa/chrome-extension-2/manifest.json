@@ -22,7 +22,8 @@
     "js": ["content.js"]
   }, {
     "matches": ["https://polandonline.vfsglobal.com/*/AppScheduling.aspx*"],
-    "js": ["gatherData.js"]
+    "js": ["gatherData.js"],
+    "css": ["gatherData.css"]
   }],
   "background": {
     "scripts": ["background.js"]

@@ -1,55 +1,76 @@
-(function() { // body...
-  var style = document.createElement('style');
-  style.innerText = 'html, body {width: 100%; height: 100%; margin: 0;}';
-  document.head.appendChild(style);
+(function() {
+  //  ***********************************Initialization*******************************
 
   var visaTypeSelect = document.querySelector('select#ctl00_plhMain_cboVisaCategory');
-
-  var emailContainer = document.createElement('div');
-  emailContainer.style.width = '100%';
-  emailContainer.style.height = '100%';
-  emailContainer.style.backgroundColor = 'rgba(0,0,0,.7)';
-  emailContainer.style.position = 'fixed';
-  emailContainer.style.top = '0';
-  emailContainer.style.left = '0';
-
-  emailContainer.hidden = true;
-
-  document.body.appendChild(emailContainer);
-
-  var emailInput = document.createElement('input');
-  emailInput.placeholder = 'Write email and pres enter...';
-  emailInput.style.border = 'none';
-  emailInput.style.backgroundColor = 'rgba(0,0,0,.5)';
-  emailInput.style.position = 'fixed';
-  emailInput.style.width = '100%';
-  emailInput.style.height = '10%';
-  emailInput.style.textAlign = 'center';
-  emailInput.style.top = '50%';
-  emailInput.style.transform = 'translateY(-50%);';
-  emailInput.style.fontSize = '40px';
-  emailInput.style.color = 'rgba(255,255,255,.7)';
-
-  emailContainer.appendChild(emailInput);
-
   var request = {};
 
+  var personalDataContainer = document.createElement('div');
+  personalDataContainer.id = 'personalDataContainer';
+  personalDataContainer.hidden = true;
+
+  var wraper = document.createElement('div');
+  wraper.id = 'wraper';
+
+  var nameInput = document.createElement('input');
+  nameInput.placeholder = 'Name...';
+  nameInput.id = 'nameInput';
+
+  var emailInput = document.createElement('input');
+  emailInput.placeholder = 'Email (@gmail.com)...';
+  emailInput.id = 'emailInput';
+
+  document.body.appendChild(personalDataContainer);
+  personalDataContainer.appendChild(wraper);
+  wraper.appendChild(nameInput);
+  wraper.appendChild(emailInput);
+
+  personalDataContainer.hide = function() {
+    nameInput.value = '';
+    emailInput.value = '';
+    personalDataContainer.hidden = true;
+  };
+
+  personalDataContainer.onkeydown = function(e) {
+    if (e.keyCode === 27) {
+      personalDataContainer.hide();
+    }
+    if (e.keyCode === 13) {
+      confirm();
+    }
+  };
+
+  personalDataContainer.onclick = function (e) {
+    if (e.target === personalDataContainer) {
+      personalDataContainer.hide();
+    }
+  };
+
+  // ***********************************************************************************
+
+  emailInput.onkeyup = function() {
+    request.email = emailInput.value;
+  };
+
+  nameInput.onkeyup = function() {
+    request.name = nameInput.value;
+  };
+
+  function confirm() {
+    if (!nameInput.value) {
+      nameInput.focus();
+    } else if (!emailInput.value || !emailInput.value.match(/gmail\.com/g)) {
+      emailInput.focus();
+    } else {
+      chrome.runtime.sendMessage({
+        type: 'gatheredRequest',
+        request: request
+      });
+      personalDataContainer.hide();
+    }
+  }
+
   function getEmail() {
-    emailInput.onkeyup = function(e) {
-      if (e.keyCode === 13) {
-      	request.email = emailInput.value;
-        chrome.runtime.sendMessage({
-          type: 'gatheredRequest',
-          request: request
-        });
-        emailContainer.hidden = true;
-      	emailInput.value = '';
-      } else if (e.keyCode === 27) {
-      	emailContainer.hidden = true;
-      	emailInput.value = '';
-      }
-    };
-    emailContainer.hidden = false;
+    personalDataContainer.hidden = false;
   }
 
   function gatherRequest(e) {
@@ -105,6 +126,7 @@
       var parent = visaTypeSelect.parentElement;
       var anotherSelect = document.createElement('select');
       anotherSelect.onchange = gatherRequest;
+      anotherSelect.name = visaTypeSelect.name;
 
       for (var i = 0; i < visaTypeSelect.children.length; i++) {
         var s = document.createElement('option');
