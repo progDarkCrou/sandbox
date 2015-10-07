@@ -7,7 +7,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.mail.SimpleMailMessage;
 import services.dto.CheckResult;
-import sun.rmi.runtime.Log;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -26,20 +25,22 @@ public class Checker {
 
     private static String invalidAttemptPattern = ".*?Invalid.*?attempt.*?";
     private static String successResultPattern = ".*[0-9]{1,2}..+?.[0-9]{1,4}.*";
+    private static String searchElementId = "#ctl00_plhMain_lblMsg";
+    private static int maxFails = 20;
+
+    private static long latency = 5000;
 
     private Logger logger;
-
     private String name;
     private long id;
 
     private String data;
+
     private String url;
+
     private String referer;
-
     private RegistredPerson person;
-
     private Thread runner;
-
     private ArrayList<CheckResult> checkResults = new ArrayList<>();
 
     public Checker(String name, String data, String url, String referer, RegistredPerson person) {
@@ -107,8 +108,8 @@ public class Checker {
                     Elements searchElements = document.select(searchElementId);
 
                     if (searchElements == null || searchElements.size() == 0) {
-                        String message = "Cannot find proper element to check. Please check it out, " +
-                                "and, if needed, reinitialize checker: " + checkerName;
+                        String message = this.name + " - cannot find proper element to check. Please check it out, " +
+                                "and, if needed, reinitialize checker." ;
                         this.checkResults.add(new CheckResult(message));
                         logger.error(message);
                         throw new IOException(message);
@@ -120,7 +121,7 @@ public class Checker {
                         this.checkResults.add(new CheckResult(searchElement.html()));
                         logger.info("Success check result: " + searchElement.html());
                     } else {
-                        logger.info("Checker \"" + checkerName + "\" result: " + searchElement.html());
+                        logger.info(this.name + " - result: " + searchElement.html());
                     }
 
                     fails = 0;
@@ -129,14 +130,14 @@ public class Checker {
                 } catch (IOException e) {
                     if (fails >= maxFails) {
                         logger.error("Max fails count was reached. Please reinitialize checker.");
-                        stop(checkerName);
+                        this.stop();
                         break;
                     }
                     fails++;
                     logger.error("Some connectivity error occurred.", e);
                     continue;
                 } catch (InterruptedException e) {
-                    logger.error("Checker stopped: " + checkerName, e);
+                    break;
                 } finally {
                     try {
                         if (inStream != null) {
@@ -146,7 +147,7 @@ public class Checker {
                             outStream.close();
                         }
                     } catch (IOException e) {
-                        logger.error("Something happened while closing connection.", e);
+                        logger.error(this.name + " - something happened while closing connection.", e);
                     }
                 }
             }
