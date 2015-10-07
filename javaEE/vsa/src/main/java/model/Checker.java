@@ -1,17 +1,13 @@
-package services;
+package model;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.stereotype.Service;
 import services.dto.CheckResult;
-import util.InstallCert;
+import sun.rmi.runtime.Log;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -19,42 +15,56 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.security.cert.CertPathBuilderException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.ArrayList;
 
 /**
- * Created by avorona on 05.10.15.
+ * Created by crou on 07.10.15.
  */
-@Service
-@Scope("singleton")
-public class CheckRunner {
+public class Checker {
 
-    private Logger logger = Logger.getLogger(CheckRunner.class.getName());
+    private static long count = 0;
 
-    private int maxFails = 20;
-    private long latency = 5000;
+    private static String invalidAttemptPattern = ".*?Invalid.*?attempt.*?";
+    private static String successResultPattern = ".*[0-9]{1,2}..+?.[0-9]{1,4}.*";
 
-    private Map<String, ConcurrentLinkedDeque<CheckResult>> results = new HashMap<>();
-    private Map<String, Thread> checkersPool = new HashMap<>();
-    private String defaultCheckerNameBase = "checker-";
-    private String searchElementId = "#ctl00_plhMain_lblMsg";
-    private String invalidAttemptPattern = ".*?Invalid.*?attempt.*?";
+    private Logger logger;
 
-    @Autowired
-    private MailSender mailSender;
-    @Autowired
-    private SimpleMailMessage templateMessage;
+    private String name;
+    private long id;
 
-    public String run(String url, String referer, String data) {
-        String checkerName = defaultCheckerNameBase + checkersPool.size();
-        ConcurrentLinkedDeque<CheckResult> checkerResults = new ConcurrentLinkedDeque<>();
-        results.put(checkerName, checkerResults);
+    private String data;
+    private String url;
+    private String referer;
 
-        Thread checker = new Thread(() -> {
+    private RegistredPerson person;
+
+    private Thread runner;
+
+    private ArrayList<CheckResult> checkResults = new ArrayList<>();
+
+    public Checker(String name, String data, String url, String referer, RegistredPerson person) {
+        this.id = count++;
+        this.name = name;
+        this.data = data;
+        this.url = url;
+        this.referer = referer;
+        this.person = person;
+        this.runner = new Thread(this::run, this.name);
+        runner.start();
+    }
+
+    public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
+        this(name, data, url, referer, new RegistredPerson(nameToSend, emailToSend));
+    }
+
+    public Checker(String data, String url, String referer, String nameToSend, String emailToSend) {
+        this(Checker.class.getName() + "-" + count, data, url, referer, nameToSend, emailToSend);
+    }
+
+    private Runnable run() {
+        return () -> {
             int fails = 0;
-            logger.info("Checker started: " + checkerName);
+            logger.info(this.name + " - started.");
 
             while (!Thread.currentThread().isInterrupted()) {
                 DataOutputStream outStream = null;
@@ -80,8 +90,8 @@ public class CheckRunner {
                     Document document = Jsoup.parse(inStream.lines().reduce((s, s2) -> s + s2).get());
 
                     if (document.html().matches(invalidAttemptPattern)) {
-                        String message = "Invalid attempt was find. Please reinitialize checker: " + checkerName;
-                        checkerResults.add(new CheckResult(message));
+                        String message = this.name + " - Invalid attempt was find. Please re-init the checker.";
+                        this.checkResults.add(new CheckResult(message));
                         logger.error(message);
 
                         SimpleMailMessage mail = new SimpleMailMessage(templateMessage);
@@ -90,7 +100,7 @@ public class CheckRunner {
                         mail.setSubject("Invalid check attempt.");
                         mailSender.send(mail);
 
-                        this.stop(checkerName);
+                        this.stop();
                         break;
                     }
 
@@ -99,15 +109,15 @@ public class CheckRunner {
                     if (searchElements == null || searchElements.size() == 0) {
                         String message = "Cannot find proper element to check. Please check it out, " +
                                 "and, if needed, reinitialize checker: " + checkerName;
-                        checkerResults.add(new CheckResult(message));
+                        this.checkResults.add(new CheckResult(message));
                         logger.error(message);
                         throw new IOException(message);
                     }
 
                     Element searchElement = searchElements.first();
 
-                    if (searchElement.html().matches(".*[0-9]{1,2}..+?.[0-9]{2,4}.*")) {
-                        checkerResults.add(new CheckResult(searchElement.html()));
+                    if (searchElement.html().matches(successResultPattern)) {
+                        this.checkResults.add(new CheckResult(searchElement.html()));
                         logger.info("Success check result: " + searchElement.html());
                     } else {
                         logger.info("Checker \"" + checkerName + "\" result: " + searchElement.html());
@@ -140,32 +150,7 @@ public class CheckRunner {
                     }
                 }
             }
-        });
-        checkersPool.put(checkerName, checker);
-        checker.setName(checkerName);
-        checker.start();
-        return checker.isAlive() && checkersPool.containsKey(checkerName) ? checkerName : null;
-    }
-
-    public boolean stop(String checkerName) {
-        if (checkersPool != null && checkersPool.containsKey(checkerName)) {
-            Thread thread = checkersPool.get(checkerName);
-            thread.interrupt();
-            checkersPool.remove(checkerName);
-            return !thread.isAlive() && !checkersPool.containsKey(checkerName);
-        }
-
-        logger.error("There is no checker with name \"" + checkerName + "\" to stop.");
-        return false;
-    }
-
-    public boolean stopAll() {
-        logger.error("Stopping all checkers.");
-        return checkersPool.entrySet()
-                .stream()
-                .map(checkerEntry -> this.stop(checkerEntry.getKey()))
-                .reduce((a, b) -> a && b)
-                .get();
+        };
     }
 
 }

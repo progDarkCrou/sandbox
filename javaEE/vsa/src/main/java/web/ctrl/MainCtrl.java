@@ -2,7 +2,7 @@ package web.ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import services.CheckRunner;
+import services.CheckManager;
 import web.vo.Answer;
 import web.vo.ErrorAnswer;
 import web.vo.InitCheckerVO;
@@ -16,7 +16,7 @@ import web.vo.SuccessAnswer;
 public class MainCtrl {
 
     @Autowired
-    private CheckRunner runner;
+    private CheckManager runner;
 
     @RequestMapping(value = "/init", method = RequestMethod.POST)
     public Answer init(@RequestBody(required = true) InitCheckerVO vo) {
