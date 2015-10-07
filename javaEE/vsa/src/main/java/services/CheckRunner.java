@@ -11,7 +11,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 import services.dto.CheckResult;
-import utils.InstallCert;
+import util.InstallCert;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -116,12 +116,6 @@ public class CheckRunner {
                     fails = 0;
 
                     Thread.currentThread().sleep(latency);
-                } catch (CertPathBuilderException e) {
-                    try {
-                        InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
                 } catch (IOException e) {
                     if (fails >= maxFails) {
                         logger.error("Max fails count was reached. Please reinitialize checker.");
