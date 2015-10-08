@@ -1,4 +1,4 @@
-package services.dto;
+package model;
 
 import java.util.Date;
 
@@ -9,14 +9,16 @@ public class CheckResult {
 
     private Date time;
     private String message;
+    private CheckStatus checkResult;
 
     public CheckResult(Date time, String message) {
         this.time = time;
         this.message = message;
     }
 
-    public CheckResult(String message) {
+    public CheckResult(String message, CheckStatus checkResult) {
         this(new Date(), message);
+        this.checkResult = checkResult;
     }
 
     public CheckResult() {
@@ -36,5 +38,19 @@ public class CheckResult {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public CheckStatus getCheckResult() {
+        return checkResult;
+    }
+
+    public void setCheckResult(CheckStatus checkResult) {
+        this.checkResult = checkResult;
+    }
+
+    public enum CheckStatus {
+        RESULT_SUCCESS,
+        RESULT_ERROR,
+        RESULT_ERROR_CRITICAL
     }
 }
