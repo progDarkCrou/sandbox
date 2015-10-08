@@ -63,7 +63,7 @@ public class Application {
     @Autowired
     public SimpleMailMessage templateMessage(JavaMailSenderImpl mailSender) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("default@checker.ch");
+        message.setFrom("default@vsa.io");
         return message;
     }
 }

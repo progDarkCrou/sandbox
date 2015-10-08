@@ -22,8 +22,8 @@ public class CheckerManager {
     private static String defaultEmailProp = "default.email";
     private static String defaultNameProp = "default.name";
 
-    private String noname;
-    private String nonameEmail;
+    private String defaultName;
+    private String defaultEmail;
 
     private Logger logger = Logger.getLogger(CheckerManager.class.getName());
 
@@ -40,8 +40,8 @@ public class CheckerManager {
             throw new RuntimeException("Both of the \"" + defaultEmailProp + "\" and \"" + defaultNameProp + "\" are required.");
         }
 
-        this.noname = defaultToSendName;
-        this.nonameEmail = defaultToSendEmail;
+        this.defaultName = defaultToSendName;
+        this.defaultEmail = defaultToSendEmail;
     }
 
     public String run(String data, String url, String referer, String name, String email) {
@@ -51,7 +51,7 @@ public class CheckerManager {
     }
 
     public String run(String data, String url, String referer) {
-        return this.run(data, url, referer, this.noname, this.nonameEmail);
+        return this.run(data, url, referer, this.defaultName, this.defaultEmail);
     }
 
     public String run(String data, String url, String referer, RegisteredPerson person) {
