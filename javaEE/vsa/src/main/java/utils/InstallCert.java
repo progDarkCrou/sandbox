@@ -39,7 +39,6 @@ package utils;/*
 import javax.net.ssl.*;
 import java.io.*;
 import java.security.KeyStore;
-import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
@@ -48,6 +47,8 @@ import java.security.cert.X509Certificate;
  * with your trusted certificates.
  */
 public class InstallCert {
+
+    private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();
 
     public static void main(String[] args) throws Exception {
         String host;
@@ -109,27 +110,6 @@ public class InstallCert {
             return;
         }
 
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println();
-        System.out.println("Server sent " + chain.length + " certificate(s):");
-        System.out.println();
-        MessageDigest sha1 = MessageDigest.getInstance("SHA1");
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        for (int i = 0; i < chain.length; i++) {
-            X509Certificate cert = chain[i];
-            System.out.println
-                    (" " + (i + 1) + " Subject " + cert.getSubjectDN());
-            System.out.println("   Issuer  " + cert.getIssuerDN());
-            sha1.update(cert.getEncoded());
-            System.out.println("   sha1    " + toHexString(sha1.digest()));
-            md5.update(cert.getEncoded());
-            System.out.println("   md5     " + toHexString(md5.digest()));
-            System.out.println();
-        }
-
-        System.out.println("Enter certificate to add to trusted keystore or 'q' to quit: [1]");
         int k = 0;
 
         X509Certificate cert = chain[k];
@@ -141,14 +121,10 @@ public class InstallCert {
         out.close();
 
         System.out.println();
-        System.out.println(cert);
-        System.out.println();
         System.out.println
                 ("Added certificate to keystore 'jssecacerts' using alias '"
                         + alias + "'");
     }
-
-    private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();
 
     private static String toHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 3);

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import utils.InstallCert;
 
 import java.util.Properties;
 
@@ -22,7 +23,7 @@ import java.util.Properties;
 public class Application {
 
     public static void main(String[] args) throws Exception {
-//        InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
+        InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
         SpringApplication.run(Application.class, args);
     }
 
