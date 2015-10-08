@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import services.ResultMailSender;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by crou on 07.10.15.
  */
+@Component("checker")
 public class Checker {
 
     private static long count = 0;
@@ -30,7 +32,7 @@ public class Checker {
 
     private static long latency = 5000;
 
-    private Logger logger;
+    private Logger logger = Logger.getLogger(Checker.class.getName());
     private String name;
     private long id;
 
@@ -46,29 +48,41 @@ public class Checker {
     @Autowired
     private ResultMailSender resultMailSender;
 
-    public Checker(String name, String data, String url, String referer, RegisteredPerson person) {
+//    public Checker(String name, String data, String url, String referer, RegisteredPerson person) {
+//        this.id = count++;
+//        this.name = name;
+//        this.data = data;
+//        this.url = url;
+//        this.referer = referer;
+//        this.runner = new Thread(this::run, this.name);
+//        runner.start();
+//        this.resultMailSender = new ResultMailSender(person, this);
+//    }
+
+    public Checker() {
+    }
+
+    public void init(String data, String url, String referer, RegisteredPerson person) {
         this.id = count++;
-        this.name = name;
+        this.name = Checker.class.getSimpleName() + "-" + count;
         this.data = data;
         this.url = url;
         this.referer = referer;
-        this.person = person;
         this.runner = new Thread(this::run, this.name);
-        runner.start();
+        this.runner.start();
         this.resultMailSender.setChecker(this);
-        this.resultMailSender.setPerson(this.person);
+        this.resultMailSender.setPerson(person);
     }
 
-    public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
-        this(name, data, url, referer, new RegisteredPerson(nameToSend, emailToSend));
-    }
+//    public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
+//        this(name, data, url, referer, new RegisteredPerson(nameToSend, emailToSend));
+//    }
+//
+//    public Checker(String data, String url, String referer, String nameToSend, String emailToSend) {
+//        this(Checker.class.getName() + "-" + count, data, url, referer, nameToSend, emailToSend);
+//    }
 
-    public Checker(String data, String url, String referer, String nameToSend, String emailToSend) {
-        this(Checker.class.getName() + "-" + count, data, url, referer, nameToSend, emailToSend);
-    }
-
-    private Runnable run() {
-        return () -> {
+    private void run() {
             int fails = 0;
             logger.info(this.name + " - started.");
 
@@ -160,7 +174,6 @@ public class Checker {
                     }
                 }
             }
-        };
     }
 
     public boolean stop() {
@@ -210,5 +223,21 @@ public class Checker {
 
     public ArrayList<CheckResult> getResults() {
         return results;
+    }
+
+    public String getReferer() {
+        return referer;
+    }
+
+    public void setReferer(String referer) {
+        this.referer = referer;
+    }
+
+    public RegisteredPerson getPerson() {
+        return person;
+    }
+
+    public void setPerson(RegisteredPerson person) {
+        this.person = person;
     }
 }

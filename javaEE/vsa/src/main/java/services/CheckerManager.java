@@ -22,6 +22,8 @@ public class CheckerManager {
     private static String defaultEmailProp = "default.email";
     private static String defaultNameProp = "default.name";
 
+    private final ConfigurableApplicationContext context;
+
     private String defaultName;
     private String defaultEmail;
 
@@ -31,6 +33,7 @@ public class CheckerManager {
 
     @Autowired
     public CheckerManager(ConfigurableApplicationContext context) {
+        this.context = context;
         ConfigurableEnvironment contextEnvironment = context.getEnvironment();
 
         String defaultToSendEmail = contextEnvironment.getProperty(defaultEmailProp);
@@ -45,7 +48,8 @@ public class CheckerManager {
     }
 
     public String run(String data, String url, String referer, String name, String email) {
-        Checker checker = new Checker(data, url, referer, name, email);
+        Checker checker = (Checker) context.getBean("checker", data, url, referer, name, email);
+        checker.init(data, url, referer, new RegisteredPerson(name, email));
         checkers.add(checker);
         return checker.isRunning() ? checker.getName() : null;
     }

@@ -16,7 +16,7 @@ import java.util.Properties;
  * Created by avorona on 05.10.15.
  */
 @Configuration
-@ComponentScan(basePackages = {"web", "services"})
+@ComponentScan(basePackages = {"web", "services", "model"})
 @EnableWebMvc
 @EnableAutoConfiguration
 public class Application {
