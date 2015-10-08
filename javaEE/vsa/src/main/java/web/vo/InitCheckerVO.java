@@ -9,6 +9,7 @@ public class InitCheckerVO {
     private String data;
     private String url;
     private String email;
+    private String name;
 
     public InitCheckerVO(String referer, String data, String url, String email) {
         this.referer = referer;
@@ -50,5 +51,13 @@ public class InitCheckerVO {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

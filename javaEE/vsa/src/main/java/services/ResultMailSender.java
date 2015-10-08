@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Service
 @Scope("prototype")
-public class ResultSender {
+public class ResultMailSender {
 
     private RegisteredPerson person;
     private Checker checker;
@@ -25,12 +25,12 @@ public class ResultSender {
     @Autowired
     private SimpleMailMessage mailTemplate;
 
-    public ResultSender(RegisteredPerson person, Checker checker) {
+    public ResultMailSender(RegisteredPerson person, Checker checker) {
         this.person = person;
         this.checker = checker;
     }
 
-    public ResultSender() {
+    public ResultMailSender() {
     }
 
     public void sendSuccess(String message) {

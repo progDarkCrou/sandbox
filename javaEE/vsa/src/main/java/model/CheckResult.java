@@ -51,6 +51,7 @@ public class CheckResult {
     public enum CheckStatus {
         RESULT_SUCCESS,
         RESULT_ERROR,
-        RESULT_ERROR_CRITICAL
+        RESULT_ERROR_CRITICAL,
+        RESULT_STOPED;
     }
 }

@@ -1,6 +1,7 @@
 package services;
 
 import model.Checker;
+import model.RegisteredPerson;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -43,10 +44,18 @@ public class CheckerManager {
         this.nonameEmail = defaultToSendEmail;
     }
 
-    public String run(String url, String referer, String data) {
-        Checker checker = new Checker(data, url, referer, noname, nonameEmail);
+    public String run(String data, String url, String referer, String name, String email) {
+        Checker checker = new Checker(data, url, referer, name, email);
         checkers.add(checker);
         return checker.isRunning() ? checker.getName() : null;
+    }
+
+    public String run(String data, String url, String referer) {
+        return this.run(data, url, referer, this.noname, this.nonameEmail);
+    }
+
+    public String run(String data, String url, String referer, RegisteredPerson person) {
+        return this.run(data, url, referer, person.getName(), person.getEmail());
     }
 
     public boolean stop(String checkerName) {

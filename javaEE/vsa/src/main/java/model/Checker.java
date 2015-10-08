@@ -6,8 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+import services.ResultMailSender;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -45,9 +44,7 @@ public class Checker {
     private ArrayList<CheckResult> results = new ArrayList<>();
 
     @Autowired
-    private MailSender mailSender;
-    @Autowired
-    private SimpleMailMessage templateMessage;
+    private ResultMailSender resultMailSender;
 
     public Checker(String name, String data, String url, String referer, RegisteredPerson person) {
         this.id = count++;
@@ -58,6 +55,8 @@ public class Checker {
         this.person = person;
         this.runner = new Thread(this::run, this.name);
         runner.start();
+        this.resultMailSender.setChecker(this);
+        this.resultMailSender.setPerson(this.person);
     }
 
     public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
@@ -101,6 +100,7 @@ public class Checker {
                         checkResult = new CheckResult(this.name + " - Invalid attempt was find. Please re-init the checker.",
                                 CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
                         logger.error(checkResult.getMessage());
+                        this.resultMailSender.sendFatalError(checkResult.getMessage());
                         this.stop();
                         break;
                     }
@@ -119,6 +119,7 @@ public class Checker {
                     if (searchElement.html().matches(successResultPattern)) {
                         checkResult = new CheckResult("Success check result: " + searchElement.html(),
                                 CheckResult.CheckStatus.RESULT_SUCCESS);
+                        this.resultMailSender.sendSuccess(checkResult.getMessage());
                         logger.info(checkResult.getMessage());
                     } else {
                         logger.info(this.name + " - result: " + searchElement.html());
@@ -137,6 +138,7 @@ public class Checker {
                                 CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
                         this.results.add(checkResult);
                         logger.error(checkResult.getMessage());
+                        this.resultMailSender.sendError(checkResult.getMessage());
                         this.stop();
                         break;
                     }
@@ -163,7 +165,10 @@ public class Checker {
 
     public boolean stop() {
         runner.interrupt();
-        logger.info(this.name + " - halted.");
+        logger.info(this.name + " - stopped.");
+        String message = this.name + ": stopped";
+        this.results.add(new CheckResult(message, CheckResult.CheckStatus.RESULT_STOPED));
+        this.resultMailSender.send(message, ResultMailSender.MessagesSubject.stopCheckerHeader);
         return !runner.isAlive();
     }
 

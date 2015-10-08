@@ -1,5 +1,6 @@
 package web.ctrl;
 
+import model.RegisteredPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import services.CheckerManager;
@@ -20,7 +21,8 @@ public class MainCtrl {
 
     @RequestMapping(value = "/init", method = RequestMethod.POST)
     public Answer init(@RequestBody(required = true) InitCheckerVO vo) {
-        String res = runner.run(vo.getUrl(), vo.getReferer(), vo.getData());
+        String res = runner.run(vo.getData(), vo.getUrl(), vo.getReferer(),
+                new RegisteredPerson(vo.getName(), vo.getEmail()));
         return res != null ? new SuccessAnswer(res) : new ErrorAnswer("Cannot create checker. Please try again.");
     }
 
