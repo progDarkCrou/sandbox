@@ -40,7 +40,7 @@ public class Checker {
     private String url;
 
     private String referer;
-    private RegistredPerson person;
+    private RegisteredPerson person;
     private Thread runner;
     private ArrayList<CheckResult> results = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class Checker {
     @Autowired
     private SimpleMailMessage templateMessage;
 
-    public Checker(String name, String data, String url, String referer, RegistredPerson person) {
+    public Checker(String name, String data, String url, String referer, RegisteredPerson person) {
         this.id = count++;
         this.name = name;
         this.data = data;
@@ -61,7 +61,7 @@ public class Checker {
     }
 
     public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
-        this(name, data, url, referer, new RegistredPerson(nameToSend, emailToSend));
+        this(name, data, url, referer, new RegisteredPerson(nameToSend, emailToSend));
     }
 
     public Checker(String data, String url, String referer, String nameToSend, String emailToSend) {

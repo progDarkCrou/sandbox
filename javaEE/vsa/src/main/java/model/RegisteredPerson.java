@@ -3,14 +3,14 @@ package model;
 /**
  * Created by crou on 07.10.15.
  */
-public class RegistredPerson {
+public class RegisteredPerson {
     private String name;
     private String email;
 
-    public RegistredPerson() {
+    public RegisteredPerson() {
     }
 
-    public RegistredPerson(String name, String email) {
+    public RegisteredPerson(String name, String email) {
         this.name = name;
         this.email = email;
     }
