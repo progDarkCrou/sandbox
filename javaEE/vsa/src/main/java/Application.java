@@ -21,7 +21,8 @@ import java.util.Properties;
 @EnableAutoConfiguration
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+//        InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
         SpringApplication.run(Application.class, args);
     }
 
