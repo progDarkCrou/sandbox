@@ -51,6 +51,7 @@ public class ResultMailSender {
         message.setSubject(this.checker.getName() + ": " + subject.toString());
         message.setSentDate(new Date());
         message.setText(body);
+        message.setFrom(this.checker.getName() + "@vsa.io");
         mailSender.send(message);
     }
 

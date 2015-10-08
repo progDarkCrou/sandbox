@@ -60,9 +60,10 @@ public class Application {
     }
 
     @Bean
-    public SimpleMailMessage templateMessage() {
+    @Autowired
+    public SimpleMailMessage templateMessage(JavaMailSenderImpl mailSender) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("vsa@checker.com");
+        message.setFrom("default@checker.ch");
         return message;
     }
 }
