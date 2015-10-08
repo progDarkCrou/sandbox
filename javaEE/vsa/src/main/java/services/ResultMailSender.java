@@ -39,7 +39,7 @@ public class ResultMailSender {
 
     public void sendSuccess(CheckResult result) {
         if (TimeUnit.MINUTES.convert(result.getTime().getTime() -
-                this.lastSent.getTime(), TimeUnit.MILLISECONDS) > this.sendFrequencyInMin) {
+                this.lastSent.getTime(), TimeUnit.MILLISECONDS) > sendFrequencyInMin) {
             this.send(result.getMessage(), MessagesSubject.successResultHeader);
             this.lastSent = result.getTime();
         }
@@ -56,7 +56,7 @@ public class ResultMailSender {
     public void send(String body, String subject) {
         SimpleMailMessage message = new SimpleMailMessage(mailTemplate);
         message.setTo(person.getEmail());
-        message.setSubject(this.checker.getName() + ": " + subject.toString());
+        message.setSubject(this.checker.getName() + ": " + subject);
         message.setSentDate(new Date());
         message.setText(body);
         message.setFrom(this.checker.getName() + "@vsa.io");

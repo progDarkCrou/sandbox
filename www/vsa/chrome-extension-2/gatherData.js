@@ -1,5 +1,6 @@
 (function() {
   //  ***********************************Initialization*******************************
+  document.body.style.margin = "0";
 
   var visaTypeSelect = document.querySelector('select#ctl00_plhMain_cboVisaCategory');
   var request = {};

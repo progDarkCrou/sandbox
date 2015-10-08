@@ -114,7 +114,7 @@ public class Checker {
                         checkResult = new CheckResult(this.name + " - Invalid attempt was find. Please re-init the checker.",
                                 CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
                         logger.error(checkResult.getMessage());
-                        this.resultMailSender.sendFatalError(checkResult.getMessage());
+                        this.resultMailSender.sendFatalError(checkResult);
                         this.stop();
                         break;
                     }
@@ -133,7 +133,7 @@ public class Checker {
                     if (searchElement.html().matches(successResultPattern)) {
                         checkResult = new CheckResult("Success check result: " + searchElement.html(),
                                 CheckResult.CheckStatus.RESULT_SUCCESS);
-                        this.resultMailSender.sendSuccess(checkResult.getMessage());
+                        this.resultMailSender.sendSuccess(checkResult);
                         logger.info(checkResult.getMessage());
                     } else {
                         logger.info(this.name + " - result: " + searchElement.html());
@@ -152,7 +152,7 @@ public class Checker {
                                 CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
                         this.results.add(checkResult);
                         logger.error(checkResult.getMessage());
-                        this.resultMailSender.sendError(checkResult.getMessage());
+                        this.resultMailSender.sendError(checkResult);
                         this.stop();
                         break;
                     }

@@ -1,8 +1,12 @@
 package services;
 
 import model.Checker;
+import model.RegisteredPerson;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
