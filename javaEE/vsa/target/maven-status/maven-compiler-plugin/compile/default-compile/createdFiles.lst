@@ -1,8 +1,0 @@
-web/vo/InitCheckerVO.class
-web/vo/SuccessAnswer.class
-services/dto/CheckResult.class
-web/vo/Answer.class
-web/ctrl/MainCtrl.class
-Application.class
-web/vo/ErrorAnswer.class
-services/CheckRunner.class
