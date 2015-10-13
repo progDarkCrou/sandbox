@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var availablePhrase = 'The next available slot';
   var unavailablePhrase = 'No date(s)';
   var invalidAttemptPhrase = 'Invalid';
@@ -24,11 +24,11 @@
   vTypeLabel.style.width = '100%';
   // ***
 
-  var timer = function reload (url, data, time) {
+  var timer = function reload(url, data, time) {
     reload.timer = setTimeout(function t() {
       var xhtml = new XMLHttpRequest();
       xhtml.open('POST', url, true);
-      xhtml.onloadend = onPostLoad(xhtml, function() {
+      xhtml.onloadend = onPostLoad(xhtml, function () {
         reload(url, data, time);
       });
       xhtml.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -36,43 +36,43 @@
     }, time);
   };
 
-  var closeTimer = function() {
+  var closeTimer = function () {
     clearTimeout(timer.timer);
     delete timer.timer;
     console.log('Check timer is off now.');
   };
 
-  var onPostLoad = function(ajaxRequest, callback) {
-    return function() {
-      if (ajaxRequest.response) {
-        if (ajaxRequest.response.indexOf(availablePhrase) !== -1) {
-        	callback = null;
+  var onPostLoad = function (ajaxRequest, callback) {
+    return function () {
+      if(ajaxRequest.response) {
+        if(ajaxRequest.response.indexOf(availablePhrase) !== -1) {
+          callback = null;
           closeTimer();
           alert('Yeah!!! There is some date available. Please reload page, chose the category you need, answer captcha and click "Submit" button. Enjoy!!!');
-        } else if (ajaxRequest.response.indexOf(unavailablePhrase) !== -1) {
+        } else if(ajaxRequest.response.indexOf(unavailablePhrase) !== -1) {
           console.log('I am sorry, but no dates available now.');
-        } else if (ajaxRequest.response.indexOf(invalidAttemptPhrase) !== -1) {
+        } else if(ajaxRequest.response.indexOf(invalidAttemptPhrase) !== -1) {
           alert('Something bad occured while posting, please reload page, and reinit me!!!');
         }
-        if (callback) {
+        if(callback) {
           callback();
         }
       }
     };
   };
 
-  initButton.onclick = function() {
+  initButton.onclick = function () {
 
-    if (timer.timer) {
+    if(timer.timer) {
       closeTimer();
       initButton.innerText = initButtonInitInnerText;
     } else {
 
       var vCategorySelect = document.querySelector('select[name*="ctl00$plhMain$cboVisaCategory"]');
 
-      for (var i = 0; i < vCategorySelect.children.length; i++) {
+      for(var i = 0; i < vCategorySelect.children.length; i++) {
         var child = vCategorySelect.children.item(i);
-        if (child.innerText === vType.value) {
+        if(child.innerText === vType.value) {
           defaultV = child.value;
         }
       }
@@ -92,11 +92,11 @@
       arrayOfInputs.push(document.querySelector('input[name*="recaptcha_response_field"]'));
       arrayOfInputs.push(vCategorySelect);
 
-      var data = arrayOfInputs.map(function(e) {
-        if (e) {
-          var name = e.getAttribute('name');
-          var value = e.getAttribute('value') ? e.getAttribute('value') : '';
-          switch (name) {
+      var data = arrayOfInputs.map(function (e) {
+          if(e) {
+            var name = e.getAttribute('name');
+            var value = e.getAttribute('value') ? e.getAttribute('value') : '';
+            switch(name) {
             case '__EVENTTARGET':
               value = 'ctl00$plhMain$cboVisaCategory';
               break;
@@ -106,12 +106,13 @@
             case 'ctl00$plhMain$cboVisaCategory':
               value = defaultV;
               break;
+            }
+            return window.encodeURIComponent(name) + '=' + window.encodeURIComponent(value);
           }
-          return window.encodeURIComponent(name) + '=' + window.encodeURIComponent(value);
-        }
-      }).reduce(function(a, b) {
-        return a + '&' + b;
-      });
+        })
+        .reduce(function (a, b) {
+          return a + '&' + b;
+        });
 
       timer(document.aspnetForm.getAttribute('action'), data, frequency);
       console.log('Timer is runnig now...');

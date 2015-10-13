@@ -1,7 +1,7 @@
 var url = 'http://104.131.161.248:8080/checker/init';
 
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+chrome.runtime.onInstalled.addListener(function () {
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [
         new chrome.declarativeContent.PageStateMatcher({
@@ -22,40 +22,42 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
-chrome.pageAction.onClicked.addListener(function(tab) {
-  if (tab.url.match(/https:\/\/polandonline\.vfsglobal\.com\/.*\/AppScheduling.aspx.*/g)) {
+chrome.pageAction.onClicked.addListener(function (tab) {
+  if(tab.url.match(/https:\/\/polandonline\.vfsglobal\.com\/.*\/AppScheduling.aspx.*/g)) {
     chrome.tabs.sendMessage(tab.id, {
       type: 'gatherRequest'
     });
+  } else {
+    chrome.tabs.sendMessage(tab.id, {
+      type: 'getUrlToOpen'
+    });
+
   }
-  chrome.tabs.sendMessage(tab.id, {
-    type: 'getUrlToOpen'
-  });
 });
 
-chrome.runtime.onMessage.addListener(function(msg) {
-  if (msg.type === 'openTab') {
+chrome.runtime.onMessage.addListener(function (msg) {
+  if(msg.type === 'openTab') {
     chrome.tabs.create({
       url: msg.url
     });
   }
 });
 
-chrome.runtime.onMessage.addListener(function(msg) {
-  if (msg.type === 'gatheredRequest') {
+chrome.runtime.onMessage.addListener(function (msg) {
+  if(msg.type === 'gatheredRequest') {
     var xhtml = new XMLHttpRequest();
     xhtml.open('POST', url, true);
-    xhtml.onloadend = function() {
-      if (xhtml.response) {
+    xhtml.onloadend = function () {
+      if(xhtml.response) {
         var data = JSON.parse(xhtml.response);
-        if (data.result) {
+        if(data.result) {
           chrome.notifications.create({
             type: 'basic',
             iconUrl: 'vsa.png',
             title: 'Successfuly created checker',
             message: 'Checker id: ' + data.result
           });
-        } else if (data.error) {
+        } else if(data.error) {
           chrome.notifications.create({
             type: 'basic',
             iconUrl: 'vsa.png',

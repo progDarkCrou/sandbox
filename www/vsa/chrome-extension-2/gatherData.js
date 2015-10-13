@@ -1,4 +1,4 @@
-(function() {
+(function () {
   //  ***********************************Initialization*******************************
   document.body.style.margin = "0";
 
@@ -25,41 +25,41 @@
   wraper.appendChild(nameInput);
   wraper.appendChild(emailInput);
 
-  personalDataContainer.hide = function() {
+  personalDataContainer.hide = function () {
     nameInput.value = '';
     emailInput.value = '';
     personalDataContainer.hidden = true;
   };
 
-  personalDataContainer.onkeydown = function(e) {
-    if (e.keyCode === 27) {
+  personalDataContainer.onkeydown = function (e) {
+    if(e.keyCode === 27) {
       personalDataContainer.hide();
     }
-    if (e.keyCode === 13) {
+    if(e.keyCode === 13) {
       confirm();
     }
   };
 
   personalDataContainer.onclick = function (e) {
-    if (e.target === personalDataContainer) {
+    if(e.target === personalDataContainer) {
       personalDataContainer.hide();
     }
   };
 
   // ***********************************************************************************
 
-  emailInput.onkeyup = function() {
+  emailInput.onkeyup = function () {
     request.email = emailInput.value;
   };
 
-  nameInput.onkeyup = function() {
+  nameInput.onkeyup = function () {
     request.name = nameInput.value;
   };
 
   function confirm() {
-    if (!nameInput.value) {
+    if(!nameInput.value) {
       nameInput.focus();
-    } else if (!emailInput.value || !emailInput.value.match(/gmail\.com/g)) {
+    } else if(!emailInput.value || !emailInput.value.match(/gmail\.com/g)) {
       emailInput.focus();
     } else {
       chrome.runtime.sendMessage({
@@ -76,7 +76,7 @@
 
   function gatherRequest(e) {
 
-    if (e.target.value > -1) {
+    if(e.target.value > -1) {
 
       var form = document.querySelector('form');
 
@@ -97,31 +97,32 @@
 
       request.referer = document.location.href;
       request.url = document.location.href.substring(0, document.location.href.lastIndexOf('/') + 1) + form.getAttribute('action');
-      request.data = arrayOfInputs.map(function(e) {
-        if (e) {
-          var name = e.getAttribute('name');
-          var value = e.value ? e.value : '';
-          switch (name) {
+      request.data = arrayOfInputs.map(function (e) {
+          if(e) {
+            var name = e.getAttribute('name');
+            var value = e.value ? e.value : '';
+            switch(name) {
             case '__EVENTTARGET':
               value = 'ctl00$plhMain$cboVisaCategory';
               break;
             case '__EVENTARGUMENT':
               value = '';
               break;
-          };
-          return encodeURIComponent(name) + '=' + encodeURIComponent(value);
-        }
-      }).reduce(function(a, b) {
-        return a + '&' + b;
-      });
+            };
+            return encodeURIComponent(name) + '=' + encodeURIComponent(value);
+          }
+        })
+        .reduce(function (a, b) {
+          return a + '&' + b;
+        });
 
       getEmail();
 
     }
   };
 
-  chrome.runtime.onMessage.addListener(function(msg) {
-    if (msg.type === 'gatherRequest') {
+  chrome.runtime.onMessage.addListener(function (msg) {
+    if(msg.type === 'gatherRequest') {
       console.log('Gathering requerst');
       visaTypeSelect.removeAttribute('onchange');
       var parent = visaTypeSelect.parentElement;
@@ -129,10 +130,11 @@
       anotherSelect.onchange = gatherRequest;
       anotherSelect.name = visaTypeSelect.name;
 
-      for (var i = 0; i < visaTypeSelect.children.length; i++) {
+      for(var i = 0; i < visaTypeSelect.children.length; i++) {
         var s = document.createElement('option');
         anotherSelect.appendChild(s);
-        s.outerHTML = visaTypeSelect.children.item(i).outerHTML;
+        s.outerHTML = visaTypeSelect.children.item(i)
+          .outerHTML;
       }
 
       parent.appendChild(anotherSelect);
