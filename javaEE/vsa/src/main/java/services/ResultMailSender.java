@@ -4,6 +4,7 @@ import model.CheckResult;
 import model.Checker;
 import model.RegisteredPerson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
@@ -15,17 +16,19 @@ import java.util.concurrent.TimeUnit;
  * Created by avorona on 08.10.15.
  */
 @Component
+@Scope("prototype")
 public class ResultMailSender {
 
     private static long sendFrequencyInMin = 10;
 
-    private Date lastSent;
+    private Date lastSendAttempt;
     private RegisteredPerson person;
 
     private Checker checker;
 
     @Autowired
     private MailSender mailSender;
+
     @Autowired
     private SimpleMailMessage mailTemplate;
 
@@ -38,12 +41,12 @@ public class ResultMailSender {
     }
 
     public void sendSuccess(CheckResult result) {
-        if (this.lastSent != null && TimeUnit.MINUTES.convert(result.getTime().getTime() -
-                this.lastSent.getTime(), TimeUnit.MILLISECONDS) > sendFrequencyInMin || this.lastSent == null) {
+        if (this.lastSendAttempt != null && TimeUnit.MINUTES.convert(result.getTime().getTime() -
+                this.lastSendAttempt.getTime(), TimeUnit.MILLISECONDS) > sendFrequencyInMin || this.lastSendAttempt == null) {
             this.send(result.getMessage(), MessagesSubject.successResultHeader);
-            this.lastSent = result.getTime();
-            this.lastSent = result.getTime();
+            this.lastSendAttempt = result.getTime();
         }
+        this.lastSendAttempt = result.getTime();
     }
 
     public void sendFatalError(CheckResult result) {
@@ -56,12 +59,12 @@ public class ResultMailSender {
 
     public void send(String body, String subject) {
         SimpleMailMessage message = new SimpleMailMessage(mailTemplate);
-        message.setTo(person.getEmail());
+        message.setTo(this.person.getEmail());
         message.setSubject(this.checker.getName() + ": " + subject);
         message.setSentDate(new Date());
         message.setText("Dear " + this.person.getName() + "!\n" + body);
         message.setFrom(this.checker.getName() + "@vsa.io");
-        mailSender.send(message);
+        this.mailSender.send(message);
     }
 
     public RegisteredPerson getPerson() {

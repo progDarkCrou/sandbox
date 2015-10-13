@@ -1,14 +1,14 @@
+import model.Checker;
+import model.RegisteredPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import services.ResultMailSender;
 import utils.InstallCert;
 
 import java.util.Properties;
@@ -22,15 +22,17 @@ import java.util.Properties;
 @EnableAutoConfiguration
 public class Application {
 
+    @Autowired
+    ConfigurableApplicationContext context;
+
     public static void main(String[] args) throws Exception {
         InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
         SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    @Autowired
     @Profile(value = {"dev", "default"})
-    public JavaMailSenderImpl mailSender(ConfigurableApplicationContext context) throws Exception {
+    public JavaMailSenderImpl mailSender() throws Exception {
         String mailSenderLoginPropName = "mail.sender.login";
         String mailSenderPassPropName = "mail.sender.password";
 
@@ -67,5 +69,15 @@ public class Application {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("default@vsa.io");
         return message;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public Checker checker(String data, String url, String referer, String name, String email) {
+        RegisteredPerson person = new RegisteredPerson(name, email);
+        Checker checker = new Checker(data, url, referer);
+        ResultMailSender sender = context.getBean(ResultMailSender.class, person, checker);
+        checker.setResultMailSender(sender);
+        return checker;
     }
 }

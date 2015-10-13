@@ -5,8 +5,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import services.ResultMailSender;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 /**
  * Created by crou on 07.10.15.
  */
-@Component("checker")
 public class Checker {
 
     private static long count = 0;
@@ -45,19 +42,17 @@ public class Checker {
     private Thread runner;
     private ArrayList<CheckResult> results = new ArrayList<>();
 
-    @Autowired
     private ResultMailSender resultMailSender;
 
-//    public Checker(String name, String data, String url, String referer, RegisteredPerson person) {
-//        this.id = count++;
-//        this.name = name;
-//        this.data = data;
-//        this.url = url;
-//        this.referer = referer;
-//        this.runner = new Thread(this::run, this.name);
-//        runner.start();
-//        this.resultMailSender = new ResultMailSender(person, this);
-//    }
+    public Checker(String data, String url, String referer) {
+        this.id = count++;
+        this.name = Checker.class.getSimpleName() + "-" + count;
+        this.data = data;
+        this.url = url;
+        this.referer = referer;
+        this.runner = new Thread(this::run, this.name);
+        runner.start();
+    }
 
     public Checker() {
     }
@@ -68,7 +63,9 @@ public class Checker {
         this.data = data;
         this.url = url;
         this.referer = referer;
-        this.runner = new Thread(this::run, this.name);
+        this.runner = new Thread(() -> {
+            run();
+        }, this.name);
         this.runner.start();
         this.resultMailSender.setChecker(this);
         this.resultMailSender.setPerson(person);
@@ -95,10 +92,11 @@ public class Checker {
                     HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
                     connection.setRequestMethod("POST");
                     connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    connection.setRequestProperty("Connection", "keep-alive");
+//                    connection.setRequestProperty("Connection", "keep-alive");
                     connection.setRequestProperty("Referer", referer);
 
                     connection.setDoOutput(true);
+                    connection.setDoInput(true);
 
                     outStream = new DataOutputStream(connection.getOutputStream());
 
@@ -106,7 +104,7 @@ public class Checker {
                     outStream.flush();
                     outStream.close();
 
-                    inStream = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    inStream = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 
                     Document document = Jsoup.parse(inStream.lines().reduce((s, s2) -> s + s2).get());
 
@@ -239,5 +237,13 @@ public class Checker {
 
     public void setPerson(RegisteredPerson person) {
         this.person = person;
+    }
+
+    public ResultMailSender getResultMailSender() {
+        return resultMailSender;
+    }
+
+    public void setResultMailSender(ResultMailSender resultMailSender) {
+        this.resultMailSender = resultMailSender;
     }
 }

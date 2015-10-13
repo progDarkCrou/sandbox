@@ -89,7 +89,7 @@ public class InstallCert {
         SavingTrustManager tm = new SavingTrustManager(defaultTrustManager);
         context.init(null, new TrustManager[]{tm}, null);
         SSLSocketFactory factory = context.getSocketFactory();
-
+//
         System.out.println("Opening connection to " + host + ":" + port + "...");
         SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
         socket.setSoTimeout(10000);
@@ -115,8 +115,8 @@ public class InstallCert {
         X509Certificate cert = chain[k];
         String alias = host + "-" + (k + 1);
         ks.setCertificateEntry(alias, cert);
-
-        OutputStream out = new FileOutputStream("jssecacerts");
+//
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         ks.store(out, passphrase);
         out.close();
 
@@ -124,17 +124,18 @@ public class InstallCert {
         System.out.println
                 ("Added certificate to keystore 'jssecacerts' using alias '"
                         + alias + "'");
-    }
 
-    private static String toHexString(byte[] bytes) {
-        StringBuilder sb = new StringBuilder(bytes.length * 3);
-        for (int b : bytes) {
-            b &= 0xff;
-            sb.append(HEXDIGITS[b >> 4]);
-            sb.append(HEXDIGITS[b & 15]);
-            sb.append(' ');
-        }
-        return sb.toString();
+        in = new ByteArrayInputStream(out.toByteArray());
+        ks = KeyStore.getInstance(KeyStore.getDefaultType());
+        ks.load(in, passphrase);
+        in.close();
+        context = SSLContext.getInstance("TLS");
+        tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        tmf.init(ks);
+        defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];
+        tm = new SavingTrustManager(defaultTrustManager);
+        context.init(null, new TrustManager[]{tm}, null);
+        HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
 
     private static class SavingTrustManager implements X509TrustManager {
@@ -147,7 +148,8 @@ public class InstallCert {
         }
 
         public X509Certificate[] getAcceptedIssuers() {
-            throw new UnsupportedOperationException();
+            if (chain == null) throw new UnsupportedOperationException();
+            return chain;
         }
 
         public void checkClientTrusted(X509Certificate[] chain, String authType)
