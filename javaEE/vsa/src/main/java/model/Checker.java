@@ -13,7 +13,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Created by crou on 07.10.15.
@@ -39,7 +39,7 @@ public class Checker {
 
     private RegisteredPerson person;
     private Thread runner;
-    private ArrayList<CheckResult> results = new ArrayList<>();
+    private ConcurrentLinkedDeque<CheckerResult> results = new ConcurrentLinkedDeque<>();
 
     private ResultMailSender resultMailSender;
 
@@ -51,9 +51,6 @@ public class Checker {
         this.referer = referer;
         this.runner = new Thread(this::run, this.name);
         runner.start();
-    }
-
-    public Checker() {
     }
 
     public void init(String data, String url, String referer, RegisteredPerson person) {
@@ -83,7 +80,7 @@ public class Checker {
             logger.info(this.name + " - started.");
 
             while (!Thread.currentThread().isInterrupted()) {
-                CheckResult checkResult = null;
+                CheckerResult checkerResult = null;
                 DataOutputStream outStream = null;
                 BufferedReader inStream = null;
 
@@ -108,10 +105,10 @@ public class Checker {
                     Document document = Jsoup.parse(inStream.lines().reduce((s, s2) -> s + s2).get());
 
                     if (document.html().matches(invalidAttemptPattern)) {
-                        checkResult = new CheckResult(this.name + " - Invalid attempt was find. Please re-init the checker.",
-                                CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
-                        logger.error(checkResult.getMessage());
-                        this.resultMailSender.sendFatalError(checkResult);
+                        checkerResult = new CheckerResult("Invalid attempt was find. Please re-init the checker.",
+                                CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
+                        logger.error(checkerResult.getMessage());
+                        this.resultMailSender.sendFatalError(checkerResult);
                         this.stop();
                         break;
                     }
@@ -119,7 +116,7 @@ public class Checker {
                     Elements searchElements = document.select(searchElementId);
 
                     if (searchElements == null || searchElements.size() == 0) {
-                        String message = this.name + " - cannot find proper element to check. Please check it out, " +
+                        String message = "Cannot find proper element to check. Please check it out, " +
                                 "and, if needed, reinitialize checker.";
                         logger.error(message);
                         throw new IOException(message);
@@ -128,16 +125,13 @@ public class Checker {
                     Element searchElement = searchElements.first();
 
                     if (searchElement.html().matches(successResultPattern)) {
-                        checkResult = new CheckResult("Success check result: " + searchElement.html(),
-                                CheckResult.CheckStatus.RESULT_SUCCESS);
-                        this.resultMailSender.sendSuccess(checkResult);
-                        logger.info(checkResult.getMessage());
+                        checkerResult = new CheckerResult("Success check result: " + searchElement.html(),
+                                CheckerResult.CheckStatus.RESULT_SUCCESS);
+                        this.resultMailSender.sendSuccess(checkerResult);
+                        logger.info(checkerResult.getMessage());
                     } else {
-                        logger.info(this.name + " - result: " + searchElement.html());
-                    }
 
-                    if (checkResult != null) {
-                        this.results.add(checkResult);
+                        logger.info("Result: " + searchElement.html());
                     }
 
                     fails = 0;
@@ -145,20 +139,23 @@ public class Checker {
                     Thread.currentThread().sleep(latency);
                 } catch (IOException e) {
                     if (fails >= maxFails) {
-                        checkResult = new CheckResult("Max fails count was reached. Please reinitialize checker.",
-                                CheckResult.CheckStatus.RESULT_ERROR_CRITICAL);
-                        this.results.add(checkResult);
-                        logger.error(checkResult.getMessage());
-                        this.resultMailSender.sendError(checkResult);
+                        checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
+                                CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
+                        this.results.add(checkerResult);
+                        logger.error(checkerResult.getMessage());
+                        this.resultMailSender.sendError(checkerResult);
                         this.stop();
                         break;
                     }
                     fails++;
-                    logger.error(this.name + " - some connectivity error occurred.", e);
+                    logger.error("Some connectivity error occurred.", e);
                     continue;
                 } catch (InterruptedException e) {
                     break;
                 } finally {
+                    if (checkerResult != null) {
+                        this.results.add(checkerResult);
+                    }
                     try {
                         if (inStream != null) {
                             inStream.close();
@@ -167,7 +164,7 @@ public class Checker {
                             outStream.close();
                         }
                     } catch (IOException e) {
-                        logger.error(this.name + " - something happened while closing connection.", e);
+                        logger.error("Something happened while closing connection.", e);
                     }
                 }
             }
@@ -177,7 +174,7 @@ public class Checker {
         runner.interrupt();
         logger.info(this.name + " - stopped.");
         String message = this.name + ": stopped";
-        this.results.add(new CheckResult(message, CheckResult.CheckStatus.RESULT_STOPED));
+        this.results.add(new CheckerResult(message, CheckerResult.CheckStatus.RESULT_STOPED));
         this.resultMailSender.send(message, ResultMailSender.MessagesSubject.stopCheckerHeader);
         return !runner.isAlive();
     }
@@ -218,7 +215,7 @@ public class Checker {
         this.url = url;
     }
 
-    public ArrayList<CheckResult> getResults() {
+    public ConcurrentLinkedDeque<CheckerResult> getResults() {
         return results;
     }
 

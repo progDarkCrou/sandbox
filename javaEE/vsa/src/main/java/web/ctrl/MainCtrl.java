@@ -47,11 +47,11 @@ public class MainCtrl {
                            @RequestParam(value = "to", required = false) Long to) {
         List<CheckerVO> result = runner.getCheckers()
                 .stream()
-                .sorted((o1, o2) -> o1.getId().compareTo(o2.getId()))
                 .map(checker -> new CheckerVO(checker))
+                .sorted((o1, o2) -> o1.getId().compareTo(o2.getId()))
                 .collect(Collectors.toList());
-        if (from != null) result = result.subList(from.intValue(), result.size());
         if (to != null) result = result.subList(0, to.intValue());
+        if (from != null) result = result.subList(from.intValue(), result.size());
         return new CheckersCollectionAnswer(result);
     }
 

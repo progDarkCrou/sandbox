@@ -1,7 +1,7 @@
 package services;
 
-import model.CheckResult;
 import model.Checker;
+import model.CheckerResult;
 import model.RegisteredPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -40,7 +40,7 @@ public class ResultMailSender {
     public ResultMailSender() {
     }
 
-    public void sendSuccess(CheckResult result) {
+    public void sendSuccess(CheckerResult result) {
         if (this.lastSendAttempt != null && TimeUnit.MINUTES.convert(result.getTime().getTime() -
                 this.lastSendAttempt.getTime(), TimeUnit.MILLISECONDS) > sendFrequencyInMin || this.lastSendAttempt == null) {
             this.send(result.getMessage(), MessagesSubject.successResultHeader);
@@ -49,11 +49,11 @@ public class ResultMailSender {
         this.lastSendAttempt = result.getTime();
     }
 
-    public void sendFatalError(CheckResult result) {
+    public void sendFatalError(CheckerResult result) {
         this.send(result.getMessage(), MessagesSubject.fatalErrorResultHeader);
     }
 
-    public void sendError(CheckResult result) {
+    public void sendError(CheckerResult result) {
         this.send(result.getMessage(), MessagesSubject.errorResultHeader);
     }
 

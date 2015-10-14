@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by avorona on 05.10.15.
@@ -28,7 +28,7 @@ public class CheckerManager {
 
     private Logger logger = Logger.getLogger(CheckerManager.class.getName());
 
-    private ConcurrentSkipListSet<Checker> checkers = new ConcurrentSkipListSet<>();
+    private CopyOnWriteArrayList<Checker> checkers = new CopyOnWriteArrayList<>();
 
     @Autowired
     public CheckerManager(ConfigurableApplicationContext context) {
@@ -83,7 +83,7 @@ public class CheckerManager {
         return this.checkers.parallelStream().filter(checker -> checker.getName().equals(checkerName)).findFirst().get();
     }
 
-    public Set<Checker> getCheckers() {
+    public List<Checker> getCheckers() {
         return checkers;
     }
 }

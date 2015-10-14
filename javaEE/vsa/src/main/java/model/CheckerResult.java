@@ -5,23 +5,23 @@ import java.util.Date;
 /**
  * Created by avorona on 06.10.15.
  */
-public class CheckResult {
+public class CheckerResult {
 
     private Date time;
     private String message;
     private CheckStatus checkResult;
 
-    public CheckResult(Date time, String message) {
+    public CheckerResult(Date time, String message) {
         this.time = time;
         this.message = message;
     }
 
-    public CheckResult(String message, CheckStatus checkResult) {
+    public CheckerResult(String message, CheckStatus checkResult) {
         this(new Date(), message);
         this.checkResult = checkResult;
     }
 
-    public CheckResult() {
+    public CheckerResult() {
     }
 
     public Date getTime() {
