@@ -31,13 +31,12 @@ public class Checker {
 
     private Logger logger = Logger.getLogger(Checker.class.getName());
     private String name;
-    private long id;
+    private Long id;
 
     private String data;
-
     private String url;
-
     private String referer;
+
     private RegisteredPerson person;
     private Thread runner;
     private ArrayList<CheckResult> results = new ArrayList<>();
@@ -195,7 +194,7 @@ public class Checker {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

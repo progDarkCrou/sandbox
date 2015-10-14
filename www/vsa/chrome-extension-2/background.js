@@ -21,6 +21,13 @@ chrome.runtime.onInstalled.addListener(function () {
   });
 });
 
+chrome.runtime.onMessage.addListener(function (msg) {
+  if(msg.type === 'openTab') {
+    chrome.tabs.create({
+      url: msg.url
+    });
+  }
+});
 
 chrome.pageAction.onClicked.addListener(function (tab) {
   if(tab.url.match(/https:\/\/polandonline\.vfsglobal\.com\/.*\/AppScheduling.aspx.*/g)) {
@@ -30,15 +37,6 @@ chrome.pageAction.onClicked.addListener(function (tab) {
   } else {
     chrome.tabs.sendMessage(tab.id, {
       type: 'getUrlToOpen'
-    });
-
-  }
-});
-
-chrome.runtime.onMessage.addListener(function (msg) {
-  if(msg.type === 'openTab') {
-    chrome.tabs.create({
-      url: msg.url
     });
   }
 });

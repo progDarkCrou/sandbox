@@ -38,17 +38,21 @@ package utils;/*
 
 import javax.net.ssl.*;
 import java.io.*;
+import java.security.KeyManagementException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class used to add the server's certificate to the KeyStore
  * with your trusted certificates.
  */
 public class InstallCert {
-
-    private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();
 
     public static void main(String[] args) throws Exception {
         String host;
@@ -65,12 +69,13 @@ public class InstallCert {
             return;
         }
 
-        File file = new File("jssecacerts");
+        String temporaryKeyStoreFileName = "jssecacerts";
+        File file = new File(temporaryKeyStoreFileName);
         if (file.isFile() == false) {
             char SEP = File.separatorChar;
             File dir = new File(System.getProperty("java.home") + SEP
                     + "lib" + SEP + "security");
-            file = new File(dir, "jssecacerts");
+            file = new File(dir, temporaryKeyStoreFileName);
             if (file.isFile() == false) {
                 file = new File(dir, "cacerts");
             }
@@ -89,53 +94,63 @@ public class InstallCert {
         SavingTrustManager tm = new SavingTrustManager(defaultTrustManager);
         context.init(null, new TrustManager[]{tm}, null);
         SSLSocketFactory factory = context.getSocketFactory();
+        HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
 //
         System.out.println("Opening connection to " + host + ":" + port + "...");
         SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
         socket.setSoTimeout(10000);
+
         try {
             System.out.println("Starting SSL handshake...");
             socket.startHandshake();
             socket.close();
             System.out.println();
             System.out.println("No errors, certificate is already trusted");
-        } catch (SSLException e) {
+        } catch (SSLHandshakeException e) {
             System.out.println();
-            e.printStackTrace(System.out);
+            System.out.println("Going to add new certificate...");
+
+            X509Certificate[] chain = tm.chain;
+            if (chain == null) {
+                System.out.println("Could not obtain server certificate chain");
+                return;
+            }
+
+            List<X509Certificate> certificates = Stream.of(tm.chain).collect(Collectors.toList());
+
+            certificates.forEach(x509Certificate -> {
+                String alias = host + "-" + (certificates.indexOf(x509Certificate));
+                try {
+                    ks.setCertificateEntry(alias, x509Certificate);
+                    ByteArrayOutputStream runtimeOut = new ByteArrayOutputStream();
+                    OutputStream fileStoreOut = new FileOutputStream(new File(temporaryKeyStoreFileName));
+                    ks.store(runtimeOut, passphrase);
+                    ks.store(fileStoreOut, passphrase);
+                    runtimeOut.close();
+
+                    System.out.println();
+                    System.out.println
+                            ("Added certificate to keystore '" + temporaryKeyStoreFileName + "' using alias '"
+                                    + alias + "'");
+
+                    InputStream i = new ByteArrayInputStream(runtimeOut.toByteArray());
+                    ks.load(i, passphrase);
+                    in.close();
+                    tmf.init(ks);
+                    context.init(null, tmf.getTrustManagers(), null);
+                } catch (KeyStoreException e1) {
+                    e1.printStackTrace();
+                } catch (CertificateException e1) {
+                    e1.printStackTrace();
+                } catch (NoSuchAlgorithmException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (KeyManagementException e1) {
+                    e1.printStackTrace();
+                }
+            });
         }
-
-        X509Certificate[] chain = tm.chain;
-        if (chain == null) {
-            System.out.println("Could not obtain server certificate chain");
-            return;
-        }
-
-        int k = 0;
-
-        X509Certificate cert = chain[k];
-        String alias = host + "-" + (k + 1);
-        ks.setCertificateEntry(alias, cert);
-//
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ks.store(out, passphrase);
-        out.close();
-
-        System.out.println();
-        System.out.println
-                ("Added certificate to keystore 'jssecacerts' using alias '"
-                        + alias + "'");
-
-        in = new ByteArrayInputStream(out.toByteArray());
-        ks = KeyStore.getInstance(KeyStore.getDefaultType());
-        ks.load(in, passphrase);
-        in.close();
-        context = SSLContext.getInstance("TLS");
-        tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        tmf.init(ks);
-        defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];
-        tm = new SavingTrustManager(defaultTrustManager);
-        context.init(null, new TrustManager[]{tm}, null);
-        HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
 
     private static class SavingTrustManager implements X509TrustManager {
