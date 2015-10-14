@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by crou on 07.10.15.
@@ -27,7 +28,10 @@ public class Checker {
     private static String searchElementId = "#ctl00_plhMain_lblMsg";
     private static int maxFails = 20;
 
+    private static long maxLatency = 60000;
     private static long latency = 5000;
+    private static long minLatency = 1000;
+    private static float latensyVatiationStep = 0.2f;
 
     private Logger logger = Logger.getLogger(Checker.class.getName());
     private String name;
@@ -136,7 +140,7 @@ public class Checker {
 
                     fails = 0;
 
-                    Thread.currentThread().sleep(latency);
+                    this.latencyDecrement();
                 } catch (IOException e) {
                     if (fails >= maxFails) {
                         checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
@@ -148,11 +152,17 @@ public class Checker {
                         break;
                     }
                     fails++;
-                    logger.error("Some connectivity error occurred.", e);
+
+                    this.latencyIncrement();
+
+                    logger.error("Some connectivity error occurred.\n\t\t\t" + e.getMessage());
                     continue;
-                } catch (InterruptedException e) {
-                    break;
                 } finally {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(latency);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
                     if (checkerResult != null) {
                         this.results.add(checkerResult);
                     }
@@ -168,6 +178,16 @@ public class Checker {
                     }
                 }
             }
+    }
+
+    private void latencyIncrement() {
+        latency = (long) (latency * (1 + latensyVatiationStep));
+        latency = latency >= maxLatency ? maxLatency : latency;
+    }
+
+    private void latencyDecrement() {
+        latency = (long) (latency * (1 - latensyVatiationStep));
+        latency = latency <= minLatency ? minLatency : latency;
     }
 
     public boolean stop() {
