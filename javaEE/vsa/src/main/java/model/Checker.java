@@ -134,13 +134,10 @@ public class Checker {
                         this.resultMailSender.sendSuccess(checkerResult);
                         logger.info(checkerResult.getMessage());
                     } else {
-
                         logger.info("Result: " + searchElement.html());
                     }
 
                     fails = 0;
-
-                    this.latencyDecrement();
                 } catch (IOException e) {
                     if (fails >= maxFails) {
                         checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
@@ -165,6 +162,11 @@ public class Checker {
                     }
                     if (checkerResult != null) {
                         this.results.add(checkerResult);
+                        if (checkerResult.getCheckerStatus().equals(CheckerResult.CheckStatus.RESULT_SUCCESS)) {
+                            this.latencyIncrement();
+                        } else {
+                            this.latencyDecrement();
+                        }
                     }
                     try {
                         if (inStream != null) {

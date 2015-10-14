@@ -40,7 +40,7 @@ public class CheckerResult {
         this.message = message;
     }
 
-    public CheckStatus getCheckResult() {
+    public CheckStatus getCheckerStatus() {
         return checkResult;
     }
 

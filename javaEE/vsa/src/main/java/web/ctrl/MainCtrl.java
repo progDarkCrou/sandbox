@@ -45,6 +45,9 @@ public class MainCtrl {
     @RequestMapping(method = RequestMethod.GET)
     public Answer checkers(@RequestParam(value = "from", required = false) Long from,
                            @RequestParam(value = "to", required = false) Long to) {
+        if (from != null && to != null && to - from < 1) {
+            return new ErrorAnswer("Parameter \"to\" must be greater than \"from\" parameter by 1 at least.");
+        }
         List<CheckerVO> result = runner.getCheckers()
                 .stream()
                 .map(checker -> new CheckerVO(checker))
