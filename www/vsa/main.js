@@ -118,8 +118,6 @@
       console.log('Timer is runnig now...');
       this.innerText = initButtonClickedInnerText;
     }
-
-
   };
 
   document.body.insertBefore(initButton, document.body.childNodes.item(0));
