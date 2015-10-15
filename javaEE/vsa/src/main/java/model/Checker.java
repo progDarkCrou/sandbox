@@ -33,7 +33,7 @@ public class Checker {
     private static long minLatency = 1000;
     private static float latensyVatiationStep = 0.2f;
 
-    private Logger logger = Logger.getLogger(Checker.class.getName());
+    private Logger logger;
     private String name;
     private Long id;
 
@@ -55,6 +55,7 @@ public class Checker {
         this.referer = referer;
         this.runner = new Thread(this::run, this.name);
         runner.start();
+        this.logger = Logger.getLogger(this.name);
     }
 
     public void init(String data, String url, String referer, RegisteredPerson person) {

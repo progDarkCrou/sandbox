@@ -1,4 +1,4 @@
-var url = 'http://localhost:8000/checker/init';
+var url = 'http://159.203.97.33:8000/checker/init';
 
 chrome.runtime.onInstalled.addListener(function () {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
