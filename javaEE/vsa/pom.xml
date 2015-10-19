@@ -8,8 +8,8 @@
     <artifactId>vsa</artifactId>
     <version>1.0</version>
 
-
     <properties>
+        <spring.versino>4.1.7.RELEASE</spring.versino>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -35,7 +35,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>Application</mainClass>
+                    <mainClass>com.vsa.checker.Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -50,15 +50,27 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.2.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
+            <version>1.5.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>4.0.5.RELEASE</version>
+            <version>${spring.versino}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.versino}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.5.5</version>
         </dependency>
     </dependencies>
 

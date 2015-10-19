@@ -1,8 +1,8 @@
-package services;
+package com.vsa.checker.services;
 
-import model.Checker;
-import model.CheckerResult;
-import model.RegisteredPerson;
+import com.vsa.checker.model.Checker;
+import com.vsa.checker.model.CheckerResult;
+import com.vsa.checker.model.RegisteredPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailSender;

@@ -1,6 +1,6 @@
-package web.ctrl.vo;
+package com.vsa.checker.web.ctrl.vo;
 
-import model.Checker;
+import com.vsa.checker.model.Checker;
 
 import java.util.List;
 import java.util.stream.Collectors;

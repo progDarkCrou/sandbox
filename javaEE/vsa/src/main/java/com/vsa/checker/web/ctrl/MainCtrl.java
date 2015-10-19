@@ -1,14 +1,14 @@
-package web.ctrl;
+package com.vsa.checker.web.ctrl;
 
+import com.vsa.checker.services.CheckerManager;
+import com.vsa.checker.web.ctrl.vo.CheckerVO;
+import com.vsa.checker.web.ctrl.vo.CheckersCollectionAnswer;
+import com.vsa.checker.web.vo.Answer;
+import com.vsa.checker.web.vo.ErrorAnswer;
+import com.vsa.checker.web.vo.InitCheckerVO;
+import com.vsa.checker.web.vo.SuccessAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import services.CheckerManager;
-import web.ctrl.vo.CheckerVO;
-import web.ctrl.vo.CheckersCollectionAnswer;
-import web.vo.Answer;
-import web.vo.ErrorAnswer;
-import web.vo.InitCheckerVO;
-import web.vo.SuccessAnswer;
 
 import java.util.List;
 import java.util.stream.Collectors;

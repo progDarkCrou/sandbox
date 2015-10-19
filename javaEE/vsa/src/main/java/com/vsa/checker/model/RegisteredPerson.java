@@ -1,4 +1,4 @@
-package model;
+package com.vsa.checker.model;
 
 /**
  * Created by crou on 07.10.15.

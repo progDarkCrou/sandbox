@@ -1,6 +1,6 @@
-package web.ctrl.vo;
+package com.vsa.checker.web.ctrl.vo;
 
-import model.CheckerResult;
+import com.vsa.checker.model.CheckerResult;
 
 import java.text.DateFormat;
 import java.util.Locale;

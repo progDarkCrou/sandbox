@@ -1,4 +1,4 @@
-package web.vo;
+package com.vsa.checker.web.vo;
 
 /**
  * Created by avorona on 05.10.15.

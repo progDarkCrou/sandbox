@@ -1,6 +1,6 @@
-package services;
+package com.vsa.checker.services;
 
-import model.Checker;
+import com.vsa.checker.model.Checker;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;

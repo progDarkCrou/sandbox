@@ -1,4 +1,4 @@
-package model;
+package com.vsa.checker.model;
 
 import java.util.Date;
 

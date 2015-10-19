@@ -1,6 +1,6 @@
-package web.ctrl.vo;
+package com.vsa.checker.web.ctrl.vo;
 
-import web.vo.Answer;
+import com.vsa.checker.web.vo.Answer;
 
 import java.util.List;
 

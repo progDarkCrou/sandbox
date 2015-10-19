@@ -1,11 +1,11 @@
-package model;
+package com.vsa.checker.model;
 
+import com.vsa.checker.services.ResultMailSender;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import services.ResultMailSender;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
