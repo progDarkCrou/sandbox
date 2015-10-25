@@ -13,6 +13,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +39,7 @@ public class Checker {
     private Logger logger;
     private String name;
     private Long id;
+    private LocalDate startTime;
 
     private String data;
     private String url;
@@ -53,134 +57,119 @@ public class Checker {
         this.data = data;
         this.url = url;
         this.referer = referer;
+        this.logger = Logger.getLogger(this.name);
         this.runner = new Thread(this::run, this.name);
         runner.start();
-        this.logger = Logger.getLogger(this.name);
     }
-
-    public void init(String data, String url, String referer, RegisteredPerson person) {
-        this.id = count++;
-        this.name = Checker.class.getSimpleName() + "-" + count;
-        this.data = data;
-        this.url = url;
-        this.referer = referer;
-        this.runner = new Thread(() -> {
-            run();
-        }, this.name);
-        this.runner.start();
-        this.resultMailSender.setChecker(this);
-        this.resultMailSender.setPerson(person);
-    }
-
-//    public Checker(String name, String data, String url, String referer, String nameToSend, String emailToSend) {
-//        this(name, data, url, referer, new RegisteredPerson(nameToSend, emailToSend));
-//    }
-//
-//    public Checker(String data, String url, String referer, String nameToSend, String emailToSend) {
-//        this(Checker.class.getName() + "-" + count, data, url, referer, nameToSend, emailToSend);
-//    }
 
     private void run() {
-            int fails = 0;
-            logger.info(this.name + " - started.");
+        int fails = 0;
+        logger.info("Started");
 
-            while (!Thread.currentThread().isInterrupted()) {
-                CheckerResult checkerResult = null;
-                DataOutputStream outStream = null;
-                BufferedReader inStream = null;
+        this.startTime = LocalDate.now();
 
-                try {
-                    HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        while (!Thread.currentThread().isInterrupted()) {
+            CheckerResult checkerResult = null;
+            DataOutputStream outStream = null;
+            BufferedReader inStream = null;
+
+            try {
+                HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 //                    connection.setRequestProperty("Connection", "keep-alive");
-                    connection.setRequestProperty("Referer", referer);
+                connection.setRequestProperty("Referer", referer);
 
-                    connection.setDoOutput(true);
-                    connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
 
-                    outStream = new DataOutputStream(connection.getOutputStream());
+                outStream = new DataOutputStream(connection.getOutputStream());
 
-                    outStream.writeBytes(data);
-                    outStream.flush();
-                    outStream.close();
+                outStream.writeBytes(data);
+                outStream.flush();
+                outStream.close();
 
-                    inStream = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+                inStream = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 
-                    Document document = Jsoup.parse(inStream.lines().reduce((s, s2) -> s + s2).get());
+                Document document = Jsoup.parse(inStream.lines().reduce((s, s2) -> s + s2).get());
 
-                    if (document.html().matches(invalidAttemptPattern)) {
-                        checkerResult = new CheckerResult("Invalid attempt was find. Please re-init the checker.",
-                                CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
-                        logger.error(checkerResult.getMessage());
-                        this.resultMailSender.sendFatalError(checkerResult);
-                        this.stop();
-                        break;
-                    }
+                if (document.html().matches(invalidAttemptPattern)) {
+                    checkerResult = new CheckerResult("Invalid attempt was find. Please re-init the checker.",
+                            CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
+                    logger.error(checkerResult.getMessage());
+                    this.resultMailSender.sendFatalError(checkerResult);
+                    this.stop();
+                    break;
+                }
 
-                    Elements searchElements = document.select(searchElementId);
+                Elements searchElements = document.select(searchElementId);
 
-                    if (searchElements == null || searchElements.size() == 0) {
-                        String message = "Cannot find proper element to check. Please check it out, " +
-                                "and, if needed, reinitialize checker.";
-                        logger.error(message);
-                        throw new IOException(message);
-                    }
+                if (searchElements == null || searchElements.size() == 0) {
+                    String message = "Cannot find proper element to check. Please check it out, " +
+                            "and, if needed, reinitialize checker.";
+                    logger.error(message);
+                    throw new IOException(message);
+                }
 
-                    Element searchElement = searchElements.first();
+                Element searchElement = searchElements.first();
 
-                    if (searchElement.html().matches(successResultPattern)) {
-                        checkerResult = new CheckerResult("Success check result: " + searchElement.html(),
-                                CheckerResult.CheckStatus.RESULT_SUCCESS);
-                        this.resultMailSender.sendSuccess(checkerResult);
-                        logger.info(checkerResult.getMessage());
+                if (searchElement.html().matches(successResultPattern)) {
+                    checkerResult = new CheckerResult("Success check result: " + searchElement.html(),
+                            CheckerResult.CheckStatus.RESULT_SUCCESS);
+                    this.resultMailSender.sendSuccess(checkerResult);
+                    logger.info(checkerResult.getMessage());
+                } else {
+                    logger.info("Result: " + searchElement.html());
+                }
+
+                fails = 0;
+            } catch (IOException e) {
+                fails++;
+
+                this.latencyIncrement();
+
+                logger.error("Some connectivity error occurred.\n\t\t\t" + e.getMessage());
+                continue;
+            } finally {
+                if (fails >= maxFails) {
+                    checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
+                            CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
+                    this.results.add(checkerResult);
+                    logger.error(checkerResult.getMessage());
+                    this.resultMailSender.sendError(checkerResult);
+                    this.stop();
+                }
+                try {
+                    TimeUnit.MILLISECONDS.sleep(latency);
+                } catch (InterruptedException e) {
+                }
+                if (checkerResult != null) {
+                    this.results.add(checkerResult);
+                    if (checkerResult.getCheckerStatus().equals(CheckerResult.CheckStatus.RESULT_SUCCESS)) {
+                        this.latencyIncrement();
                     } else {
-                        logger.info("Result: " + searchElement.html());
-                    }
-
-                    fails = 0;
-                } catch (IOException e) {
-                    if (fails >= maxFails) {
-                        checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
-                                CheckerResult.CheckStatus.RESULT_ERROR_CRITICAL);
-                        this.results.add(checkerResult);
-                        logger.error(checkerResult.getMessage());
-                        this.resultMailSender.sendError(checkerResult);
-                        this.stop();
-                        break;
-                    }
-                    fails++;
-
-                    this.latencyIncrement();
-
-                    logger.error("Some connectivity error occurred.\n\t\t\t" + e.getMessage());
-                    continue;
-                } finally {
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(latency);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    if (checkerResult != null) {
-                        this.results.add(checkerResult);
-                        if (checkerResult.getCheckerStatus().equals(CheckerResult.CheckStatus.RESULT_SUCCESS)) {
-                            this.latencyIncrement();
-                        } else {
-                            this.latencyDecrement();
-                        }
-                    }
-                    try {
-                        if (inStream != null) {
-                            inStream.close();
-                        }
-                        if (outStream != null) {
-                            outStream.close();
-                        }
-                    } catch (IOException e) {
-                        logger.error("Something happened while closing connection.", e);
+                        this.latencyDecrement();
                     }
                 }
+                try {
+                    if (inStream != null) {
+                        inStream.close();
+                    }
+                    if (outStream != null) {
+                        outStream.close();
+                    }
+                } catch (IOException e) {
+                    logger.error("Something happened while closing connection.", e);
+                }
             }
+        }
+
+        logger.info("Stopped");
+        Period deltaWorkTime = Period.between(this.startTime, LocalDate.now());
+        logger.info("Worked for: " + deltaWorkTime.get(ChronoUnit.HOURS) + " hours and " + deltaWorkTime.get(ChronoUnit.MINUTES));
+        String message = this.name + ": stopped";
+        this.results.add(new CheckerResult(message, CheckerResult.CheckStatus.RESULT_STOPED));
+        this.resultMailSender.send(message, ResultMailSender.MessagesSubject.stopCheckerHeader);
     }
 
     private void latencyIncrement() {
@@ -195,10 +184,6 @@ public class Checker {
 
     public boolean stop() {
         runner.interrupt();
-        logger.info(this.name + " - stopped.");
-        String message = this.name + ": stopped";
-        this.results.add(new CheckerResult(message, CheckerResult.CheckStatus.RESULT_STOPED));
-        this.resultMailSender.send(message, ResultMailSender.MessagesSubject.stopCheckerHeader);
         return !runner.isAlive();
     }
 

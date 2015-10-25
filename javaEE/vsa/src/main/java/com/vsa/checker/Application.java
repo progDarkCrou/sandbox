@@ -1,8 +1,5 @@
 package com.vsa.checker;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.vsa.checker.model.Checker;
 import com.vsa.checker.model.RegisteredPerson;
 import com.vsa.checker.services.ResultMailSender;
@@ -20,9 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by avorona on 05.10.15.
@@ -40,12 +35,6 @@ public class Application {
     public static void main(String[] args) throws Exception {
         InstallCert.main(new String[]{"polandonline.vfsglobal.com"});
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-        System.out.println("Sending active message.");
-
-        Channel sendingChannel = context.getBean("sendingChannel", Channel.class);
-        sendingChannel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        sendingChannel.basicPublish("", QUEUE_NAME, null, "Hello RabbitMQ World!!!".getBytes());
-        sendingChannel.close();
     }
 
     @Bean
@@ -102,21 +91,5 @@ public class Application {
     @Bean
     public ConfigurableEnvironment environment() {
         return context.getEnvironment();
-    }
-
-    @Bean
-    public Channel sendingChannel() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        return connection.createChannel();
-    }
-
-    @Bean
-    public Channel receivingChannel() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        return connection.createChannel();
     }
 }
