@@ -18,7 +18,7 @@
     "default_icon": "vsa.png"
   },
   "content_scripts": [{
-    "matches": ["http://www.polandvisa-ukraine.com/*/scheduleappointment_2.html", "http://polandvisa-ukraine.com/scheduleappointment_2.html"],
+    "matches": ["http://www.polandvisa-ukraine.com/scheduleappointment_2.html", "http://polandvisa-ukraine.com/scheduleappointment_2.html"],
     "js": ["content.js"]
   }, {
     "matches": ["https://polandonline.vfsglobal.com/*/AppScheduling.aspx*"],
