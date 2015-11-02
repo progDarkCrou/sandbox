@@ -13,9 +13,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +38,7 @@ public class Checker {
     private Logger logger;
     private String name;
     private Long id;
-    private LocalDate startTime;
+    private Instant startTime;
 
     private String data;
     private String url;
@@ -64,9 +63,9 @@ public class Checker {
 
     private void run() {
         int fails = 0;
-        logger.info("Started");
+        logger.info("Starting...");
 
-        this.startTime = LocalDate.now();
+        this.startTime = Instant.now();
 
         while (!Thread.currentThread().isInterrupted()) {
             CheckerResult checkerResult = null;
@@ -129,7 +128,6 @@ public class Checker {
                 this.latencyIncrement();
 
                 logger.error("Some connectivity error occurred.\n\t\t\t" + e.getMessage());
-                continue;
             } finally {
                 if (fails >= maxFails) {
                     checkerResult = new CheckerResult("Max fails count was reached. Please reinitialize checker.",
@@ -142,6 +140,7 @@ public class Checker {
                 try {
                     TimeUnit.MILLISECONDS.sleep(latency);
                 } catch (InterruptedException e) {
+                    runner.interrupt();
                 }
                 if (checkerResult != null) {
                     this.results.add(checkerResult);
@@ -165,8 +164,8 @@ public class Checker {
         }
 
         logger.info("Stopped");
-        Period deltaWorkTime = Period.between(this.startTime, LocalDate.now());
-        logger.info("Worked for: " + deltaWorkTime.get(ChronoUnit.HOURS) + " hours and " + deltaWorkTime.get(ChronoUnit.MINUTES));
+        Duration deltaWorkTime = Duration.between(this.startTime, Instant.now());
+        logger.info("Worked for: " + deltaWorkTime.toHours() + " hours and " + deltaWorkTime.toMinutes() + " minutes");
         String message = this.name + ": stopped";
         this.results.add(new CheckerResult(message, CheckerResult.CheckStatus.RESULT_STOPED));
         this.resultMailSender.send(message, ResultMailSender.MessagesSubject.stopCheckerHeader);
@@ -183,8 +182,9 @@ public class Checker {
     }
 
     public boolean stop() {
+        logger.info("Stopping...");
         runner.interrupt();
-        return !runner.isAlive();
+        return runner.isInterrupted() || !runner.isAlive();
     }
 
     public boolean isRunning() {
