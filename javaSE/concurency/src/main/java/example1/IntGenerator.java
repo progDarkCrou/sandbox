@@ -1,3 +1,5 @@
+package example1;
+
 /**
  * Created by avorona on 26.10.15.
  */
