@@ -3,7 +3,8 @@ package com.andriy.example3;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+import java.util.LinkedList;
+import java.util.concurrent.*;
 
 /**
  * Created by avorona on 05.11.15.
@@ -11,7 +12,8 @@ import java.util.concurrent.TimeoutException;
 public class Sender {
     public static String QUEUE_NAME = "rpc_queue_1";
 
-    public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
+    public static void main(String[] args) throws IOException, TimeoutException, InterruptedException, CloneNotSupportedException {
+        int count = 1000;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -20,32 +22,47 @@ public class Sender {
 
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-        QueueingConsumer consumer = new QueueingConsumer(channel);
 
-        String replyQueueName = channel.queueDeclare().getQueue();
+        LinkedList<Future<FibResult>> results = new LinkedList<>();
 
-        channel.basicConsume(replyQueueName, true, consumer);
+        ExecutorService executorService = Executors.newFixedThreadPool(count / 10);
 
-        String corrId = java.util.UUID.randomUUID().toString();
+        int i = 0;
+        while (i++ < count) {
+            String replyQueueName = channel.queueDeclare().getQueue();
+            String corrId = java.util.UUID.randomUUID().toString();
+            AMQP.BasicProperties props = new AMQP.BasicProperties()
+                    .builder()
+                    .correlationId(corrId)
+                    .replyTo(replyQueueName)
+                    .build();
 
-        AMQP.BasicProperties props = new AMQP.BasicProperties()
-                .builder()
-                .correlationId(corrId)
-                .contentEncoding("UTF-8")
-                .replyTo(replyQueueName)
-                .build();
+            QueueingConsumer consumer = new QueueingConsumer(channel);
+            channel.basicConsume(replyQueueName, true, consumer);
 
-        String numb = "10";
-        channel.basicPublish("", QUEUE_NAME, props, numb.getBytes());
+            final int finalI = i;
 
-        QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+            results.add(executorService.submit(() -> {
+                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+                while (!(delivery.getProperties().getCorrelationId().equals(corrId)))
+                    delivery = consumer.nextDelivery();
+                return new FibResult(new String(delivery.getBody()), finalI);
+            }));
 
-        while (!delivery.getProperties().getCorrelationId().equals(corrId)) {
-            delivery = consumer.nextDelivery();
+            channel.basicPublish("", QUEUE_NAME, props, ("" + i).getBytes());
         }
 
-        System.out.println("Result: fib(" + numb + ") = " + new String(delivery.getBody()));
+        results.parallelStream().forEach(f -> {
+            try {
+                System.out.println(f.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
 
+        executorService.shutdown();
         channel.close();
         connection.close();
     }
