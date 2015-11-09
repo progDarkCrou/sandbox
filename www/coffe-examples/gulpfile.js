@@ -1,15 +1,15 @@
 //Configs
-var appSrc = './app';
+var appSrc = 'app';
 var appCssSrc = appSrc + '/css/';
 var appJsSrc = appSrc + '/js/';
 var appCoffeeSrc = appSrc + '/coffee/';
-var appLessSrc = appSrc + '/coffee/';
-var devDestSrc = './dest';
-var tmp = './.tmp';
+var appLessSrc = appSrc + '/less/';
+var devDestSrc = 'dest';
+var tmp = '.tmp';
 var tmpCss = tmp + '/css';
 var tmpJs = tmp + '/js';
-var tmpJsVendor = tmp + '/js/vendor';
-var tmpCssVendor = tmp + '/css/vendor';
+var tmpJsVendor = tmp + '/vendor/js';
+var tmpCssVendor = tmp + '/vendor/css';
 var tmpCoffeeCompiled = tmpJs + '/coffee-compiled'
 var tmpLessCompiled = tmpCss + '/less-compiled'
 
@@ -39,7 +39,11 @@ function bowerJs() {
 }
 
 function setUpWatch(watchForArray, watchTasksArray, cb) {
-  var watcher = gulp.watch(watchForArray, watchTasksArray);
+  var watcher = watch(watchForArray, function() {
+    watchTasksArray.forEach(function(t) {
+      gulp.start(t);
+    })
+  });
   watcher.on('change', function() {
     console.log('[Watch] - Some files changed');
     console.log('[Watch] - going to do this tasks: [' + watchTasksArray.join(', ') + ']');
@@ -53,17 +57,19 @@ gulp.task('serve', ['tmp'], function() {
   gulp.src(tmp)
     .pipe(serve({
       host: '0.0.0.0',
-      port: 9000,
+      port: 3000,
       livereload: true,
       directoryListen: true
     }));
 });
 
 gulp.task('clean', function(cb) {
-  var d = del([tmp + '/**'], {
+  var d = del([tmp], {
     force: true
   });
-  d.then(cb);
+  d.then(function() {
+    cb();
+  });
 });
 
 gulp.task('bower-css', function(cb) {
@@ -104,7 +110,7 @@ gulp.task('coffee', function(cb) {
 
 gulp.task('dev-js', function(cb) {
   gulp.src(appJsSrc + '/**/*.js')
-    .pipe(gulp.dest(tmpJsVe))
+    .pipe(gulp.dest(tmpJsVendor))
     .on('end', cb);
 });
 
@@ -141,6 +147,6 @@ gulp.task('wiredep', ['js', 'css', 'html', 'json', 'coffee', 'less'], function(c
 
 gulp.task('tmp', gulpSync.sync(['clean', 'wiredep']));
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   setUpWatch([appSrc + '/**/*'], ['tmp'])
 });
