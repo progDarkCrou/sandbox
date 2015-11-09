@@ -11,6 +11,7 @@ import java.util.concurrent.TimeoutException;
  * Created by avorona on 05.11.15.
  */
 public class Client {
+
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -27,26 +28,30 @@ public class Client {
         System.out.println("Waiting for messages...");
 
         while (true) {
-            QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-
-            AMQP.BasicProperties props = delivery.getProperties();
-
-            AMQP.BasicProperties replyProps = new AMQP.BasicProperties
-                    .Builder()
-                    .correlationId(props.getCorrelationId())
-                    .build();
-
-            String message = new String(delivery.getBody(), "UTF-8");
-
-            System.out.println("calculating fib(" + message + ")...");
-
-            String resp = "" + fib(new BigInteger(message));
-
-            System.out.println("Responsing...");
-            channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, resp.getBytes());
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-            System.out.println("Sent...");
+            work(channel, consumer);
         }
+    }
+
+    public static void work(Channel channel, QueueingConsumer consumer) throws InterruptedException, IOException {
+        QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+
+        AMQP.BasicProperties props = delivery.getProperties();
+
+        AMQP.BasicProperties replyProps = new AMQP.BasicProperties
+                .Builder()
+                .correlationId(props.getCorrelationId())
+                .build();
+
+        String message = new String(delivery.getBody(), "UTF-8");
+
+        System.out.println("calculating fib(" + message + ")...");
+
+        String resp = "" + fib(new BigInteger(message));
+
+        System.out.println("Responsing...");
+        channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, resp.getBytes());
+        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+        System.out.println("Sent...");
     }
 
     public static BigInteger fibT(BigInteger times) {

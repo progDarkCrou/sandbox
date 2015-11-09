@@ -13,7 +13,7 @@ public class Sender {
     public static String QUEUE_NAME = "rpc_queue_1";
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException, CloneNotSupportedException {
-        int count = 1000;
+        int count = 10000;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -27,6 +27,7 @@ public class Sender {
 
         ExecutorService executorService = Executors.newFixedThreadPool(count / 10);
 
+        System.out.println("Started task sending...");
         int i = 0;
         while (i++ < count) {
             String replyQueueName = channel.queueDeclare().getQueue();
@@ -38,7 +39,8 @@ public class Sender {
                     .build();
 
             QueueingConsumer consumer = new QueueingConsumer(channel);
-            channel.basicConsume(replyQueueName, true, consumer);
+
+            channel.basicConsume(replyQueueName, consumer);
 
             final int finalI = i;
 
@@ -49,9 +51,17 @@ public class Sender {
                 return new FibResult(new String(delivery.getBody()), finalI);
             }));
 
-            channel.basicPublish("", QUEUE_NAME, props, ("" + i).getBytes());
+            channel.basicPublish("", QUEUE_NAME, props, ("" + finalI).getBytes());
+//            executorService.submit(() -> {
+//                try {
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
         }
 
+
+        System.out.println("Listening for results...");
         results.parallelStream().forEach(f -> {
             try {
                 System.out.println(f.get());
