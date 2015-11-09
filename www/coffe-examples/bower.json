@@ -1,0 +1,25 @@
+{
+  "name": "coffe-examples",
+  "description": "Coffee script examples",
+  "main": "main.js",
+  "authors": [
+    "crou"
+  ],
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "less",
+    "coffee"
+  ],
+  "homepage": "https://github.com/progDarkCrou/sandbox",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
