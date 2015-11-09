@@ -3,15 +3,20 @@ package com.andriy.example3;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+import java.math.BigInteger;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Created by avorona on 05.11.15.
  */
 public class Sender {
-    public static String QUEUE_NAME = "rpc_queue_1";
+    public static final String QUEUE_NAME = "rpc_queue_2";
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
+        int num = 0;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -20,31 +25,60 @@ public class Sender {
 
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-        QueueingConsumer consumer = new QueueingConsumer(channel);
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        Map<Integer, Future<BigInteger>> results = new HashMap<>();
 
-        String replyQueueName = channel.queueDeclare().getQueue();
+        while (num++ < 10000) {
+            final int finalNum = num;
 
-        channel.basicConsume(replyQueueName, true, consumer);
+            Callable<BigInteger> task = () -> {
+                QueueingConsumer consumer = new QueueingConsumer(channel);
 
-        String corrId = java.util.UUID.randomUUID().toString();
+                String replyQueueName = channel.queueDeclare().getQueue();
 
-        AMQP.BasicProperties props = new AMQP.BasicProperties()
-                .builder()
-                .correlationId(corrId)
-                .contentEncoding("UTF-8")
-                .replyTo(replyQueueName)
-                .build();
+                channel.basicConsume(replyQueueName, true, consumer);
 
-        String numb = "10";
-        channel.basicPublish("", QUEUE_NAME, props, numb.getBytes());
+                String corrId = java.util.UUID.randomUUID().toString();
 
-        QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+                AMQP.BasicProperties props = new AMQP.BasicProperties()
+                        .builder()
+                        .correlationId(corrId)
+                        .replyTo(replyQueueName)
+                        .build();
 
-        while (!delivery.getProperties().getCorrelationId().equals(corrId)) {
-            delivery = consumer.nextDelivery();
+                channel.basicPublish("", QUEUE_NAME, props, (finalNum + "").getBytes());
+
+                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+
+                while (!delivery.getProperties().getCorrelationId().equals(corrId)) {
+                    delivery = consumer.nextDelivery();
+                }
+
+                String res = new String(delivery.getBody());
+
+                return new BigInteger(res);
+            };
+
+            results.put(num, executorService.submit(task));
         }
 
-        System.out.println("Result: fib(" + numb + ") = " + new String(delivery.getBody()));
+        executorService.shutdown();
+
+        float start = System.nanoTime();
+
+        results.entrySet().parallelStream().forEach(res -> {
+            try {
+                System.out.println("Result: fib(" + res.getKey() + ") = " + res.getValue().get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+
+        float delta = System.nanoTime() - start;
+
+        System.out.println("Process take: " + Duration.ofNanos((long) delta).getSeconds() + "s");
 
         channel.close();
         connection.close();
