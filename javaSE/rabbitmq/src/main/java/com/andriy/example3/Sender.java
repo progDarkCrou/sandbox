@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  * Created by avorona on 05.11.15.
  */
 public class Sender {
-    public static String QUEUE_NAME = "rpc_queue_1";
+    public static final String QUEUE_NAME = "rpc_queue_2";
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException, CloneNotSupportedException {
         int count = 10000;
@@ -21,7 +21,6 @@ public class Sender {
         Channel channel = connection.createChannel();
 
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-
 
         LinkedList<Future<FibResult>> results = new LinkedList<>();
 
@@ -59,7 +58,6 @@ public class Sender {
 //                }
 //            });
         }
-
 
         System.out.println("Listening for results...");
         results.parallelStream().forEach(f -> {

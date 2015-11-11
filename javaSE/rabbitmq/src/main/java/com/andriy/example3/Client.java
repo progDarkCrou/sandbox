@@ -19,6 +19,8 @@ public class Client {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        channel.queueDeclare(com.andriy.example3.Sender.QUEUE_NAME, true, false, false, null);
+
         channel.basicQos(1);
 
         QueueingConsumer consumer = new QueueingConsumer(channel);
@@ -55,11 +57,11 @@ public class Client {
     }
 
     public static BigInteger fibT(BigInteger times) {
-        float start = System.currentTimeMillis();
+        float start = System.nanoTime();
         BigInteger res = fib(times);
-        float delta = System.currentTimeMillis() - start;
+        float delta = System.nanoTime() - start;
         System.out.println("fib(" + times.toString() + ") takes: " +
-                Duration.ofMillis((long) delta).getSeconds() + "s");
+                Duration.ofNanos((long) delta).getSeconds() + "s");
         return res;
     }
 
@@ -73,7 +75,7 @@ public class Client {
             b = b.add(t);
         }
 
-        return b;
+        return a;
     }
 
 }

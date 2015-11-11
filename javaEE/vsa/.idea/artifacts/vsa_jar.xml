@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="vsa:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/vsa_jar</output-path>
-    <root id="archive" name="vsa.jar">
-      <element id="module-output" name="vsa" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.8.3/jsoup-1.8.3.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>

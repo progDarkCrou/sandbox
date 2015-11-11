@@ -16,7 +16,6 @@ var inject = require('gulp-inject');
 var bowerFiles = require('main-bower-files');
 var concat = require('gulp-concat');
 var del = require('del');
-var concatCss = require('gulp-concat-css');
 var gulpSync = require('gulp-sync')(gulp);
 
 gulp.task('serve', ['watch'], function() {
@@ -33,9 +32,7 @@ gulp.task('clean', function(cb) {
   var d = del(['.tmp'], {
     force: true
   });
-  d.then(function() {
-    cb();
-  });
+  d.then(cb);
 });
 
 gulp.task('watch', ['package'], function() {
