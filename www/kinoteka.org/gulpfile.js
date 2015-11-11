@@ -12,8 +12,9 @@ var tmpCss = tmp + '/css';
 var tmpJs = tmp + '/js';
 var tmpJsVendor = tmp + '/vendor/js';
 var tmpCssVendor = tmp + '/vendor/css';
-var tmpCoffeeCompiled = tmpJs + '/coffee-compiled'
-var tmpLessCompiled = tmpCss + '/less-compiled'
+var tmpCoffeeCompiled = tmpJs + '/coffee-compiled';
+var tmpLessCompiled = tmpCss + '/less-compiled';
+var dest = 'dest';
 
 //    Requires
 var gulp = require('gulp');
@@ -84,7 +85,7 @@ gulp.task('bower-css', function (cb) {
 });
 
 gulp.task('less', function (cb) {
-    gulp.src(appLessSrc + '/**/*.less')
+    gulp.src(appLessSrc + '/main.less')
         .pipe(less())
         .pipe(gulp.dest(tmpLessCompiled))
         .on('end', cb);
@@ -133,7 +134,7 @@ gulp.task('json', function (cb) {
         .on('end', cb);
 });
 
-gulp.task('wiredep', ['js', 'css', 'html', 'json', 'coffee', 'less'], function (cb) {
+gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less']), function (cb) {
     var target = gulp.src(appSrc + '/index.html');
     var sourcesVendorJs = gulp.src([tmpJsVendor + '/**/*.js'])
         .pipe(angularFilesort());
@@ -153,10 +154,17 @@ gulp.task('wiredep', ['js', 'css', 'html', 'json', 'coffee', 'less'], function (
             ignorePath: tmp
         }))
         .pipe(gulp.dest(tmp))
-        .on('end', cb);
+        .on('end', function () {
+            cb();
+        });
 });
 
 gulp.task('tmp', gulpSync.sync(['clean', 'wiredep']));
+
+gulp.task('dest', ['wiredep'], function () {
+    gulp.src([tmp + '/**/*'])
+        .pipe(gulp.dest(dest));
+});
 
 gulp.task('watch', function () {
     setUpWatch([appSrc + '/**/*', bowerFile], ['tmp'])

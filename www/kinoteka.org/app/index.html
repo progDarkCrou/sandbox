@@ -10,48 +10,9 @@
     <!-- endinject -->
 </head>
 
-<body data-ng-app="application">
-
-    <div data-ng-view=""></div>
-    <div class="container-fluid full-height">
-        <div class="row">
-            <div class="col-xs-6 col-xs-offset-3">
-                <ul class="nav nav-pills">
-                    <li><a href="#">Menu 1</a></li>
-                    <li><a href="#">Menu 2</a></li>
-                    <li><a href="#">Menu 3</a></li>
-                    <li><a href="#">Menu 4</a></li>
-                    <li><a href="#">Menu 5</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row full-height">
-            <div class="col-xs-3 full-height left-side-container">
-                <div class="row">
-                    <div class="col-xs-12 poster-container">
-                        <img src="http://orig14.deviantart.net/1b02/f/2012/052/e/d/iron_man_poster_by_squint911-d2qndj2.jpg" alt="This is Iron Man film poster" class="img-rounded img-responsive poster">
-                    </div>
-                    <div class="col-xs-12">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li role="presentation"><a href="" herf="#">Menu item 1</a></li>
-                            <li role="presentation"><a href="" herf="#">Menu item 2</a></li>
-                            <li role="presentation"><a href="" herf="#">Menu item 3</a></li>
-                            <li role="presentation"><a href="" herf="#">Menu item 4</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-9 full-height main-container">
-                <div class="row full-height">
-                    <div class="col-xs-12 full-height">
-                        <div class="row full-height">
-                            <data-player></data-player>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body data-ng-app="application" class="clearfix">
+    <div class="menu shadow-bottom"></div>
+    <div data-ng-view="" class="container main-container"></div>
     <!-- vendor:js -->
     <!-- endinject -->
     <!-- inject:js -->
