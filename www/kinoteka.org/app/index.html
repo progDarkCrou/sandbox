@@ -10,27 +10,15 @@
     <!-- endinject -->
 </head>
 
-<body data-ng-app="application" class="clearfix">
-<div class="header shadow-bottom">
-    <div class="container full-height">
-        <div class="menu">
-            <ul class="menu-items">
-                <li class="menu-item">Menu 1</li>
-                <li class="menu-item">Menu 2</li>
-                <li class="menu-item">Menu 3</li>
-                <li class="menu-item">Menu 4</li>
-                <li class="menu-item">Menu 5</li>
-            </ul>
-        </div>
-        <div class="logo"></div>
-        <div class="login"></div>
-    </div>
-</div>
-    <div data-ng-view="" class="container main-container"></div>
-    <!-- vendor:js -->
-    <!-- endinject -->
-    <!-- inject:js -->
-    <!-- endinject -->
+<body data-ng-app="application"
+      class="clearfix">
+<data-header></data-header>
+<div data-ng-view=""
+     class="container main-container"></div>
+<!-- vendor:js -->
+<!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
 </body>
 
 </html>

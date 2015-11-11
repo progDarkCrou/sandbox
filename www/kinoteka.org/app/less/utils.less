@@ -36,12 +36,12 @@
   border-radius: @border-radius;
 }
 
-.hidden() {
+.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
-.visible() {
+.visible {
   opacity: 1;
   visibility: visible;
 }
@@ -56,4 +56,19 @@
 
 .text-align-center {
   text-align: center;
+}
+
+.pull-left() {
+  float: left;
+}
+
+.pull-right() {
+  float: right;
+}
+
+.default-hover() {
+  color: @site-color;
+  &:hover {
+    background-color: @site-hover-color;
+  }
 }

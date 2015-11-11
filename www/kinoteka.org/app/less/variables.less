@@ -7,19 +7,36 @@
 // @tablets: ~&quot;only screen (min-width: @screen-sm)&quot;;
 // @laptops: ~&quot;only screen (min-width: @screen-md)&quot;;
 // @laptops-lg: ~&quot;only screen (min-width: @screen-lg)&quot;;
+@site-default-color: #155674;
+@site-background-color: fadeout(@site-default-color, 80%);
+@site-color: darken(@site-default-color, 20%);
+@site-hover-color: fadeout(@site-default-color, 60%);
 
 @main-container-padding: 15px;
 @main-container-width: 100% - @main-container-padding * 2;
 
 @default-elements-margin: 15px;
+@default-border-radius: 4px;
 
-@site-background-color: fadeout(#C8F0F0, 70%);
-
+//Header
 @header-height: 50px;
 @header-background-color: white;
+@header-menu-color: fadeout(lighten(@site-color, 30%), 60%);
+@header-default-padding: 10px;
+@header-default-font-size: @header-height - @header-default-padding * 3;
+@header-default-line-height: @header-height - @header-default-padding * 2;
+@header-logo-font-size: @header-default-font-size;
 
+@header-search-padding: 3px;
+@header-search-font-size: @header-default-font-size - @header-search-padding * 2;
+@header-search-border-size: 1px;
+@header-search-background-color: darken(#fff, 3%);
+@header-search-line-height: @header-height - (@header-search-border-size + @header-default-padding) * 2;
+@header-search-form-margin: @header-default-padding - @header-search-border-size * 2;
+
+//Main screen tiles (home page)
 @tile-container-width: @main-container-width;
-@tile-border-radius: 4px;
+@tile-border-radius: @default-border-radius;
 @tile-padding: 5px;
 @tile-header-margin-bottom: @tile-padding;
 @tile-header-font-size: 20px;
