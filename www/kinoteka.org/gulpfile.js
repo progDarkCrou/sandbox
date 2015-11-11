@@ -10,6 +10,7 @@ var devDestSrc = 'dest';
 var tmp = '.tmp';
 var tmpCss = tmp + '/css';
 var tmpJs = tmp + '/js';
+var tmpFontsVendor = tmp + '/vendor/fonts';
 var tmpJsVendor = tmp + '/vendor/js';
 var tmpCssVendor = tmp + '/vendor/css';
 var tmpCoffeeCompiled = tmpJs + '/coffee-compiled';
@@ -78,6 +79,17 @@ gulp.task('clean', function (cb) {
     });
 });
 
+gulp.task('bower-fonts', function (cb) {
+    var fontsBase = 'bower_components/bootstrap/dist/fonts/**/*';
+    gulp.src([fontsBase + '.ttf',
+            fontsBase + '.eot',
+            fontsBase + '.woff',
+            fontsBase + '.woff2',
+            fontsBase + '.svg'])
+        .pipe(gulp.dest(tmpFontsVendor))
+        .on('end', cb);
+});
+
 gulp.task('bower-css', function (cb) {
     gulp.src(bowerCss())
         .pipe(gulp.dest(tmpCssVendor))
@@ -134,7 +146,7 @@ gulp.task('json', function (cb) {
         .on('end', cb);
 });
 
-gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less']), function (cb) {
+gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts']), function (cb) {
     var target = gulp.src(appSrc + '/index.html');
     var sourcesVendorJs = gulp.src([tmpJsVendor + '/**/*.js'])
         .pipe(angularFilesort());

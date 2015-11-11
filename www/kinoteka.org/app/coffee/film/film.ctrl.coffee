@@ -1,9 +1,7 @@
 ((angular) ->
-	app = angular.module 'application'
+  app = angular.module 'application'
 
-	app.controller 'filmCtrl', ['$route', ($route) -> 
-		console.log $route
+  app.controller 'filmCtrl', ['$route', ($route) ->
+    console.log $route
 
-		]
-	
-	)(angular)
+    ])(angular)

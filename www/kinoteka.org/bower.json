@@ -21,7 +21,11 @@
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.min.css",
-        "dist/js/bootstrap.min.js"
+        "dist/js/bootstrap.min.js",
+        "fonts/glyphicons-halfilings-regular.eot",
+        "fonts/glyphicons-halfilings-regular.svg",
+        "fonts/glyphicons-halfilings-regular.ttf",
+        "fonts/glyphicons-halfilings-regular.wof"
       ]
     }
   }

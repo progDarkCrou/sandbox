@@ -9,9 +9,21 @@
 // @laptops-lg: ~&quot;only screen (min-width: @screen-lg)&quot;;
 
 @main-container-padding: 15px;
-@main-container-width: @screen-xs - @main-container-padding * 2;
+@main-container-width: 100% - @main-container-padding * 2;
 
-@site-background-color: rgba(106, 209, 83, 0.20);
+@default-elements-margin: 15px;
 
-@top-menu-height: 50px;
-@top-menu-background-color: white;
+@site-background-color: fadeout(#C8F0F0, 70%);
+
+@header-height: 50px;
+@header-background-color: white;
+
+@tile-container-width: @main-container-width;
+@tile-border-radius: 4px;
+@tile-padding: 5px;
+@tile-header-margin-bottom: @tile-padding;
+@tile-header-font-size: 20px;
+@tile-header-title-font-size: @tile-header-font-size;
+@tile-header-rating-font-size: @tile-header-font-size / 2;
+
+@container-top: @header-height;

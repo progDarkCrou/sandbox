@@ -1,63 +1,26 @@
 @import url("variables.less");
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 html {
-    height: 100%;
-    body {
-        background-color: @site-background-color;
-        height: 100%;
-    }
-    
-    @import url('utils.less');
-    @import url('menu.less');
+  height: 100%;
+  min-width: @screen-xs;
 
-    @poster-height: 400px;
-    @max-poster-height: @poster-height;
-    .left-side-container {
-        .poster-container {
-            max-height: @max-poster-height;
-            height: @poster-height;
-            .poster {
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                max-height: 100%;
-            }
-        }
-    }
-    @default-elements-margin: 20px;
-    @container-top: @top-menu-height;
-    .main-container {
-        position: relative;
-        top: @container-top + @default-elements-margin;
-        @media (min-width: 1200px) {
-            .cafel-container-conf() {
-                @cafel-container-width: 1170px;
-                @cafel-count: 3;
-                @cafel-height: @cafel-container-width / @cafel-count - @default-elements-margin * 2;
-                @cafel-width: @cafel-container-width / @cafel-count - @default-elements-margin * 2;
-            }
-            .cafel-container {
-                .cafel-container-conf();
-                width: @cafel-container-width;
-                .cafel {
-                    width: @cafel-width;
-                    height: @cafel-height;
-                }
-            }
-        }
-        .cafel-container {
-            margin: 0 auto;
-            .cafel {
-                float: left;
-                background-color: white;
-                margin: @default-elements-margin;
-                border-radius: 6px;
-            }
-        }
-    }
+  body {
+    background-color: @site-background-color;
+    height: 100%;
+    @import url('normalize.less');
+  }
+
+  @import url('utils.less');
+  @import url('header.less');
+
+  .main-container {
+    position: relative;
+    top: @container-top + @default-elements-margin;
+    @import url('home.less');
+  }
 }
