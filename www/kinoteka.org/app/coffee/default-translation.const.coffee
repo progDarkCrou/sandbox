@@ -1,7 +1,7 @@
 ((angular) ->
   angular.module('application').constant 'translations', {
     eng:
-      menu:
+      nav:
         home:
           name: 'home'
           title: 'Home'

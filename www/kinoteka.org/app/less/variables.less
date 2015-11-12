@@ -7,10 +7,15 @@
 // @tablets: ~&quot;only screen (min-width: @screen-sm)&quot;;
 // @laptops: ~&quot;only screen (min-width: @screen-md)&quot;;
 // @laptops-lg: ~&quot;only screen (min-width: @screen-lg)&quot;;
-@site-default-color: #155674;
+@site-default-color: #60BEB3;
 @site-background-color: fadeout(@site-default-color, 80%);
 @site-color: darken(@site-default-color, 20%);
 @site-hover-color: fadeout(@site-default-color, 60%);
+@border-color-base: fadeout(@site-default-color, 30%);
+
+@font-size-base: 20px;
+@line-height-base: 1.1;
+@border-base: 1px solid @border-color-base;
 
 @main-container-padding: 15px;
 @main-container-width: 100% - @main-container-padding * 2;
@@ -21,18 +26,9 @@
 //Header
 @header-height: 50px;
 @header-background-color: white;
-@header-menu-color: fadeout(lighten(@site-color, 30%), 60%);
-@header-default-padding: 10px;
-@header-default-font-size: @header-height - @header-default-padding * 3;
-@header-default-line-height: @header-height - @header-default-padding * 2;
-@header-logo-font-size: @header-default-font-size;
-
-@header-search-padding: 3px;
-@header-search-font-size: @header-default-font-size - @header-search-padding * 2;
-@header-search-border-size: 1px;
-@header-search-background-color: darken(#fff, 3%);
-@header-search-line-height: @header-height - (@header-search-border-size + @header-default-padding) * 2;
-@header-search-form-margin: @header-default-padding - @header-search-border-size * 2;
+@header-nav-color: fadeout(lighten(@site-color, 30%), 60%);
+@header-padding: 10px;
+@header-logo-font-size: 30px;
 
 //Main screen tiles (home page)
 @tile-container-width: @main-container-width;

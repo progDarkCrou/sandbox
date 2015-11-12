@@ -1,18 +1,17 @@
 <div class="header shadow-bottom">
-    <div class="container full-height">
-        <div class="menu menu-left hidden-xs">
-            <ul class="menu-items">
-                <li data-ng-repeat="item in trans[locale].menu track by $index">
-                    <a class="menu-item"
-                       data-ng-href="#!{{routes[item.name]}}"
+    <div class="container">
+        <div class="navigation navigation-left hidden-xs">
+            <ul class="navigation-items">
+                <li data-ng-repeat="item in trans[locale].nav track by $index">
+                    <a data-ng-href="#!{{routes[item.name]}}"
                        data-ng-bind="item.title"></a>
                 </li>
             </ul>
         </div>
-        <div class="menu menu-right hidden-xs">
-            <ul class="menu-items">
+        <div class="navigation navigation-right hidden-xs">
+            <ul class="navigation-items">
                 <li class="dropdown"><a href=""
-                                        class="dropdown-toggle menu-item"
+                                        class="dropdown-toggle navigation-item"
                                         data-toggle="dropdown">Login</a>
                     <ul class="dropdown-menu">
                         <li><a href="">Login</a></li>
@@ -21,14 +20,19 @@
                 </li>
             </ul>
         </div>
-        <div class="menu menu-search menu-right hidden-xs">
+        <div class="navigation navigation-search navigation-right hidden-xs">
             <form action=""
-                  class="search-form">
-                <input type="text"
-                       class="form-control">
+                  class="form search-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control">
+                        <span class="glyphicon glyphicon-search input-group-addon"></span>
+                    </div>
+                </div>
             </form>
         </div>
-        <div class="menu menu-logo text-align-center">
+        <div class="navigation navigation-logo text-align-center">
             <a href="#!/">Kinoteka</a>
         </div>
     </div>
