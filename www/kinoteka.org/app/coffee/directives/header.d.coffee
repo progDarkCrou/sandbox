@@ -14,8 +14,7 @@
         return
 
       angular.element(document).on 'click', (e) ->
-        console.log 'Clicked'
-        if !$menuToggle.has e.target && !$menuToggle.is e.target
+        if !($menuToggle.is(e.target) or $menuToggle.has(e.target).length)
           $menu.addClass 'hidden'
         return
     }
