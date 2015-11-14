@@ -7,7 +7,13 @@
 }
 
 .shadow-bottom {
-  box-shadow: 0 3px 2px 0 lightgray !important;
+  box-shadow: @box-shadow-base !important;
+}
+
+.shadow-base() {
+  -webkit-box-shadow: 0 0 @box-shadow-blure-base @box-shadow-radius-base @box-shadow-color-base;
+  -moz-box-shadow: 0 0 @box-shadow-blure-base @box-shadow-radius-base @box-shadow-color-base;
+  box-shadow: 0 0 @box-shadow-blure-base @box-shadow-radius-base @box-shadow-color-base;
 }
 
 .center {
@@ -39,6 +45,7 @@
 .hidden {
   opacity: 0;
   visibility: hidden;
+  display: block;
 }
 
 .visible {
@@ -72,13 +79,6 @@
     content: '';
     display: table;
     clear: both;
-  }
-}
-
-.default-hover() {
-  color: @site-color;
-  &:hover {
-    background-color: @site-hover-color;
   }
 }
 
