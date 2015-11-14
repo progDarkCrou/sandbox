@@ -14,7 +14,12 @@
         return
 
       angular.element(document).on 'click', (e) ->
-        if !($menuToggle.is(e.target) or $menuToggle.has(e.target).length)
+        if $menu.has(e.target).length
+          setTimeout () ->
+            $menu.addClass 'hidden'
+            return
+          , 120
+        else if !($menuToggle.is(e.target) or $menuToggle.has(e.target).length)
           $menu.addClass 'hidden'
         return
     }

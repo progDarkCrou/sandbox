@@ -27,6 +27,21 @@
         "fonts/glyphicons-halfilings-regular.ttf",
         "fonts/glyphicons-halfilings-regular.wof"
       ]
+    },
+    "angular": {
+      "main": [
+        "angular.min.js"
+      ]
+    },
+    "angular-cookie": {
+      "main": [
+        "angular-cookie.min.js"
+      ]
+    },
+    "angular-route": {
+      "main": [
+        "angular-route.min.js"
+      ]
     }
   }
 }

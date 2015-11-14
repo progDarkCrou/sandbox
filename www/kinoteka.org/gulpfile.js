@@ -6,7 +6,6 @@ var appCssSrc = appSrc + '/css';
 var appJsSrc = appSrc + '/js';
 var appCoffeeSrc = appSrc + '/coffee';
 var appLessSrc = appSrc + '/less';
-var devDestSrc = 'dest';
 var tmp = '.tmp';
 var tmpCss = tmp + '/css';
 var tmpJs = tmp + '/js';
@@ -16,6 +15,7 @@ var tmpCssVendor = tmp + '/vendor/css';
 var tmpCoffeeCompiled = tmpJs + '/coffee-compiled';
 var tmpLessCompiled = tmpCss + '/less-compiled';
 var dest = 'dest';
+var destVendor = dest + '/vendor';
 
 //    Requires
 var gulp = require('gulp');
@@ -24,6 +24,7 @@ var watch = require('gulp-watch');
 var angularFilesort = require('gulp-angular-filesort');
 var inject = require('gulp-inject');
 var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 var gulpSync = require('gulp-sync')(gulp);
 var coffee = require('gulp-coffee');
 var bowerFiles = require('main-bower-files');
@@ -173,9 +174,48 @@ gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less
 
 gulp.task('tmp', gulpSync.sync(['clean', 'wiredep']));
 
-gulp.task('dest', ['wiredep'], function () {
-    gulp.src([tmp + '/**/*'])
-        .pipe(gulp.dest(dest));
+gulp.task('clean-dest', function (cb) {
+    var d = del([dest], {
+        force: true
+    });
+    d.then(function () {
+        cb();
+    });
+});
+
+gulp.task('dest', gulpSync.sync(['clean-dest', 'clean', 'package']));
+
+gulp.task('package', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts']), function () {
+    var fontsBase = 'bower_components/bootstrap/dist/fonts/**/*';
+    gulp.src([fontsBase + '.ttf',
+            fontsBase + '.eot',
+            fontsBase + '.woff',
+            fontsBase + '.woff2',
+            fontsBase + '.svg'])
+        .pipe(gulp.dest(dest + '/fonts/'))
+
+    gulp.src(tmpCssVendor + '/**/*.css').pipe(concat('vendor.css')).pipe(gulp.dest(destVendor));
+    gulp.src(tmpJsVendor + '/**/*.js').pipe(angularFilesort()).pipe(concat('vendor.js')).pipe(gulp.dest(destVendor));
+    gulp.src(tmpJs + '/**/*.js').pipe(concat('main.js')).pipe(uglify()).pipe(gulp.dest(dest));
+    gulp.src(tmpCss + '/**/*.css').pipe(concat('main.css')).pipe(gulp.dest(dest));
+    gulp.src(tmp + '/**/*.html').pipe(gulp.dest(dest));
+
+    var target = gulp.src(appSrc + '/index.html');
+
+    setTimeout(function () {
+        var sourcesVendor = gulp.src([destVendor + '/*.js', destVendor + '/*.css']);
+        var sources = gulp.src([dest + '/*.js', dest + '/*.css']);
+
+        target.pipe(inject(sourcesVendor, {
+                ignorePath: dest,
+                name: 'vendor'
+            }))
+            .pipe(gulp.dest(dest))
+            .pipe(inject(sources, {
+                ignorePath: dest
+            }))
+            .pipe(gulp.dest(dest));
+    }, 2000);
 });
 
 gulp.task('watch', function () {
