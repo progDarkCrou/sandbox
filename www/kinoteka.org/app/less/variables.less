@@ -19,16 +19,21 @@
 @line-height-base: 1.1;
 
 //Borders
-@border-light-base: 1px solid fadeout(@site-color-base, 50%);
 @border-color-base: fadeout(@site-color-base, 30%);
 @border-base: 1px solid @border-color-base;
+@border-light-base: 1px solid fadeout(@site-color-base, 50%);
+@border-lighter-base: 1px solid fadeout(@site-color-base, 80%);
 @border-radius-base: 4px;
 
 //Box shadow
-@box-shadow-radius-base: 2px;
-@box-shadow-blure-base: 7px;
-@box-shadow-color-base: fadeout(@site-color-base, 70%);
-@box-shadow-base: 0 3px @box-shadow-blure-base @box-shadow-color-base;
+@box-shadow-radius-base: 1px;
+@box-shadow-blur-base: 7px;
+@box-shadow-color-base: fadeout(darken(@site-color-base, 10%), 70%);
+@box-shadow-base: 0 3px @box-shadow-blur-base 0 @box-shadow-color-base;
+
+//Tiles box shadow
+
+
 
 @elements-margin-base: 15px;
 
