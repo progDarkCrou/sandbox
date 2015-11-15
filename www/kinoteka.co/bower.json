@@ -15,8 +15,7 @@
     "bootstrap": "~3.3.5",
     "angular": "~1.4.7",
     "angular-cookie": "~4.0.9",
-    "angular-route": "~1.4.7",
-    "sprint.js": "*"
+    "angular-route": "~1.4.7"
   },
   "overrides": {
     "bootstrap": {

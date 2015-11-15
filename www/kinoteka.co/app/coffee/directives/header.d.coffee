@@ -13,7 +13,9 @@
         $menu.toggleClass 'hidden'
         return
 
-      angular.element(document).on 'click', (e) ->
+      $document = angular.element document
+
+      $document.on 'click', (e) ->
         if $menu.has(e.target).length
           setTimeout () ->
             $menu.addClass 'hidden'
@@ -22,5 +24,12 @@
         else if !($menuToggle.is(e.target) or $menuToggle.has(e.target).length)
           $menu.addClass 'hidden'
         return
+
+      angular.element(window).resize () ->
+        if $document.width() >= 720
+          $menu.addClass 'hidden'
+        return
+
+      return
     }
   ])(angular)
