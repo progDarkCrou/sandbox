@@ -18,21 +18,22 @@
                 <div class="row section-content">
                     <div class="col-xs-12">
                         <div class="row tile-container">
-                            <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 "
-                                 data-ng-repeat="k in s.items track by $index">
-                                <div class="tile">
+                            <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 "
+                                 data-ng-repeat="f in s.items | filter:homeFilter">
+                                <div class="tile"
+                                     data-ng-init="link = '#!' + routes.film + (f.id || f.$index || s.items.indexOf(f));">
                                     <div class="tile-header">
                                         <div class="rating text-align-right">
-                                            5.8
+                                            <span data-ng-bind="f.rating"></span>
                                         </div>
                                         <div class="title">
-                                            <a href="#!{{routes.film + k}}">
-                                                Iron man
+                                            <a href="{{link}}"
+                                               data-ng-bind="f.title">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="tile-content">
-                                        <a href="#!{{routes.film + k}}">
+                                        <a href="{{link}}">
                                             <div class="cover play">
                                                 <span class="glyphicon glyphicon-play-circle"></span>
                                             </div>

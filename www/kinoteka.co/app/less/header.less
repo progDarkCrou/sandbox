@@ -1,10 +1,7 @@
 .header {
-  @header-sm-font-size: @header-font-size * @header-sm-ratio;
-  @header-sm-height: @header-height * @header-sm-ratio;
-
-  @menu-size-ratio: 0.7;
-  @menu-font-size: @header-font-size * @menu-size-ratio;
-  @menu-height: @header-height * @menu-size-ratio;
+  @menu-size-ratio: 0.8;
+  @menu__font-size: @header-default-font-size * @menu-size-ratio;
+  @menu-item__height: @header-height * @menu-size-ratio;
 
   @site-color-fadeout: 30%;
   @site-color: fadeout(@site-color-base, @site-color-fadeout);
@@ -12,9 +9,7 @@
   @anchor-hover-background-color: fadeout(@site-color-base, 90%);
   @anchor-hover-color: darken(@site-color-base, 5%);
 
-  @search-margin: @header-sm-height * 0.15;
-  @search-font-size: @header-sm-font-size * 0.8;
-  @search-padding: (@header-sm-height - @search-font-size * @header-line-height - @search-margin * 2) / 2 - 2;
+  @search-padding: (@header-sm-height - @filter__font-size * @header-default-line-height - @filter__margin * 2) / 2 - 2;
 
   position: fixed;
   top: 0;
@@ -24,21 +19,23 @@
   background-color: @header-background-color;
   z-index: @header-z-index-base;
   border-bottom: @border-light-base;
+  line-height: @header-default-line-height;
+
+  .noselect();
 
   .navigation {
     position: relative;
     z-index: @header-z-index-base - 1;
-    .noselect();
 
     a {
       .tran();
       padding: @header-padding-base;
-      display: block;
+      display: inline-block;
       color: @site-color;
-      .anchor-font-size-fixed-height(@header-font-size, @header-line-height, @header-height);
+      .anchor-font-size-fixed-height(@header-default-font-size, @header-default-content-height, @header-height);
 
       @media @tablet {
-        .anchor-font-size-fixed-height(@header-sm-font-size, @header-line-height, @header-sm-height);
+        .anchor-font-size-fixed-height(@header-sm-font-size, @header-sm-content-height, @header-sm-height);
       }
 
       &:hover, &:focus {
@@ -59,10 +56,11 @@
       a {
         width: auto;
         display: inline-block;
-        .anchor-font-size-fixed-height(@header-logo-font-size, @header-line-height, @header-height);
+        vertical-align: middle;
+        .anchor-font-size-fixed-height(@header-logo-font-size, @header-height, @header-height);
 
         @media @tablet {
-          .anchor-font-size-fixed-height(@header-logo-font-size * @header-sm-ratio, @header-line-height, @header-sm-height);
+          .anchor-font-size-fixed-height(@header-logo-sm-font-size, @header-sm-height, @header-sm-height);
         }
 
         color: lighten(@site-color-base, 10%);
@@ -79,15 +77,15 @@
         .form-group {
           margin: 0;
           padding: 0;
-          line-height: @header-line-height;
-          font-size: @search-font-size;
+          line-height: @header-default-line-height;
+          font-size: @filter__font-size;
 
           .input-group {
             .search-conf-base() {
               line-height: inherit;
               height: auto;
-              margin-bottom: @search-margin;
-              margin-top: @search-margin;
+              margin-bottom: @filter__margin;
+              margin-top: @filter__margin;
               padding: @search-padding;
               border-radius: @border-radius-base;
             }
@@ -97,7 +95,7 @@
               font-size: inherit;
               border: @border-light-base;
               background-color: @header-background-color;
-              padding-right: @search-font-size + @search-padding * 2 + @border-radius-base;
+              padding-right: @filter__font-size + @search-padding * 2 + @border-radius-base;
               padding-left: @border-radius-base * 2;
               .tran();
 
@@ -143,6 +141,9 @@
       padding: 10px 0;
 
       ul.menu {
+        position: relative;
+        left: 0;
+        right: 0;
         list-style: none;
         margin: 0;
         padding: 0;
@@ -152,8 +153,8 @@
           width: 100%;
 
           a {
-            .anchor-font-size-fixed-height(@menu-font-size, @header-line-height, @menu-height);
-
+            width: 100%;
+            .anchor-font-size-fixed-height(@menu__font-size, @menu-item__height, @menu-item__height);
             padding-left: @header-padding-base * 2;
           }
         }

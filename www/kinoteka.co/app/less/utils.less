@@ -91,9 +91,9 @@
   user-select: none;
 }
 
-.anchor-font-size-fixed-height(@font-size: @font-size-base; @line-height: @line-height-base; @height: @font-size) {
+.anchor-font-size-fixed-height(@font-size: @font-size-base, @content-height, @height) {
   font-size: @font-size;
-  line-height: @line-height;
-  padding-bottom: (@height - @line-height * @font-size) / 2;
-  padding-top: (@height - @line-height * @font-size) / 2;
+  line-height: unit(@content-height / @font-size);
+  padding-bottom: (@height - @content-height) / 2;
+  padding-top: (@height - @content-height) / 2;
 }

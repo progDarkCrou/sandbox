@@ -14,7 +14,9 @@
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text"
-                               class="form-control search-control">
+                               class="form-control search-control"
+                               data-ng-model="homeFilter"
+                               placeholder="Filter...">
                         <span class="glyphicon glyphicon-search input-group-addon"></span>
                     </div>
                 </div>
@@ -22,9 +24,8 @@
             <ul class="navigation-items hidden-sm hidden-md hidden-lg">
                 <li class="dropdown">
                     <a href=""
-                       class="menu-toggle navigation-item"
+                       class="menu-toggle navigation-item glyphicon glyphicon-menu-hamburger"
                        data-toggle="menu">
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
                     </a>
                 </li>
             </ul>

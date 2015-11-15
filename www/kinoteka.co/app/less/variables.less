@@ -37,14 +37,20 @@
 @main-container-width: 100% - @main-container-padding * 2;
 
 //Header
-@header-height: 50px;
 @header-background-color: white;
-@header-padding-base: @header-height * .2;
-@header-font-size: 25px;
-@header-logo-font-size: @header-font-size * 1.4;
+@header-default-content-height: 30px;
+@header-height: 50px;
+@header-default-font-size: 24px;
+@header-default-line-height: unit(@header-default-content-height / @header-default-font-size);
+@header-padding-base: (@header-height - @header-default-content-height) / 2;
 @header-z-index-base: 999;
-@header-line-height: 1;
-@header-sm-ratio: 0.90;
+@header-sm-height: 50px;
+@header-sm-content-height: 30px;
+@header-sm-font-size: 20px;
+@header-logo-font-size: 36px;
+@header-logo-sm-font-size: 32px;
+@filter__font-size: 16px;
+@filter__margin: 8px;
 
 //Main screen tiles (home page)
 @tile-container-width: @main-container-width;
@@ -55,4 +61,4 @@
 @tile-header-title-font-size: @tile-header-font-size;
 @tile-header-rating-font-size: @tile-header-font-size / 2;
 @container-top: @header-height;
-@container-sm-ratio: @header-sm-ratio;
+@container-sm-top: @header-sm-height;

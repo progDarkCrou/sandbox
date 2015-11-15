@@ -7,4 +7,6 @@
     $rootScope.trans = translations
     $rootScope.locale = 'eng'
 
+    $rootScope.homeFilter = '';
+
   ]))(angular)
