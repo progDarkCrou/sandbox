@@ -1,0 +1,27 @@
+@import url("variables.less");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+
+  body {
+    line-height: @line-height-base;
+    font-size: @font-size-base;
+    background-color: @site-background-color;
+    height: 100%;
+    color: @site-color;
+
+    @import url('normalize.less');
+    @import url('utils.less');
+    @import url('header.less');
+
+    .main-container {
+      @import url('home.less');
+    }
+  }
+
+}
