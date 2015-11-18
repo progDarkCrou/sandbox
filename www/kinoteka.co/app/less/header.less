@@ -45,7 +45,14 @@
         &:hover, &:focus {
           background-color: transparent;
           color: @site-color-base;
+          text-decoration: none;
         }
+      }
+
+      &:not(.navigation-left):not(.navigation-right) {
+        position: absolute;
+        right: 0;
+        left: 0;
       }
     }
 
