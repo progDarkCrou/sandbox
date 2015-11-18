@@ -10,6 +10,7 @@ var tmp = '.tmp';
 var tmpCss = tmp + '/css';
 var tmpJs = tmp + '/js';
 var tmpFontsVendor = tmp + '/vendor/fonts';
+var tmpFonts = tmp + '/fonts';
 var tmpJsVendor = tmp + '/vendor/js';
 var tmpCssVendor = tmp + '/vendor/css';
 var tmpCoffeeCompiled = tmpJs + '/coffee-compiled';
@@ -91,6 +92,17 @@ gulp.task('bower-fonts', function (cb) {
         .on('end', cb);
 });
 
+gulp.task('fonts', function (cb) {
+    var fontsBase = appSrc + '/fonts/**/*';
+    gulp.src([fontsBase + '.ttf',
+              fontsBase + '.eot',
+              fontsBase + '.woff',
+              fontsBase + '.woff2',
+              fontsBase + '.svg'])
+        .pipe(gulp.dest(tmpFonts))
+        .on('end', cb);
+});
+
 gulp.task('bower-css', function (cb) {
     gulp.src(bowerCss())
         .pipe(gulp.dest(tmpCssVendor))
@@ -147,7 +159,8 @@ gulp.task('json', function (cb) {
         .on('end', cb);
 });
 
-gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts']), function (cb) {
+gulp.task('wiredep', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts', 'fonts']),
+    function (cb) {
     var target = gulp.src(appSrc + '/index.html');
     var sourcesVendorJs = gulp.src([tmpJsVendor + '/**/*.js'])
         .pipe(angularFilesort());
@@ -185,14 +198,22 @@ gulp.task('clean-dest', function (cb) {
 
 gulp.task('dest', gulpSync.sync(['clean-dest', 'clean', 'package']));
 
-gulp.task('package', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts']), function () {
-    var fontsBase = 'bower_components/bootstrap/dist/fonts/**/*';
-    gulp.src([fontsBase + '.ttf',
-            fontsBase + '.eot',
-            fontsBase + '.woff',
-            fontsBase + '.woff2',
-            fontsBase + '.svg'])
-        .pipe(gulp.dest(dest + '/fonts/'))
+gulp.task('package', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less', 'bower-fonts', 'fonts']),
+    function () {
+        var fontsBase = [tmpFontsVendor + '/**/*', tmpFonts + '/*'];
+        var fontsExts = ['ttf', 'eot', 'woff', 'woff2', 'svg'];
+        var fonts = fontsBase.map(function (e) {
+            return fontsExts.map(function (e1) {
+                return e + '.' + e1;
+            });
+        }).reduce(function (a, b) {
+            //return 'app/fonts/*.ttf';
+            Array.prototype.push.apply(a, b);
+            return a;
+        });
+
+        gulp.src(fonts)
+            .pipe(gulp.dest(dest + '/fonts/'));
 
     gulp.src(tmpCssVendor + '/**/*.css').pipe(concat('vendor.css')).pipe(gulp.dest(destVendor));
     gulp.src(tmpJsVendor + '/**/*.js').pipe(angularFilesort()).pipe(concat('vendor.js')).pipe(gulp.dest(destVendor));

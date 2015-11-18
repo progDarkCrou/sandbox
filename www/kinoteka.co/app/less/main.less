@@ -15,16 +15,14 @@ html {
     height: 100%;
     color: @site-color;
 
+    @import url('kanji-pa-font.less');
     @import url('normalize.less');
     @import url('utils.less');
     @import url('header.less');
 
     .main-container {
       position: relative;
-      top: @container-top + @elements-margin-base;
-      @media @tablet {
-        top: @container-sm-top + @elements-margin-base;
-      }
+      top: @container-top + @elements-margin-base + @border-thiknes-base;
 
       @import url('home.less');
     }

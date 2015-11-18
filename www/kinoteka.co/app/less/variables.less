@@ -10,47 +10,51 @@
 @portrait: ~"(orientation: portrait)";
 @landscape: ~"(orientation: landscape)";
 
-//Bases
+@gutter-base: 20px;
+
+//Color bases
 @site-color-base: #166678;
 @site-color: @site-color-base;
 @site-background-color: #F0F0EF;
+@header-background-color: white;
 
-@font-size-base: 20px;
-@line-height-base: 1.1;
+//Typography
+@content-height-base: 20px;
+@font-size-base: 14px;
+@font-size-large: floor(@font-size-base * 1.25);
+@font-size-small: ceil(@font-size-base * 0.8);
+@line-height-base: unit(@content-height-base / @font-size-base);
 
 @elements-margin-base: 15px;
 
 //Borders
-@border-color-base: fadeout(@site-color-base, 30%);
-@border-base: 1px solid @border-color-base;
-@border-light-base: 1px solid fadeout(@site-color-base, 50%);
-@border-lighter-base: 1px solid fadeout(@site-color-base, 80%);
+@border-color: fadeout(@site-color-base, 50%);
+@border-light-color: fadeout(@border-color, 20%);
+@border-thiknes-base: 1px;
+@border-default: @border-thiknes-base solid @border-color;
+@border-lighter: @border-thiknes-base solid @border-light-color;
 @border-radius-base: 4px;
 
 //Box shadow
 @box-shadow-radius-base: 1px;
 @box-shadow-blur-base: 7px;
-@box-shadow-color-base: fadeout(darken(@site-color-base, 10%), 70%);
-@box-shadow-base: 0 3px @box-shadow-blur-base 0 @box-shadow-color-base;
+@box-shadow-color-base: fadeout(darken(@site-color-base, 5%), 70%);
+@box-shadow-base: 0 3px @box-shadow-blur-base @box-shadow-color-base;
 
-@main-container-padding: 15px;
-@main-container-width: 100% - @main-container-padding * 2;
+@main-container-width: 100% - @gutter-base;
 
 //Header
-@header-background-color: white;
-@header-default-content-height: 30px;
-@header-height: 50px;
-@header-default-font-size: 24px;
-@header-default-line-height: unit(@header-default-content-height / @header-default-font-size);
-@header-padding-base: (@header-height - @header-default-content-height) / 2;
+//Logo
+@header-default-height: 50px;
+@header-line-height-computed: 20px;
+@header-default-content-height: 34px;
+@header-default-font-size: @font-size-base;
+@header-font-size-larger: @font-size-large;
+@header-default-line-height: unit(@header-line-height-computed / @header-default-font-size) - 0.00000001;
 @header-z-index-base: 999;
-@header-sm-height: 50px;
-@header-sm-content-height: 30px;
-@header-sm-font-size: 20px;
-@header-logo-font-size: 36px;
-@header-logo-sm-font-size: 32px;
-@filter__font-size: 16px;
-@filter__margin: 8px;
+@header-logo-font: "Kanji PA", Helvetica, sans-serif;
+@header-logo-font-size: @font-size-base;
+@header-control-font-size: @font-size-base;
 
 //Main screen tiles (home page)
 @tile-container-width: @main-container-width;
@@ -60,5 +64,4 @@
 @tile-header-font-size: 20px;
 @tile-header-title-font-size: @tile-header-font-size;
 @tile-header-rating-font-size: @tile-header-font-size / 2;
-@container-top: @header-height;
-@container-sm-top: @header-sm-height;
+@container-top: @header-default-height;
