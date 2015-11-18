@@ -6,8 +6,8 @@
       $log.info 'Header loaded'
 
     compile: () ->
-      $menuToggle = angular.element '.menu-toggle'
-      $menu = angular.element '.navigation-menu'
+               $menuToggle = angular.element 'a.menu-toggle'
+               $menu = angular.element $menuToggle.attr 'data-toggle'
 
       $menuToggle.on 'click', () ->
         $menu.toggleClass 'hidden'

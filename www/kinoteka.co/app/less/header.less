@@ -2,12 +2,9 @@
 @import (reference) "utils";
 
 .header {
-  @menu-size-ratio: 0.8;
-  @menu__font-size: @header-default-font-size * @menu-size-ratio;
-  @menu-item__height: @header-default-height * @menu-size-ratio;
-
-  @site-color-fadeout: 30%;
-  @site-color: fadeout(@site-color-base, @site-color-fadeout);
+  @dropdown-menu-size-ratio: 0.8;
+  @dropdown-menu-font-size: @header-font-size-larger;
+  @dropdown-menu-height: ceil(@header-default-height * @dropdown-menu-size-ratio);
 
   @link-hover-background-color: fadeout(@site-color-base, 90%);
   @link-hover-color: darken(@site-color-base, 5%);
@@ -142,12 +139,21 @@
         padding: 0;
 
         & > li {
-          display: block;
           width: 100%;
 
           & > a {
+            .tran();
+            display: block;
             width: 100%;
-            .link-font-size-fixed-height(@menu__font-size, @menu-item__height, @menu-item__height);
+            font-size: @dropdown-menu-font-size;
+            line-height: @header-default-line-height;
+            padding: floor((@dropdown-menu-height - @dropdown-menu-font-size * @header-default-line-height) / 2)
+              @gutter-base / 2;
+
+            &:hover, &:focus {
+              color: @link-hover-color;
+              background-color: @link-hover-background-color;
+            }
           }
         }
       }
