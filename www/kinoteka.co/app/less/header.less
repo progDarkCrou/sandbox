@@ -30,6 +30,7 @@
       z-index: @header-z-index-base - 2;
 
       a {
+        .tran();
         font-family: @header-logo-font;
         font-weight: 100;
         width: auto;
@@ -40,11 +41,11 @@
         padding: ceil((@header-default-height - @header-default-line-height * @header-logo-font-size) / 2)
           @gutter-base / 2;
 
-        color: lighten(@site-color-base, 10%);
+        color: @orange;
 
         &:hover, &:focus {
           background-color: transparent;
-          color: @site-color-base;
+          color: @dark-blue;
           text-decoration: none;
         }
       }
@@ -197,14 +198,14 @@
         & > a {
           .tran();
           display: inline-block;
-          color: @site-color;
+          color: @green;
           line-height: @header-default-line-height;
           font-size: @header-font-size-larger;
           padding: ceil((@header-default-height - @header-default-line-height * @header-font-size-larger) / 2) @gutter-base / 2;
 
           &:hover, &:focus {
             text-decoration: none;
-            color: @link-hover-color;
+            color: @dark-blue;
             background-color: @link-hover-background-color;
           }
 
