@@ -1,15 +1,19 @@
 ((angular) ->
-  angular.module('directives').directive 'header', ['$log', ($log) ->
-    {
+  angular.module('directives').directive 'header', ['$log', '$location', 'ROUTES', ($log, $location, ROUTES) ->
     templateUrl: '/templates/header.tmpl.html'
     controller: () ->
       $log.info 'Header loaded'
 
-    compile: () ->
+    link: (scope, elem) ->
+      scope.isActive = (url) ->
+                         url == ROUTES.convert(ROUTES.home) == ROUTES.convert($location.path()) or
+                             url != ROUTES.convert(ROUTES.home) and -1 != $location.absUrl().indexOf(url)
+
       $menuToggle = angular.element 'a.menu-toggle'
       $menu = angular.element $menuToggle.attr 'data-toggle'
 
       $menuToggle.on 'click', () ->
+
         $menu.toggleClass 'hidden'
         return
 
@@ -31,5 +35,4 @@
         return
 
       return
-    }
   ])(angular)

@@ -3,16 +3,18 @@
         <div class="navigation navigation-left hidden-xs hidden-sm">
             <ul class="navigation-items">
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
-                    <a data-ng-href="#!{{routes[item.name]}}"
-                       data-ng-bind="item.title"></a>
+                    <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
+                       data-ng-bind="item.title"
+                       data-ng-class="{'active': isActive(url)}"></a>
                 </li>
             </ul>
         </div>
         <div class="navigation navigation-right hidden-xs hidden-md hidden-lg">
             <ul class="navigation-items">
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
-                    <a data-ng-href="#!{{routes[item.name]}}"
-                       data-ng-bind="item.title"></a>
+                    <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
+                            data-ng-bind="item.title"
+                            data-ng-class="{'active': isActive(url)}"></a>
                 </li>
             </ul>
         </div>
@@ -47,8 +49,9 @@
         <div class="navigation navigation-dropdown-menu hidden hidden-md hidden-lg shadow-bottom">
             <ul class="menu">
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
-                    <a data-ng-href="#!{{routes[item.name]}}"
-                       data-ng-bind="item.title"></a>
+                    <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
+                       data-ng-bind="item.title"
+                       data-ng-class="{'active': isActive(url)}"></a>
                 </li>
             </ul>
         </div>

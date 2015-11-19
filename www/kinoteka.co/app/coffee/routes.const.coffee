@@ -1,7 +1,9 @@
 ((angular) ->
-  angular.module('application').constant 'routes', {
+  angular.module('application').constant 'ROUTES', {
+    pathPrefix: '!'
+    convert: (path) ->
+                   return '#' + this.pathPrefix + path
     film: '/film/'
-    films: '/films/'
     home: '/'
     about: '/about/'
     shows: '/shows/'

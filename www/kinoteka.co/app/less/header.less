@@ -9,6 +9,12 @@
   @link-hover-background-color: fadeout(@site-color-base, 90%);
   @link-hover-color: darken(@site-color-base, 5%);
 
+  .active {
+    text-decoration: none;
+    color: @link-hover-color;
+    background-color: @link-hover-background-color;
+  }
+
   position: fixed;
   top: 0;
   left: 0;
@@ -43,7 +49,7 @@
 
         color: @orange;
 
-        &:hover, &:focus {
+        &:hover {
           background-color: transparent;
           color: @dark-blue;
           text-decoration: none;
@@ -151,6 +157,7 @@
 
           & > a {
             .tran();
+            color: @green;
             display: block;
             width: 100%;
             font-size: @dropdown-menu-font-size;
@@ -158,9 +165,8 @@
             padding: floor((@dropdown-menu-height - @dropdown-menu-font-size * @header-default-line-height) / 2)
               @gutter-base / 2;
 
-            &:hover, &:focus {
-              color: @link-hover-color;
-              background-color: @link-hover-background-color;
+            &:hover, &:focus:not(:active) {
+              .active();
             }
           }
         }
@@ -203,10 +209,8 @@
           font-size: @header-font-size-larger;
           padding: ceil((@header-default-height - @header-default-line-height * @header-font-size-larger) / 2) @gutter-base / 2;
 
-          &:hover, &:focus {
-            text-decoration: none;
-            color: @dark-blue;
-            background-color: @link-hover-background-color;
+          &:hover {
+            .active();
           }
 
           &:visited, &:active {

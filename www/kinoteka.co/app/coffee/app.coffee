@@ -2,10 +2,10 @@
   directives = angular.module 'directives', []
   app = angular.module 'application', ['ngRoute', 'directives']
 
-  app.run(['routes', '$rootScope', 'translations', (routes, $rootScope, translations) ->
-    $rootScope.routes = routes
+  app.run(['ROUTES', '$rootScope', 'translations', (ROUTES, $rootScope, translations) ->
+    $rootScope.ROUTES = ROUTES
     $rootScope.trans = translations
-    $rootScope.locale = 'eng'
+    $rootScope.locale = 'rus'
 
     $rootScope.homeFilter = '';
 
