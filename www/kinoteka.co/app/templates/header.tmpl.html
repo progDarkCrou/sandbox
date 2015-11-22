@@ -13,30 +13,8 @@
             <ul class="navigation-items">
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
                     <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
-                            data-ng-bind="item.title"
-                            data-ng-class="{'active': isActive(url)}"></a>
-                </li>
-            </ul>
-        </div>
-        <div class="navigation navigation-right"
-        data-ng-init="showMenu=false">
-            <ul class="navigation-items">
-                <li>
-                    <a href=""
-                       data-ng-bind="'Login'"
-                       class="menu-toggle"
-                       data-ng-class="{'active': isActive(url)}"
-                       data-ng-mouseover="showMenu=true"
-                       data-ng-mouseleave="showMenu=false"></a>
-                </li>
-            </ul>
-            <ul class="menu" data-ng-if="showMenu" style="position: absolute; top: 100%; right: 0; list-style-type:
-            none; display: block; font-size: 20px;">
-                <li>
-                    <a href="" style="display: block; background-color: #F0F0EF">Login</a>
-                </li>
-                <li>
-                    <a href="" style="display: block; background-color: #F0F0EF">Resiter</a>
+                       data-ng-bind="item.title"
+                       data-ng-class="{'active': isActive(url)}"></a>
                 </li>
             </ul>
         </div>
