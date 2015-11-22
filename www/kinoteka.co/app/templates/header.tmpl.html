@@ -18,6 +18,28 @@
                 </li>
             </ul>
         </div>
+        <div class="navigation navigation-right"
+        data-ng-init="showMenu=false">
+            <ul class="navigation-items">
+                <li>
+                    <a href=""
+                       data-ng-bind="'Login'"
+                       class="menu-toggle"
+                       data-ng-class="{'active': isActive(url)}"
+                       data-ng-mouseover="showMenu=true"
+                       data-ng-mouseleave="showMenu=false"></a>
+                </li>
+            </ul>
+            <ul class="menu" data-ng-if="showMenu" style="position: absolute; top: 100%; right: 0; list-style-type:
+            none; display: block; font-size: 20px;">
+                <li>
+                    <a href="" style="display: block; background-color: #F0F0EF">Login</a>
+                </li>
+                <li>
+                    <a href="" style="display: block; background-color: #F0F0EF">Resiter</a>
+                </li>
+            </ul>
+        </div>
         <div class="navigation navigation-right navigation-search">
             <form action=""
                   class="form navigation-form hidden-xs hidden-sm">

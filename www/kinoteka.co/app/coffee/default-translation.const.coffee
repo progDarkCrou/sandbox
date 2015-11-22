@@ -25,7 +25,4 @@
         shows:
           name: 'shows'
           title: 'Сериалы'
-        about:
-          name: 'about'
-          title: 'Про нас'
   })(angular)

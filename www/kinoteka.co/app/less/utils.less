@@ -47,7 +47,7 @@
 .hidden {
   opacity: 0;
   visibility: hidden;
-  display: block;
+  display: block !important;
 }
 
 .visible {
@@ -98,4 +98,28 @@
   line-height: unit(@content-height / @font-size);
   padding-bottom: (@height - @content-height) / 2;
   padding-top: (@height - @content-height) / 2;
+}
+
+.cover {
+  .tran();
+  .hidden();
+  .coverage(@tile-border-radius);
+
+  &.play {
+    font-size: 40px;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+
+    .glyphicon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  }
 }

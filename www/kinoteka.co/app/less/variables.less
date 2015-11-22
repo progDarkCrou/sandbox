@@ -1,12 +1,12 @@
-@screen-lg: 1199px;
-@screen-md: 991px;
-@screen-sm: 767px;
-@screen-xs: 479px;
+@screen-lg: 1200px;
+@screen-md: 992px;
+@screen-sm: 768px;
+@screen-xs: 480px;
 
-@smartphone: ~"handled and (min-width: 480px)";
-@tablet: ~"(min-width: 768px)";
-@desktop: ~"(min-width: 992px)";
-@desktop-lg: ~"(min-width: 1200px)";
+@smartphone: ~"handled and (min-width: @{screen-xs})";
+@tablet: ~"(min-width: @{screen-sm})";
+@desktop: ~"(min-width: @{screen-md})";
+@desktop-lg: ~"(min-width: @{screen-lg})";
 @portrait: ~"(orientation: portrait)";
 @landscape: ~"(orientation: landscape)";
 
