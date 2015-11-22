@@ -54,11 +54,17 @@
 
           $active = $($tmp.get(activeNumber)).addClass('active');
 
-          width = $slidesContainer.children(':not(.active)').outerWidth();
+          width = $slidesContainer.children().outerWidth(true);
           curPos = -activeNumber * width;
 
           $slidesContainer.css({
             left: curPos
+          });
+
+          elem.find('.slider').find('img.invisible').each(function (n, e) {
+            var $e = $(e).on('load', function () {
+              $e.removeClass('invisible');
+            });
           });
 
           return $active;
