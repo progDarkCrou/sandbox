@@ -20,7 +20,7 @@
         }
       }
 
-      .tran();
+      .transition-default();
       background-color: white;
       margin: @elements-margin-base 0;
       border-radius: @tile-border-radius;
@@ -42,7 +42,6 @@
       }
 
       .cover {
-        .tran();
         .hidden();
         .coverage(@tile-border-radius);
 
@@ -54,13 +53,7 @@
 
           .glyphicon {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+            .absolute-center();
           }
         }
       }

@@ -36,7 +36,7 @@
       z-index: @header-z-index-base - 2;
 
       a {
-        .tran();
+        .transition-default();
         font-family: @header-logo-font;
         font-weight: 100;
         width: auto;
@@ -88,7 +88,7 @@
 
         input.form-control {
           #control-conf-base();
-          .tran();
+          .transition-default();
           background-color: @header-background-color;
 
           &:focus, &:active {
@@ -129,7 +129,7 @@
     }
 
     &.navigation-dropdown-menu {
-      .tran();
+      .transition-default();
       position: absolute;
 
       right: 0;
@@ -176,7 +176,7 @@
           }
 
           & > a {
-            .tran();
+            .transition-default();
             color: @green;
             display: block;
             width: 100%;
@@ -210,7 +210,7 @@
     }
 
     ul.navigation-items {
-      .tran();
+      .transition-default();
 
       list-style: none;
       //display: block;
@@ -221,7 +221,7 @@
         display: inline-block;
 
         & > a {
-          .tran();
+          .transition-default();
           display: inline-block;
           color: @green;
           line-height: @header-default-line-height;

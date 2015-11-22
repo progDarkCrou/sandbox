@@ -28,28 +28,41 @@
         });
 
         var $slidesContainer = elem.find('.slider').find('.slider-items > ul');
-        var $tmp = $slidesContainer.children('li');
 
-        var $active = $tmp.filter('.active');
-        var activeNumber = Math.floor($tmp.length / 2.0);
+        var width = 0;
+        var curPos = 0;
 
-        if ($active.length) {
-          activeNumber = $tmp.index($active.get(0));
-        }
-
-        $active = $($tmp.get(activeNumber)).addClass('active');
+        var $active = initPosition();
 
         var $prev = $active.prev();
-        $prev.bind('click', rightPressed);
         var $next = $active.next();
+
+        $prev.bind('click', rightPressed);
         $next.bind('click', leftPressed);
 
-        var width = $slidesContainer.children(':not(.active)').outerWidth();
-        var curPos = -activeNumber * width;
+        $(window).on('resize', initPosition);
 
-        $slidesContainer.css({
-          left: curPos
-        });
+        function initPosition() {
+          var $tmp = $slidesContainer.children('li');
+
+          var $active = $tmp.filter('.active');
+          var activeNumber = Math.floor($tmp.length / 2.0);
+
+          if ($active.length) {
+            activeNumber = $tmp.index($active.get(0));
+          }
+
+          $active = $($tmp.get(activeNumber)).addClass('active');
+
+          width = $slidesContainer.children(':not(.active)').outerWidth();
+          curPos = -activeNumber * width;
+
+          $slidesContainer.css({
+            left: curPos
+          });
+
+          return $active;
+        }
 
         function leftPressed(e) {
           var $active = $slidesContainer.children('li.active:not(:last-child)');
