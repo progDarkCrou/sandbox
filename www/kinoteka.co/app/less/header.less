@@ -63,67 +63,65 @@
       }
     }
 
-    &.navigation-search {
-      form.form.navigation-form {
-        @navigation-form-margin-vertical: ceil((@header-default-height - @header-default-content-height) / 2);
-        margin-top: @navigation-form-margin-vertical;
-        margin-bottom: @navigation-form-margin-vertical;
+    form.form.navigation-form {
+      @navigation-form-margin-vertical: ceil((@header-default-height - @header-default-content-height) / 2);
+      margin-top: @navigation-form-margin-vertical;
+      margin-bottom: @navigation-form-margin-vertical;
 
-        .form-group {
-          margin: 0;
-          padding: 0;
+      .form-group {
+        margin: 0;
+        padding: 0;
+        line-height: @header-default-line-height;
+        font-size: @header-control-font-size;
+
+        @control-padding-vertical: ceil((@header-default-content-height - @header-default-line-height * @header-control-font-size) / 2) - @border-thiknes-base * 2;
+        @control-padding-horizontal: @control-padding-vertical;
+
+        #control-conf-base {
           line-height: @header-default-line-height;
           font-size: @header-control-font-size;
+          height: auto;
+          padding: @control-padding-vertical @control-padding-horizontal;
+          border-radius: @border-radius-base;
+          border: @border-default;
+        }
 
-          @control-padding-vertical: ceil((@header-default-content-height - @header-default-line-height * @header-control-font-size) / 2) - @border-thiknes-base * 2;
-          @control-padding-horizontal: @control-padding-vertical;
+        input.form-control {
+          #control-conf-base();
+          .tran();
+          background-color: @header-background-color;
 
-          #control-conf-base {
-            line-height: @header-default-line-height;
-            font-size: @header-control-font-size;
-            height: auto;
-            padding: @control-padding-vertical @control-padding-horizontal;
-            border-radius: @border-radius-base;
-            border: @border-default;
+          &:focus, &:active {
+            .shadow-base();
           }
+        }
 
+        .input-group {
           input.form-control {
-            #control-conf-base();
-            .tran();
-            background-color: @header-background-color;
-
-            &:focus, &:active {
-              .shadow-base();
+            &[type=text]:not(:last-child):nth-child(1) {
+              padding-right: @control-padding-horizontal * 2 + @header-control-font-size;
+              padding-left: @control-padding-horizontal * 2;
+            }
+            &[type=text]:not(:first-child):nth-child(1) {
+              padding-left: @control-padding-horizontal * 2 + @header-control-font-size;
+              padding-right: @control-padding-horizontal * 2;
             }
           }
 
-          .input-group {
-            input.form-control {
-              &[type=text]:not(:last-child):nth-child(1) {
-                padding-right: @control-padding-horizontal * 2 + @header-control-font-size;
-                padding-left: @control-padding-horizontal * 2;
-              }
-              &[type=text]:not(:first-child):nth-child(1) {
-                padding-left: @control-padding-horizontal * 2 + @header-control-font-size;
-                padding-right: @control-padding-horizontal * 2;
-              }
+          .input-group-addon {
+            #control-conf-base();
+            background-color: transparent;
+            position: absolute;
+            width: auto;
+            border: 1px solid transparent;
+            z-index: @header-z-index-base;
+
+            &:last-child {
+              right: @border-thiknes-base;
             }
 
-            .input-group-addon {
-              #control-conf-base();
-              background-color: transparent;
-              position: absolute;
-              width: auto;
-              border: 1px solid transparent;
-              z-index: @header-z-index-base;
-
-              &:last-child {
-                right: @border-thiknes-base;
-              }
-
-              &:first-child {
-                left: @border-thiknes-base;
-              }
+            &:first-child {
+              left: @border-thiknes-base;
             }
           }
         }
@@ -132,10 +130,12 @@
 
     &.navigation-dropdown-menu {
       .tran();
+      position: absolute;
+
       right: 0;
       left: 0;
       top: 100%;
-      position: absolute;
+
       background-color: @header-background-color;
       //bootstrap purpose
       display: block !important;
@@ -152,8 +152,28 @@
         margin: 0;
         padding: 0;
 
+        @menu-padding-vertical-default: floor((@dropdown-menu-height - @dropdown-menu-font-size * @header-default-line-height) / 2);
+
         & > li {
           width: 100%;
+
+          .navigation-form {
+            width: 100%;
+
+            .form-group {
+              .input-group {
+                width: 100%;
+                position: relative;
+
+                padding: @menu-padding-vertical-default @gutter-base / 2;
+
+                .input-group-addon {
+                  top: @menu-padding-vertical-default;
+                  right: @gutter-base / 2;
+                }
+              }
+            }
+          }
 
           & > a {
             .tran();
@@ -162,8 +182,7 @@
             width: 100%;
             font-size: @dropdown-menu-font-size;
             line-height: @header-default-line-height;
-            padding: floor((@dropdown-menu-height - @dropdown-menu-font-size * @header-default-line-height) / 2)
-              @gutter-base / 2;
+            padding: @menu-padding-vertical-default @gutter-base / 2;
 
             &:hover, &:focus:not(:active) {
               .active();

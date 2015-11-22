@@ -1,5 +1,5 @@
 <div class="header shadow-bottom">
-    <div class="container">
+    <div class="container hidden-sm">
         <div class="navigation navigation-left hidden-xs hidden-sm">
             <ul class="navigation-items">
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
@@ -31,8 +31,26 @@
                     </div>
                 </div>
             </form>
-            <ul class="navigation-items hidden-sm hidden-md hidden-lg">
-                <li class="dropdown">
+        </div>
+        <div class="navigation navigation-logo text-align-center hidden-xs hidden-sm">
+            <a href="#!/">Kinoteka</a>
+        </div>
+    </div>
+
+    <!--Showed only on the small resolutions-->
+    <div class="container-fluid hidden-md hidden-lg">
+        <div class="navigation navigation-logo navigation-left text-align-left">
+            <a href="#!/">Kinoteka</a>
+        </div>
+        <div class="navigation navigation-right">
+            <ul class="navigation-items">
+                <li data-ng-repeat="item in trans[locale].nav track by $index"
+                    class="hidden-xs">
+                    <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
+                       data-ng-bind="item.title"
+                       data-ng-class="{'active': isActive(url)}"></a>
+                </li>
+                <li class="dropdown hidden-sm hidden-md hidden-lg">
                     <a href=""
                        class="menu-toggle navigation-item glyphicon glyphicon-menu-hamburger"
                        data-toggle=".navigation-dropdown-menu">
@@ -40,20 +58,42 @@
                 </li>
             </ul>
         </div>
-        <div class="navigation navigation-logo text-align-center hidden-xs hidden-sm">
-            <a href="#!/">Kinoteka</a>
-        </div>
-        <div class="navigation navigation-logo navigation-left text-align-left hidden-md hidden-lg">
-            <a href="#!/">Kinoteka</a>
-        </div>
-        <div class="navigation navigation-dropdown-menu hidden hidden-md hidden-lg shadow-bottom">
+        <div class="navigation navigation-dropdown-menu hidden shadow-bottom">
             <ul class="menu">
+                <li>
+                    <form action=""
+                          class="form navigation-form search-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       data-ng-model="homeFilter"
+                                       placeholder="Filter...">
+                                <span class="glyphicon glyphicon-search input-group-addon"></span>
+                            </div>
+                        </div>
+                    </form>
+                </li>
                 <li data-ng-repeat="item in trans[locale].nav track by $index">
                     <a data-ng-init="url = ROUTES.convert(ROUTES[item.name])" data-ng-href="{{url}}"
                        data-ng-bind="item.title"
                        data-ng-class="{'active': isActive(url)}"></a>
                 </li>
             </ul>
+        </div>
+        <div class="navigation navigation-right navigation-search hidden-portrait-xs hidden-xs">
+            <form action=""
+                  class="form navigation-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               data-ng-model="homeFilter"
+                               placeholder="Filter...">
+                        <span class="glyphicon glyphicon-search input-group-addon"></span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
