@@ -15,17 +15,20 @@ html {
     height: 100%;
     color: @site-color;
 
-    @import url('kanji-pa-font');
-    @import url('normalize');
-    @import url('utils');
-    @import url('header');
-    @import url("slider");
+    @import 'kanji-pa-font';
+    @import 'normalize';
+
+    @import 'utils';
+
+    @import 'header';
+
+    @import "slider";
 
     .main-container {
       position: relative;
       top: @container-top + @border-thiknes-base;
 
-      @import url('home.less');
+      @import 'home';
     }
   }
 
