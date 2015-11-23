@@ -30,12 +30,12 @@
   box-shadow: @shadow;
 }
 
-.shadows-inset(@shadow, @add: false) {
-  & when (@add = true) {
-    -webkit-box-shadow+: inset @shadow;
-    -moz-box-shadow+: inset @shadow;
-    box-shadow+: inset @shadow;
-  }
+.shadows-inset(@shadow) {
+  //& when (@add = true) {
+  //  -webkit-box-shadow+: inset @shadow;
+  //  -moz-box-shadow+: inset @shadow;
+  //  box-shadow+: inset @shadow;
+  //}
   -webkit-box-shadow: inset @shadow;
   -moz-box-shadow: inset @shadow;
   box-shadow: inset @shadow;

@@ -6,8 +6,8 @@
   @dropdown-menu-font-size: @header-font-size-larger;
   @dropdown-menu-height: ceil(@header-default-height * @dropdown-menu-size-ratio);
 
-  @link-hover-background-color: fadeout(@site-color-base, 90%);
-  @link-hover-color: darken(@site-color-base, 5%);
+  @link-hover-background-color: fadeout(white, 90%);
+  @link-hover-color: white;
 
   .active {
     text-decoration: none;
@@ -22,7 +22,6 @@
   color: @site-color;
   background-color: @header-background-color;
   z-index: @header-z-index-base;
-  border-bottom: @border-default;
   line-height: @header-default-line-height;
 
   .noselect();
@@ -89,10 +88,11 @@
         input.form-control {
           #control-conf-base();
           .transition-default();
-          background-color: @header-background-color;
+          background-color: @site-background-color;
 
           &:focus, &:active {
             .shadow-base();
+            background-color: screen(@site-background-color, #eee);
           }
         }
 
