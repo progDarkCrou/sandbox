@@ -13,9 +13,10 @@
       $menuToggle = angular.element 'a.menu-toggle'
       $menu = angular.element $menuToggle.attr 'data-toggle'
       $searchForm = angular.element '.search-form'
+      invisibleClass = 'invisible'
 
       $menuToggle.on 'click', () ->
-        $menu.toggleClass 'hidden'
+        $menu.toggleClass invisibleClass
         return
 
       $document = angular.element document
@@ -24,16 +25,16 @@
         if !$searchForm.is(e.target) and !$searchForm.has(e.target).length
           if $menu.has(e.target).length
             setTimeout () ->
-              $menu.addClass 'hidden'
+              $menu.addClass invisibleClass
               return
             , 120
           else if !($menuToggle.is(e.target) or $menuToggle.has(e.target).length)
-            $menu.addClass 'hidden'
+            $menu.addClass invisibleClass
           return
 
       angular.element(window).resize () ->
         if $document.width() >= 720
-          $menu.addClass 'hidden'
+          $menu.addClass invisibleClass
         return
 
       return
