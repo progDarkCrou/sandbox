@@ -24,6 +24,7 @@
             } else if (ratio >= containerRatio) {
               $e.addClass('full-height');
             }
+            $e.removeClass('invisible');
           });
         });
 
@@ -58,13 +59,7 @@
           curPos = -activeNumber * width;
 
           $slidesContainer.css({
-            left: curPos
-          });
-
-          elem.find('.slider').find('img.invisible').each(function (n, e) {
-            var $e = $(e).on('load', function () {
-              $e.removeClass('invisible');
-            });
+            transform: 'translate3d(' + curPos + 'px, 0, 0)'
           });
 
           return $active;
@@ -74,7 +69,6 @@
           var $active = $slidesContainer.children('li.active:not(:last-child)');
 
           if ($active.length) {
-            console.log(angular.element($active).scope());
             $prev.unbind('click', rightPressed);
             $prev.unbind('click', leftPressed);
             $next.unbind('click', leftPressed);
@@ -83,7 +77,7 @@
             $active = $active.removeClass('active').next().addClass('active');
 
             $slidesContainer.css({
-              left: curPos -= width
+              transform: 'translate3d(' + (curPos -= width) + 'px, 0, 0)'
             });
 
             $prev = $active.prev().bind('click', rightPressed);
@@ -103,7 +97,7 @@
             $active = $active.removeClass('active').prev().addClass('active');
 
             $slidesContainer.css({
-              left: curPos += width
+              transform: 'translate3d(' + (curPos += width) + 'px, 0, 0)'
             });
 
             $prev = $active.prev().bind('click', rightPressed);
