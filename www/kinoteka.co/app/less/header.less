@@ -88,11 +88,15 @@
         input.form-control {
           #control-conf-base();
           .transition-default();
-          background-color: @site-background-color;
+          background-color: darken(@site-background-color, 4%);
 
           &:focus, &:active {
             .shadow-base();
-            background-color: screen(@site-background-color, #eee);
+            background-color: screen(@site-background-color, #fff);
+          }
+
+          &:hover:not(:focus) {
+            background-color: lighten(@site-background-color, 1%);
           }
         }
 
