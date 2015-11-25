@@ -242,6 +242,11 @@ gulp.task('package', gulpSync.sync(['js', 'css', 'html', 'json', 'coffee', 'less
             .pipe(inject(sources, {
               ignorePath: dest
             }))
+            .pipe(htmlMinify({
+              spare: true,
+              conditionals: true,
+              empty: true
+            }))
             .pipe(gulp.dest(dest));
       }, 2000);
     });

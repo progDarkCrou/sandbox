@@ -58,9 +58,7 @@
           width = $slidesContainer.children().outerWidth(true);
           curPos = -activeNumber * width;
 
-          $slidesContainer.css({
-            transform: 'translate3d(' + curPos + 'px, 0, 0)'
-          });
+          $slidesContainer.translateLeft(curPos, 'px');
 
           return $active;
         }
@@ -76,9 +74,7 @@
 
             $active = $active.removeClass('active').next().addClass('active');
 
-            $slidesContainer.css({
-              transform: 'translate3d(' + (curPos -= width) + 'px, 0, 0)'
-            });
+            $slidesContainer.translateLeft(width);
 
             $prev = $active.prev().bind('click', rightPressed);
             $next = $active.next().bind('click', leftPressed);
@@ -96,15 +92,12 @@
 
             $active = $active.removeClass('active').prev().addClass('active');
 
-            $slidesContainer.css({
-              transform: 'translate3d(' + (curPos += width) + 'px, 0, 0)'
-            });
+            $slidesContainer.translateRight(width);
 
             $prev = $active.prev().bind('click', rightPressed);
             $next = $active.next().bind('click', leftPressed);
           }
         }
-
       }
     };
   }
