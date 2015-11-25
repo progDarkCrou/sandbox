@@ -14,105 +14,62 @@
 @slide-width-md: floor(@slider-width-md * .8);
 @slide-width-lg: floor(@slider-width-lg * .8);
 
+@image-ratio-sm: 16 / 9;
+
 @slider-title-height: 30px;
 @slider-title-font-size: 24px;
 @slider-subtitle-height: 20px;
 @slider-subtitle-font-size: 18px;
-@slide-body-height-lg: floor(@slide-width-lg / 16 * 9);
-@slide-body-height-md: floor(@slide-width-md / 16 * 9);
-@slide-body-height-sm: floor(@slide-width-sm / 16 * 9);
-@slide-img-width-lg: floor(@slide-body-height-lg / 9 * 16);
-@slide-img-width-md: floor(@slide-body-height-md / 9 * 16);
-@slide-img-width-sm: floor(@slide-body-height-sm / 9 * 16);
+@slide-img-height-sm: floor(@slide-width-sm / @image-ratio-sm);
+@slide-img-height-md: floor(@slide-width-md / @image-ratio-sm);
+@slide-img-height-lg: floor(@slide-width-lg / @image-ratio-sm);
+@slide-img-width-sm: @slide-width-sm;
+@slide-img-width-md: @slide-width-md;
+@slide-img-width-lg: @slide-width-lg;
 
 @slider-horizontal-padding-sm: 50px;
 @slider-horizontal-padding-md: 90px;
 @slider-horizontal-padding-lg: 120px;
 
-@slider-items-transition: all .2s cubic-bezier(.44,.93,.6,.98);
-@slider-items-transition-inverted: all .7s cubic-bezier(.29,.02,.3,.09);
+@slider-items-transition: all .2s cubic-bezier(.44, .93, .6, .98);
+@slider-items-transition-inverted: all .7s cubic-bezier(.29, .02, .3, .09);
 
 @slider-background-color: darken(#5F818A, 10%);
 
 #slide-heights() {
-  height: @slide-body-height-sm;
-
-  @media @desktop {
-    height: @slide-body-height-md;
-  }
-
-  @media @desktop-lg {
-    height: @slide-body-height-lg;
-  }
+  height: @slide-img-height-sm;
 }
 
 .slider {
-  display: block;
   position: relative;
-
-  background: @slider-background-color;
-  left: 0;
   right: 0;
 
+  left: 0;
+  display: block;
   overflow: hidden;
 
-  .shadows-inset(~'0 0 4px 1px fadeout(black, 50%)');
-
   padding-top: @slider-gutter / 2;
+
   padding-bottom: @slider-gutter / 2;
+  background: @slider-background-color;
+
+  .shadows-inset(~'0 0 4px 1px fadeout(black, 50%)');
 
   .slider-body {
     width: @slide-width-sm;
 
-    @media @desktop {
-      width: @slide-width-md;
-    }
-
-    @media @desktop-lg {
-      width: @slide-width-lg;
-    }
-
-    height: 100%;
     position: relative;
     .h-center();
 
     color: #fff;
 
-    .slider-header {
-      font-size: @slider-title-font-size;
-      line-height: @line-height-base;
-
-      .title {
-        font-size: inherit;
-        padding: ceil((@slider-title-height - @slider-title-font-size * @line-height-base) / 2) 0;
-      }
-
-      .subtitle {
-        font-size: @slider-subtitle-font-size;
-        padding: ceil((@slider-subtitle-height - @slider-subtitle-font-size * @line-height-base) / 2) 0;
-        color: fadeout(#fff, 40%);
-      }
-    }
-
     .slider-items {
       position: absolute;
-
-      width: @slide-width-sm;
-      height: @slide-body-height-sm;
-
-      @media @desktop {
-        width: @slide-width-md;
-        height: @slide-body-height-md;
-      }
-
-      @media @desktop-lg {
-        width: @slide-width-lg;
-        height: @slide-body-height-lg;
-      }
-
       bottom: 0;
-
       .absolute-h-center();
+
+      width: inherit;
+      height: @slide-img-height-sm;
 
       & > ul {
         position: relative;
@@ -121,10 +78,10 @@
 
         right: 0;
 
-        height: 100%;
+        height: inherit;
 
         margin: 0;
-        margin-left: -@slider-horizontal-padding-sm / 2;
+        margin-left: -(@slider-horizontal-padding-sm / 2);
 
         padding: 0;
 
@@ -140,30 +97,14 @@
           position: relative;
           display: inline-block;
 
-          height: 100%;
+          height: inherit;
           width: @slide-width-sm;
 
-          @media @desktop {
-            width: @slide-width-md;
-          }
+          .transited);
 
-          @media @desktop-lg {
-            width: @slide-width-lg;
-          }
+          margin: 0er-items-transition-invertions(@slid @slider-horizonta 2;
 
-          .transitions(@slider-items-transition-inverted);
-
-          margin: 0 @slider-horizontal-padding-sm / 2;
-
-          @media @desktop {
-            margin: 0 @slider-horizontal-padding-md / 2;
-          }
-
-          @media @desktop-lg {
-            margin: 0 @slider-horizontal-padding-lg / 2;
-          }
-
-          &.active {
+          &.acsm /l-padding-tive {
 
             a.slider-item:after {
               .invisible();
@@ -192,11 +133,11 @@
               .visible();
               .transition-default();
               background-color: fadeout(white, 60%);
-            }
-          }
-        }
+             }
       }
-    }
+
+       }
+          } }
 
     .slider-description {
       #slide-heights();
@@ -206,6 +147,9 @@
       color: black;
       position: relative;
       font-weight: 700;
+      width: inherit;
+      height: inherit;
+
       .clearfix();
 
       .cover {
@@ -218,20 +162,45 @@
         }
       }
 
-      .slider-description-right {
-        position: absolute;
-        padding: 5px;
-        height: 100%;
-        right: 0;
-        width: 30%;
-        background-color: fadeout(white, 60%);
+      .slider-description-header {
+        font-size: @slider-title-font-size;
+        line-height: @line-height-base;
 
-        &:hover {
-          .cover {
-            .invisible();
-          }
+        .title {
+          font-size: inherit;
+          padding: ceil((@slider-title-height - @slider-title-font-size * @line-height-base) / 2) 0;
+        }
+
+        .subtitle {
+          font-size: @slider-subtitle-font-size;
+          padding: ceil((@slider-subtitle-height - @slider-subtitle-font-size * @line-height-       color: 0;
+   t(#fff, 40%fadeoubase) / 2) );
         }
       }
+
+      .slider-description-body {
+        position: relative;
+        height: @slide-img-height-sm;
+        widows: inherit;
+        overflow: hidden;
+
+        .slider-description-right {
+          position: absolute;
+          padding: 5px;
+          height: 100%;
+          right: 0;
+          width: 30%;
+          background-color: fadeout(white, 60%);
+
+          &:hover {
+            .cover {
+              .invisible();
+            }
+          }
+        }
+
+      }
+
     }
   }
 

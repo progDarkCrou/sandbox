@@ -9,13 +9,16 @@ html {
   height: 100%;
 
   body {
-    line-height: @line-height-base;
-    font-size: @font-size-base;
-    background-color: @site-background-color;
-    height: 100%;
-    color: @site-color;
+    @import 'fonts/kanji-pa-font';
+    @import 'fonts/Web-Serveroff';
 
-    @import 'kanji-pa-font';
+    height: 100%;
+    background-color: @site-background-color;
+    color: @site-color;
+    font-size: @font-size-base;
+    font-family: 'clinica_proregular', sans-serif;
+    line-height: @line-height-base;
+
     @import 'normalize';
 
     @import 'utils';
