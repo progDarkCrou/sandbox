@@ -6,7 +6,7 @@
   @dropdown-menu-font-size: @header-font-size-larger;
   @dropdown-menu-height: ceil(@header-default-height * @dropdown-menu-size-ratio);
 
-  @link-hover-background-color: fadeout(white, 92%);
+  @link-hover-background-color: fadeout(white, 90%);
   @link-hover-color: white;
 
   #active() {
@@ -143,14 +143,10 @@
       left: 0;
       top: 100%;
 
-      background-color: darken(@header-background-color, 10%);
-
-      -webkit-box-shadow: @box-shadow-base, inset @box-shadow-base;
-      -moz-box-shadow: @box-shadow-base, inset @box-shadow-base;
-      box-shadow: @box-shadow-base, inset @box-shadow-base;
-
+      background-color: @header-background-color;
       display: block;
-
+      border-bottom: @border-default;
+      border-top: @border-default;
       z-index: @header-z-index-base - 2;
       padding: 10px 0;
 
