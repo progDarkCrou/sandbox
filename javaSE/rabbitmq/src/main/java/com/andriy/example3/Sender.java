@@ -28,26 +28,27 @@ public class Sender {
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         Map<Integer, Future<BigInteger>> results = new HashMap<>();
 
-        while (num++ < 10000) {
+
+        System.out.println("Sender started");
+        System.out.println("Start sending tasks...");
+
+        int amount = 10000;
+        while (num++ < amount) {
             final int finalNum = num;
 
+            String replyQueueName = channel.queueDeclare().getQueue();
+            String corrId = java.util.UUID.randomUUID().toString();
+
+            AMQP.BasicProperties props = new AMQP.BasicProperties()
+                    .builder()
+                    .correlationId(corrId)
+                    .replyTo(replyQueueName)
+                    .build();
+            channel.basicPublish("", QUEUE_NAME, props, (finalNum + "").getBytes());
+            QueueingConsumer consumer = new QueueingConsumer(channel);
+            channel.basicConsume(replyQueueName, true, consumer);
+
             Callable<BigInteger> task = () -> {
-                QueueingConsumer consumer = new QueueingConsumer(channel);
-
-                String replyQueueName = channel.queueDeclare().getQueue();
-
-                channel.basicConsume(replyQueueName, true, consumer);
-
-                String corrId = java.util.UUID.randomUUID().toString();
-
-                AMQP.BasicProperties props = new AMQP.BasicProperties()
-                        .builder()
-                        .correlationId(corrId)
-                        .replyTo(replyQueueName)
-                        .build();
-
-                channel.basicPublish("", QUEUE_NAME, props, (finalNum + "").getBytes());
-
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery();
 
                 while (!delivery.getProperties().getCorrelationId().equals(corrId)) {
@@ -61,6 +62,7 @@ public class Sender {
 
             results.put(num, executorService.submit(task));
         }
+        System.out.println(amount + " tasks sent");
 
         executorService.shutdown();
 
