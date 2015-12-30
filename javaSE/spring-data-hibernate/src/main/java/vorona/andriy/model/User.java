@@ -2,9 +2,9 @@ package vorona.andriy.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Transactional
 public class User {
 
     @Id
@@ -25,8 +24,8 @@ public class User {
 
     private String surname;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    private List<House> houses;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", targetEntity = House.class)
+    private List<House> houses = new ArrayList<>();
 
     public User() {
     }

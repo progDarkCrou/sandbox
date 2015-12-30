@@ -5,16 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vorona.andriy.model.Image;
 import vorona.andriy.repositories.ImageRepository;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.IOException;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -22,7 +22,7 @@ import java.sql.SQLException;
  * Created by avorona on 29.12.15.
  */
 @Controller
-@Transactional
+@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
 public class MainController {
 
     @Autowired
@@ -31,7 +31,11 @@ public class MainController {
 //
     @RequestMapping(method = RequestMethod.POST, value = "/image")
     @ResponseBody
-    public String saveImage(HttpServletRequest request, @RequestPart("file") MultipartFile file) throws IOException, ServletException, SQLException {
+    public String saveImage(InputStream inputStream, @RequestPart("file") MultipartFile file) throws IOException, ServletException, SQLException {
+        ByteBuffer buffer = ByteBuffer.allocate(inputStream.available());
+        Channels.newChannel(inputStream).read(buffer);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(buffer.array())));
+        reader.lines().forEach(System.out::println);
         Blob blob = new SerialBlob(file.getBytes());
         String name = "image" + (int) (Math.random() * 100);
 
@@ -45,6 +49,22 @@ public class MainController {
         Image image = imageRepository.findOneByName(imageName);
         long length = image.getFile().length();
         return new ResponseEntity<>(image.getFile().getBytes(1, (int) length), HttpStatus.FOUND);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/newImage")
+    @ResponseBody
+    public void saveImage(InputStream stream) throws IOException, ServletException, SQLException {
+//        if (entity == null) {
+//            throw new RuntimeException("Cannot read from null entity value");
+//        }
+//        if (!entity.hasBody()) {
+//            throw new RuntimeException("Cannot read from entity without body");
+//        }
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(entity.getBody())));
+//        reader.lines().forEach(System.out::println);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+
+        reader.lines().forEach(System.out::println);
     }
 
 }

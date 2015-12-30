@@ -2,7 +2,6 @@ package vorona.andriy.model;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Transactional
 public class House {
 
     private String street;
@@ -22,7 +20,7 @@ public class House {
     @Column(unique = true)
     private Integer number;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
     public User getUser() {

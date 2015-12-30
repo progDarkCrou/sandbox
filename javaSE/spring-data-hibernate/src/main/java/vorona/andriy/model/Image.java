@@ -1,7 +1,5 @@
 package vorona.andriy.model;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Blob;
@@ -13,10 +11,8 @@ import java.sql.Blob;
 public class Image {
 
     @Id
-    @NotNull
     private String name;
 
-    @NotNull
     private Blob file;
 
     public Image() {

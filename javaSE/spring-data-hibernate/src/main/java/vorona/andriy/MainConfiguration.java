@@ -1,20 +1,22 @@
 package vorona.andriy;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernateEntityManager;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -25,23 +27,25 @@ import java.util.Properties;
  */
 
 @Configuration
+@EnableTransactionManagement(mode = AdviceMode.PROXY, proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = "vorona.andriy.repositories")
-public class MainConfiguration {
+public class MainConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     @Scope("singleton")
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/hibernate?useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
+        dataSource.setSuppressClose(true);
         return dataSource;
     }
 
     @Bean
     @Autowired
-    public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactory.setEntityManagerInterface(HibernateEntityManager.class);
@@ -53,7 +57,7 @@ public class MainConfiguration {
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.cache.provider_class",
                 org.hibernate.cache.ehcache.StrategyRegistrationProviderImpl.class.getName()
         );
@@ -66,24 +70,35 @@ public class MainConfiguration {
         entityManagerFactory.setPackagesToScan("vorona.andriy.model");
 
         entityManagerFactory.afterPropertiesSet();
-        return entityManagerFactory.getObject();
+        return entityManagerFactory;
     }
 
     @Bean
     @Autowired
-    public SessionFactory sessionFactory(EntityManagerFactory entityManagerFactory) {
+    public HibernateJpaSessionFactoryBean sessionFactory(EntityManagerFactory entityManagerFactory) {
         HibernateJpaSessionFactoryBean sessionFactoryBean = new HibernateJpaSessionFactoryBean();
         sessionFactoryBean.setEntityManagerFactory(entityManagerFactory);
-        return sessionFactoryBean.getObject();
+        return sessionFactoryBean;
     }
 
 //    @Bean
 //    @Autowired
-//    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory);
-//        transactionManager.setRollbackOnCommitFailure(true);
-//        transactionManager.setNestedTransactionAllowed(true);
+//    public Session session(SessionFactory sessionFactory) {
+//        try {
+//            return sessionFactory.getCurrentSession();
+//        } catch (HibernateException e) {
+//            return sessionFactory.openSession();
+//        }
+//    }
+
+//    @Bean
+//    @Autowired
+//    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory, DataSource dataSource) {
+//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 //
+//        transactionManager.setDataSource(dataSource);
+//        transactionManager.setNestedTransactionAllowed(true);
+//        transactionManager.setRollbackOnCommitFailure(true);
 //        transactionManager.afterPropertiesSet();
 //
 //        return transactionManager;
@@ -91,13 +106,13 @@ public class MainConfiguration {
 
     @Bean
     @Autowired
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory, DataSource dataSource) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-
-        transactionManager.setDataSource(dataSource);
-        transactionManager.setNestedTransactionAllowed(true);
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory);
+        transactionManager.setGlobalRollbackOnParticipationFailure(true);
         transactionManager.setRollbackOnCommitFailure(true);
-        transactionManager.setHibernateManagedSession(false);
+        transactionManager.setTransactionSynchronization(AbstractPlatformTransactionManager.SYNCHRONIZATION_ALWAYS);
+        transactionManager.setFailEarlyOnGlobalRollbackOnly(true);
+        transactionManager.setNestedTransactionAllowed(true);
         transactionManager.afterPropertiesSet();
 
         return transactionManager;
