@@ -5,7 +5,8 @@
   "main": "app.build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts-compile": "tsc"
+    "ts-compile": "tsc",
+    "r-build": "r.js -o build.js"
   },
   "keywords": [
     "test",
