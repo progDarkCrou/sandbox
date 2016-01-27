@@ -4,7 +4,8 @@
   "description": "Testing some building tools for TS ans R.js",
   "main": "app.build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-compile": "tsc"
   },
   "keywords": [
     "test",
