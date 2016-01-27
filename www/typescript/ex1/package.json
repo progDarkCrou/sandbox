@@ -1,0 +1,19 @@
+{
+  "name": "ex1",
+  "version": "0.0.1",
+  "description": "Testing some building tools for TS ans R.js",
+  "main": "app.build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "r.js",
+    "typescript"
+  ],
+  "author": "crou",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-inject": "^3.0.0"
+  }
+}
