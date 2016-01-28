@@ -127,6 +127,8 @@ Session.vim
 .netrwhist
 *~
 
+node_modules/
+*/node_modules/**
 */node_modules/*
-www/kinoteka.org/node_modules/
-javaEE/vsa/vsa.iml
+www/coffe-examples/node_modules/del www/coffe-examples/node_modules/gulp www/coffe-examples/node_modules/gulp-coffee www/coffe-examples/node_modules/gulp-concat www/coffe-examples/node_modules/gulp-inject www/coffe-examples/node_modules/gulp-less www/coffe-examples/node_modules/gulp-sync www/coffe-examples/node_modules/gulp-watch www/coffe-examples/node_modules/gulp-webserver www/coffe-examples/node_modules/main-bower-files
+www/coffe-examples/node_modules

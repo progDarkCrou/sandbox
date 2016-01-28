@@ -24,26 +24,26 @@ public class Sender {
 
         LinkedList<Future<FibResult>> results = new LinkedList<>();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(count / 10);
+        System.out.println("Sender started");
+        System.out.println("Start sending tasks...");
 
-        System.out.println("Started task sending...");
-        int i = 0;
-        while (i++ < count) {
+        int amount = 10000;
+        while (num++ < amount) {
+            final int finalNum = num;
+
             String replyQueueName = channel.queueDeclare().getQueue();
             String corrId = java.util.UUID.randomUUID().toString();
+
             AMQP.BasicProperties props = new AMQP.BasicProperties()
                     .builder()
                     .correlationId(corrId)
                     .replyTo(replyQueueName)
                     .build();
-
+            channel.basicPublish("", QUEUE_NAME, props, (finalNum + "").getBytes());
             QueueingConsumer consumer = new QueueingConsumer(channel);
+            channel.basicConsume(replyQueueName, true, consumer);
 
-            channel.basicConsume(replyQueueName, consumer);
-
-            final int finalI = i;
-
-            results.add(executorService.submit(() -> {
+            Callable<BigInteger> task = () -> {
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery();
                 while (!(delivery.getProperties().getCorrelationId().equals(corrId)))
                     delivery = consumer.nextDelivery();
@@ -58,6 +58,7 @@ public class Sender {
 //                }
 //            });
         }
+        System.out.println(amount + " tasks sent");
 
         System.out.println("Listening for results...");
         results.parallelStream().forEach(f -> {
