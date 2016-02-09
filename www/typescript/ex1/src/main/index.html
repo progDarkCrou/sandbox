@@ -6,13 +6,17 @@
 </head>
 <body>
 
-<!--deps:js-->
-<!--endinject-->
 <!--inject:js-->
 <!--endinject-->
-
+<script src="/deps/requirejs/require.js"></script>
 <script>
-    require(['js/index']);
+    requirejs.config({
+        paths: {
+            "jquery": "/deps/jquery/jquery",
+            "angular": "/deps/angular/angular"
+        }
+    });
+    requirejs(['js/index']);
 </script>
 </body>
 </html>

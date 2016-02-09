@@ -6,6 +6,7 @@ var gulp = require('gulp');
 var inject = require('gulp-inject');
 var tsc = require('gulp-tsc');
 var rjs = require('gulp-requirejs-optimize');
+var uglify = require('gulp-uglify');
 
 var sync = require('gulp-sync')(gulp);
 var serve = require('gulp-webserver');
@@ -30,7 +31,7 @@ gulp.task('tsc', function () {
 });
 
 gulp.task('rjs', ['tsc'], function () {
-  return gulp.src('.tmp/compile/**.js').pipe(rjs({
+  return gulp.src('.tmp/compile/**/*.js').pipe(rjs({
     paths: {
       jquery: "empty:",
       angular: "empty:"
@@ -39,13 +40,17 @@ gulp.task('rjs', ['tsc'], function () {
   })).pipe(gulp.dest('.tmp/build/'));
 });
 
+gulp.task('js-compress', ['tsc'], function () {
+  return gulp.src(['.tmp/compile/**/*.js']).pipe(uglify()).pipe(gulp.dest('build/js/'));
+});
+
 gulp.task('js-deps', function () {
   gulp.src(deps.map(function (e) {
     return depsRoot + '/**/' + e;
   })).pipe(gulp.dest('build/deps/'));
 });
 
-gulp.task('js', ['rjs', 'js-deps'], function () {
+gulp.task('js', ['js-compress', 'js-deps'], function () {
   return gulp.src('.tmp/build/**.js').pipe(gulp.dest('build/js/'));
 });
 
@@ -61,7 +66,6 @@ gulp.task('build-js', ['js'], function (cb) {
     ignorePath: 'build',
     name: 'deps'
   })).pipe(gulp.dest('build/'));
-
 });
 
 gulp.task('clean', function () {
