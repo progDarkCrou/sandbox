@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
@@ -27,8 +28,9 @@ import java.util.Properties;
  */
 
 @Configuration
+@EnableWebMvc
 @EnableTransactionManagement(mode = AdviceMode.PROXY, proxyTargetClass = true)
-@EnableJpaRepositories(basePackages = "vorona.andriy.repositories")
+@EnableJpaRepositories
 public class MainConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -53,6 +55,7 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
 
         Properties properties = new Properties();
 
+        properties.setProperty("hibernate.dialect", org.hibernate.dialect.MySQL5InnoDBDialect.class.getName());
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
