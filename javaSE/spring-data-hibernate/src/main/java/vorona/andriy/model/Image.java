@@ -1,5 +1,9 @@
 package vorona.andriy.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Blob;
@@ -13,6 +17,7 @@ public class Image {
     @Id
     private String name;
 
+    @Fetch(FetchMode.SELECT)
     private Blob file;
 
     public Image() {

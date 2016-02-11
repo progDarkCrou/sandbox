@@ -60,7 +60,7 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.cache.provider_class",
                 org.hibernate.cache.ehcache.StrategyRegistrationProviderImpl.class.getName()
         );
@@ -84,29 +84,6 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
         return sessionFactoryBean;
     }
 
-//    @Bean
-//    @Autowired
-//    public Session session(SessionFactory sessionFactory) {
-//        try {
-//            return sessionFactory.getCurrentSession();
-//        } catch (HibernateException e) {
-//            return sessionFactory.openSession();
-//        }
-//    }
-
-//    @Bean
-//    @Autowired
-//    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory, DataSource dataSource) {
-//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-//
-//        transactionManager.setDataSource(dataSource);
-//        transactionManager.setNestedTransactionAllowed(true);
-//        transactionManager.setRollbackOnCommitFailure(true);
-//        transactionManager.afterPropertiesSet();
-//
-//        return transactionManager;
-//    }
-
     @Bean
     @Autowired
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -125,7 +102,7 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setDefaultEncoding("UTF-8");
-        multipartResolver.setMaxInMemorySize(10000000);
+        multipartResolver.setMaxInMemorySize(1000000000);
         return multipartResolver;
     }
 
