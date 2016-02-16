@@ -59,7 +59,7 @@ public class MainController {
     if (image == null) {
       try {
         return ResponseEntity.notFound()
-                .location(new URI(request.getProtocol() + "://" + request.getRemoteHost() + "/allImages"))
+                .location(new URI("http://" + request.getRemoteHost() + "/allImages"))
                 .build();
       } catch (URISyntaxException e) {
         e.printStackTrace();
@@ -71,28 +71,65 @@ public class MainController {
 
     long length = file.length();
 
-    BufferedImage scaledImage;
-    if (todo != null && (todo.equalsIgnoreCase("size") || todo.equalsIgnoreCase("crop") && width != null && height != null)) {
+    BufferedImage resultImage;
+    if (todo != null && width != null && height != null) {
       BufferedImage img = ImageIO.read(new BufferedInputStream(file.getBinaryStream()));
-      scaledImage = new BufferedImage(width, height, img.getColorModel().getTransferType());
-      Graphics2D graphics = scaledImage.createGraphics();
-      graphics.drawImage(img, 0, 0, width, height, 0, 0, width, height, null);
-      graphics.dispose();
+      resultImage = new BufferedImage(width, height, img.getType());
+      Graphics2D graphics = resultImage.createGraphics();
+
+      switch (todo.toLowerCase()) {
+        case "size": {
+          graphics.drawImage(img, 0, 0, width, height, null);
+          graphics.dispose();
+          break;
+        }
+        case "cover": {
+          double initialRatio = ((double) img.getWidth()) / img.getHeight();
+          double destRatio = width.doubleValue() / height.doubleValue();
+          double leftCornerX = 0;
+          double leftCornerY = 0;
+
+          double destWidth = img.getWidth();
+          double destHeight = img.getHeight();
+
+          if (initialRatio > destRatio) {
+            destWidth = img.getHeight() * destRatio;
+            leftCornerX = (img.getWidth() - destWidth) / 2;
+          } else {
+            destHeight = img.getWidth() / destRatio;
+            leftCornerY = (img.getHeight() - destHeight) / 2;
+          }
+
+          resultImage = new BufferedImage(((int) destWidth), ((int) destHeight), BufferedImage.TYPE_INT_RGB);
+          graphics = resultImage.createGraphics();
+
+          graphics.drawImage(img, 0, 0, (int) destWidth, (int) destHeight, (int) leftCornerX,
+                  (int) leftCornerY, (int) (destWidth + leftCornerX), (int) (destHeight + leftCornerY), null);
+          graphics.dispose();
+
+          break;
+        }
+        case "crop": {
+          return null;
+        }
+      }
+
     } else {
-      scaledImage = ImageIO.read(file.getBinaryStream());
+      resultImage = ImageIO.read(file.getBinaryStream());
     }
 
     ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-    ImageIO.write(scaledImage, "jpg", out);
+    ImageIO.write(resultImage, "png", out);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.add("Content-type", "image/jpeg");
+    headers.add("Content-Type", "image/jpeg");
+    headers.add("Cache-Control", "private, max-age=604800");
 
     return new ResponseEntity<>(out.toByteArray(), headers, HttpStatus.FOUND);
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/newImage")
+  @RequestMapping(method = RequestMethod.GET, value = "/allImages")
   @ResponseBody
   public Collection<String> allImages() {
     return imageRepository.findAll().parallelStream().map(Image::getName).collect(Collectors.toList());
