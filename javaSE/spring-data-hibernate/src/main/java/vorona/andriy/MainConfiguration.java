@@ -14,10 +14,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -28,10 +24,9 @@ import java.util.Properties;
  */
 
 @Configuration
-@EnableWebMvc
 @EnableTransactionManagement(mode = AdviceMode.PROXY, proxyTargetClass = true)
 @EnableJpaRepositories
-public class MainConfiguration extends WebMvcConfigurerAdapter {
+public class MainConfiguration {
 
     @Bean
     @Scope("singleton")
@@ -60,13 +55,6 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.cache.provider_class",
-                org.hibernate.cache.ehcache.StrategyRegistrationProviderImpl.class.getName()
-        );
-        properties.setProperty("hibernate.cache.region.factory_class",
-                org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory.class.getName()
-        );
 
         entityManagerFactory.setJpaProperties(properties);
 
@@ -97,13 +85,4 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
 
         return transactionManager;
     }
-
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setDefaultEncoding("UTF-8");
-        multipartResolver.setMaxInMemorySize(1000000000);
-        return multipartResolver;
-    }
-
 }
