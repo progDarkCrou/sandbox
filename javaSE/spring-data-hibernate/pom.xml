@@ -143,5 +143,11 @@
             <version>2.2.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.0.7.Final</version>
+        </dependency>
+
     </dependencies>
 </project>
