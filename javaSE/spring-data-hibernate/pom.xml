@@ -147,6 +147,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>5.0.7.Final</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
