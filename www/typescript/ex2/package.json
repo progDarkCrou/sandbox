@@ -1,0 +1,28 @@
+{
+  "name": "ex2",
+  "version": "0.0.1",
+  "description": "Testing some building tools for TS ans R.js",
+  "main": "app.build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-compile": "tsc",
+    "r-build": "r.js -o build.js"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "crou",
+  "license": "ISC",
+  "dependencies": {
+    "gulp-inject": "^3.0.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-requirejs-optimize": "^0.3.1",
+    "gulp-sync": "^0.1.4",
+    "gulp-tsc": "^1.1.4",
+    "gulp-uglify": "^1.5.2",
+    "gulp-webserver": "^0.9.1"
+  }
+}
