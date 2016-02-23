@@ -14,9 +14,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -28,8 +25,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.PROXY, proxyTargetClass = true)
-@EnableJpaRepositories(basePackages = "vorona.andriy.repositories")
-public class MainConfiguration extends WebMvcConfigurerAdapter {
+@EnableJpaRepositories
+public class MainConfiguration {
 
     @Bean
     @Scope("singleton")
@@ -53,17 +50,11 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
 
         Properties properties = new Properties();
 
+        properties.setProperty("hibernate.dialect", org.hibernate.dialect.MySQL5InnoDBDialect.class.getName());
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.use_sql_comments", "true");
         properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.cache.provider_class",
-                org.hibernate.cache.ehcache.StrategyRegistrationProviderImpl.class.getName()
-        );
-        properties.setProperty("hibernate.cache.region.factory_class",
-                org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory.class.getName()
-        );
 
         entityManagerFactory.setJpaProperties(properties);
 
@@ -81,29 +72,6 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
         return sessionFactoryBean;
     }
 
-//    @Bean
-//    @Autowired
-//    public Session session(SessionFactory sessionFactory) {
-//        try {
-//            return sessionFactory.getCurrentSession();
-//        } catch (HibernateException e) {
-//            return sessionFactory.openSession();
-//        }
-//    }
-
-//    @Bean
-//    @Autowired
-//    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory, DataSource dataSource) {
-//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-//
-//        transactionManager.setDataSource(dataSource);
-//        transactionManager.setNestedTransactionAllowed(true);
-//        transactionManager.setRollbackOnCommitFailure(true);
-//        transactionManager.afterPropertiesSet();
-//
-//        return transactionManager;
-//    }
-
     @Bean
     @Autowired
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -117,13 +85,4 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
 
         return transactionManager;
     }
-
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setDefaultEncoding("UTF-8");
-        multipartResolver.setMaxInMemorySize(10000000);
-        return multipartResolver;
-    }
-
 }

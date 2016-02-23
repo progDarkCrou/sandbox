@@ -11,7 +11,6 @@ import java.util.List;
  * Created by avorona on 28.12.15.
  */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
 
     @Id
