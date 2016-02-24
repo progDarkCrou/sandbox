@@ -17,11 +17,11 @@ var $container = document.createElement('div');
 
 var $startClickingButton = document.createElement('button');
 
-$startClickingButton.innerText = 'Start adding';
+$startClickingButton.innerText = 'Start clicking';
 
 var $stopClickingButton = document.createElement('button');
 
-$stopClickingButton.innerText = 'Stop slicking';
+$stopClickingButton.innerText = 'Stop clicking';
 $stopClickingButton.style.display = 'none';
 
 $container.style.position = 'fixed';
@@ -59,7 +59,7 @@ function startChosing() {
 }
 
 function selectElement(event) {
-    if (event.target.tagName === 'BUTTON') {
+    if (event.target.tagName === 'BUTTON' || event.target.tagName === 'A') {
         event.preventDefault();
         startClicking(event.target);
     }
