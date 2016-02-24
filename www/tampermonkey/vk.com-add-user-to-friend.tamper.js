@@ -41,81 +41,107 @@ document.body.insertBefore(document.body.children[0], $container);
 var waitingForClick = [];
 
 function stopClicking() {
-	waitingForClick.forEach(function (e) {
-		clearTimeOut(e);
-		removeFrom(waitingForClick, e);
-	});
+    waitingForClick.forEach(function(e) {
+        clearTimeout(e);
+    });
+    waitingForClick.length = 0;
+    if (waitingForClick.length) {
+        throw new Error('Failed to clear all clickers, left ' + waitingForClick);
+    } else {
+        console.log('Clicking stoped');
+    }
+    $stopClickingButton.style.display = 'none';
 }
 
 function startChosing() {
-	document.onmousedown = selectElement;
+    // document.onmousedown = selectElement;
+    document.onmousedown = selectElement;
 }
 
 function selectElement(event) {
-	if (event.target.tagName === 'BUTTON') {
-		event.preventDefault();
-		startClicking();
-	}
-	
-	document.onmousedown = null;
+    if (event.target.tagName === 'BUTTON') {
+        event.preventDefault();
+        startClicking(event.target);
+    }
+
+    document.onmousedown = null;
 }
 
 var defaultCaptchaWaiting = 5000;
 var defaultElementAmount = 40;
+var defaultTimeout = 2000;
 
 function startClicking(exampleButton) {
-	var buttons = document.querySelectorAll(getSelector(exampleButton));
+    if (!exampleButton) {
+        throw new Error('Illegal example element, Got ' + exampleButton);
+    }
+    var selector = getSelector(exampleButton);
 
-	buttons = buttons.slice(0, defaultElementAmount);
+    console.log('Selector for finding - ' + selector);
 
-	buttons.forEach(click);
+    var buttons = document.querySelectorAll(selector);
 
-	$stopClickingButton.style.display = 'inline-block';
+    buttons = Array.prototype.filter.call(buttons, function(button) {
+        return button.innerText === exampleButton.innerText && !button.attributes.style;
+    }).slice(0, defaultElementAmount);
+
+    console.log('Finded ' + buttons.length + ' the buttons to click');
+
+    click(buttons[0], buttons);
+
+    $stopClickingButton.style.display = 'inline-block';
 }
 
-function click(button) {
-	if (isCaptcha()) {
-		setTimeout(click.bind(null, button));
-	} else {
-		button.click();
-	}
+function click(button, buttonsArray) {
+    var index = buttonsArray.indexOf(button);
+    var nextButton = buttonsArray[index + 1];
+    waitingForClick.push(setTimeout(function() {
+        if (isCaptcha()) {
+            console.log('Clicker ' + index + ' Waiting for captcha exit');
+            click(button, buttonsArray);
+        } else {
+            button.click();
+            console.log('Clicker ' + index + ' clicked successful');
+            if (nextButton) {
+                click(nextButton, buttonsArray);
+            } else {
+                alert('Clicking ended');
+                $stopClickingButton.click();
+            }
+        }
+    }, defaultTimeout));
 }
 
 function isCaptcha() {
-	var captcha = document.querySelectorAll('#box_layer_wrap #box_layer .box_layout .box_body .captcha');
-	return captcha && captcha.length && true || false;
+    var captcha = document.querySelectorAll('#box_layer_wrap #box_layer .box_layout .box_body .captcha');
+    return captcha && captcha.length ? true : false;
 }
 
 //==== Utils 
-
 function getSelector(elem) {
-	if (elem === document.body) {
-		return '';
-	}
+    if (!elem) {
+        throw new Error('Illegal element to get selector. Got ' + elem);
+    }
 
-	if (!elem) {
-		return null;
-	}
+    if (elem === document.body) {
+        return '';
+    }
 
-	if (elem ) {
+    if (elem.classList.length) {
+        return getSelector(elem.parentElement) + ' .' + Array.prototype.reduce.call(elem.classList, function(a, b) {
+            return a + '.' + b;
+        });
+    } else if (elem.id) {
+        return getSelector(elem.parentElement) + ' #' + elem.id;
+    }
 
-	}
-
-	if (elem.id) {
-		return getSelector(elem.parentElement) + ' #' + elem.id;
-	} else if (elem.classList.length) {
-		return getSelector(elem.parentElement) + ' .' + Array.prototype.reduce.call(elem.classList, function (a, b) {
-			return a + '.' b;
-		});
-	}
-	
-	return elem.tagName.toLowerCase();
+    return elem.tagName.toLowerCase();
 }
 
 function removeFrom(array, elem) {
-	var index = array.indexOf(elem);
-	if (index > -1) {
-		array.splice(index, 1);
-		return array;
-	}
+    var index = array.indexOf(elem);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
 }

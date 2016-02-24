@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="fragment" content="!" />
     <title>Coffee player</title>
     <!-- vendor:css -->
     <!-- endinject -->
@@ -10,21 +11,34 @@
     <!-- endinject -->
 </head>
 
-<body>
-    <div class="video-container">
-        <video id="player"
-            src="https://16-lvl3-pdl.vimeocdn.com/01/1559/1/32796535/74541999.mp4?expires=1447087477&token=0e0f56cc3b834325ad2ad">
-        </video>
-        <a href="#"
-            class="play-pause">Play</a>
-        <div class="controlls-panel">
-            <div class="progress-bar"></div>
-            <div class="controll-bar">
-                <div class="play-pause"></div>
-                <div class="time-info">
-                    <div class="current-time">00:00</div>
-                    <div class="divider">/</div>
-                    <div class="duration">00:00</div>
+<body data-ng-app="application" data-ng-controller="MainCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <form>
+                    <input type="text" class="form-control" data-ng-model="videoSrc">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div class="video-container full-width">
+                    <video id="player" src="{{video}}" class="full-width">
+                    </video>
+                    <a href="#" class="play-pause">Play</a>
+                    <div class="controlls-panel full-width">
+                        <div class="progress-bar full-width">
+                            <div class="progress-line full-height"></div>
+                        </div>
+                        <div class="controll-bar full-width">
+                            <!-- <div class="play-pause"></div> -->
+                            <div class="time-info full-height">
+                                <div class="current-time">00:00</div>
+                                <div class="divider">/</div>
+                                <div class="duration">00:00</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

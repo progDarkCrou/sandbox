@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.video-container {
+  margin: auto;
+  position: relative;
+  background-color: black;
+  
+  video {
+    cursor: pointer;
+  }
+  
+  a.play-pause {
+    display: block;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    
+    transition: 0.1s;
+    visibility: visible;
+    opacity: 1;
+    
+    &.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.1s;
+    }
+  }
+  
+  .controlls-panel {
+    @controlls-panel-height: 40px;
+    @progress-line-height: @controlls-panel-height * 0.3;
+    @time-pannel-height: @controlls-panel-height - @progress-line-height;
+    
+    width: 100%;
+    height: @controlls-panel-height;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    .progress-bar {
+      @bc: #00D859;
+      height: @progress-line-height;
+      position: absolute;
+      background-color: tint(@bc, 50%);
+      cursor: pointer;
+      .progress-line {
+        background-color: @bc;
+      }
+    }
+
+    .controll-bar {
+      height: @time-pannel-height;
+      background-color: rgba(255,255,255, 0.3);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      
+      * {
+        display: inline-block;
+      }
+      
+      .time-info {
+        background-color: rgba(255, 0,0, 0.3);
+        width: auto;
+        color: white;
+        font-size: @time-pannel-height * 0.9;
+        vertical-align: middle;
+        line-height: @time-pannel-height;
+        padding: 0 3px;
+      }
+    }
+  }
+}

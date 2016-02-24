@@ -3,10 +3,7 @@ package com.andriy.example3;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
 import java.util.concurrent.*;
 
 /**
@@ -15,8 +12,8 @@ import java.util.concurrent.*;
 public class Sender {
     public static final String QUEUE_NAME = "rpc_queue_2";
 
-    public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
-        int num = 0;
+    public static void main(String[] args) throws IOException, TimeoutException, InterruptedException, CloneNotSupportedException {
+        int count = 10000;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
@@ -25,9 +22,7 @@ public class Sender {
 
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        Map<Integer, Future<BigInteger>> results = new HashMap<>();
-
+        LinkedList<Future<FibResult>> results = new LinkedList<>();
 
         System.out.println("Sender started");
         System.out.println("Start sending tasks...");
@@ -50,27 +45,25 @@ public class Sender {
 
             Callable<BigInteger> task = () -> {
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-
-                while (!delivery.getProperties().getCorrelationId().equals(corrId)) {
+                while (!(delivery.getProperties().getCorrelationId().equals(corrId)))
                     delivery = consumer.nextDelivery();
-                }
+                return new FibResult(new String(delivery.getBody()), finalI);
+            }));
 
-                String res = new String(delivery.getBody());
-
-                return new BigInteger(res);
-            };
-
-            results.put(num, executorService.submit(task));
+            channel.basicPublish("", QUEUE_NAME, props, ("" + finalI).getBytes());
+//            executorService.submit(() -> {
+//                try {
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
         }
         System.out.println(amount + " tasks sent");
 
-        executorService.shutdown();
-
-        float start = System.nanoTime();
-
-        results.entrySet().parallelStream().forEach(res -> {
+        System.out.println("Listening for results...");
+        results.parallelStream().forEach(f -> {
             try {
-                System.out.println("Result: fib(" + res.getKey() + ") = " + res.getValue().get());
+                System.out.println(f.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -78,10 +71,7 @@ public class Sender {
             }
         });
 
-        float delta = System.nanoTime() - start;
-
-        System.out.println("Process take: " + Duration.ofNanos((long) delta).getSeconds() + "s");
-
+        executorService.shutdown();
         channel.close();
         connection.close();
     }

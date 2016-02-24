@@ -1,4 +1,6 @@
 //Configs
+var bowerFile = 'bower.json';
+
 var appSrc = 'app';
 var appCssSrc = appSrc + '/css/';
 var appJsSrc = appSrc + '/js/';
@@ -148,5 +150,4 @@ gulp.task('wiredep', ['js', 'css', 'html', 'json', 'coffee', 'less'], function(c
 gulp.task('tmp', gulpSync.sync(['clean', 'wiredep']));
 
 gulp.task('watch', function() {
-  setUpWatch([appSrc + '/**/*'], ['tmp'])
-});
+  setUpWatch([appSrc + '/**/*', bowerFile], ['tmp']) });
