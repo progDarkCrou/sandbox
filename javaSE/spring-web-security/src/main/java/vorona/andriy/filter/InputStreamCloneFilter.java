@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by avorona on 30.12.15.
  */
 @Component
-@Order(-1)
+@Order(-10000000)
 public class InputStreamCloneFilter implements Filter {
 
     @Override
@@ -23,7 +23,6 @@ public class InputStreamCloneFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         filterChain.doFilter(new InputStreamCloneServletRequestWrapper((HttpServletRequest) servletRequest), servletResponse);
-//        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

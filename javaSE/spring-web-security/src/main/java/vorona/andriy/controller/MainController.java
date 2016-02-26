@@ -1,5 +1,8 @@
 package vorona.andriy.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +25,8 @@ public class MainController {
 
     @RequestMapping(value = "/sayhello", method = RequestMethod.GET)
     @ResponseBody
-    public String hello(UserDetails userDetails) {
-        return "Hello " + userDetails.getUsername();
+    @PreAuthorize("hasAuthority('USER')")
+    public String hello(Authentication authentication) {
+        return "Hello " + authentication.getName();
     }
 }
