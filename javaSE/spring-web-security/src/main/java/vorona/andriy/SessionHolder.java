@@ -1,5 +1,6 @@
 package vorona.andriy;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Map;
  * Created by avorona on 01.03.16.
  */
 @Service
+@Scope("singleton")
 public class SessionHolder {
 
     private static int sessionIdLength = 26;
@@ -23,8 +25,8 @@ public class SessionHolder {
         StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < sessionIdLength; i++) {
-            int offsetToAdd = Math.round(Math.random()) == 0? 'a': 'A';
-            builder.append(((int) (Math.random() * 26)) + offsetToAdd);
+            char offsetToAdd = Math.round(Math.random()) == 0? 'a': 'A';
+            builder.append(((char) (Math.random() * 26)) + offsetToAdd);
         }
 
         String sessionId = builder.toString();
