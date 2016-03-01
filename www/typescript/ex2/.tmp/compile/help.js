@@ -18,6 +18,6 @@ var Help;
             console.log("My name is " + this.getFullName() + ', and I say you ' + (text ? text : ' hello!!!'));
         };
         return Person;
-    })();
+    }());
     Help.Person = Person;
 })(Help || (Help = {}));

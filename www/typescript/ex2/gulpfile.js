@@ -23,7 +23,7 @@ var deps = [
 
 gulp.task('tsc', function () {
   return gulp.src(['src/main/js/**/*.ts', 'typings/**/*.d.ts']).pipe(tsc({
-    module: "commonjs",
+    module: "system",
     target: "es5",
     sourceMap: false,
     rootDir: "src/main/js/",
