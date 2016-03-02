@@ -16,13 +16,13 @@
     <script>
         System.config({
             packages: {
-                app: {
+                ".tmp": {
                     format: 'register',
                     defaultExtension: 'js'
                 }
             }
         });
-        System.import('app/main')
+        System.import('.tmp/main')
                 .then(null, console.error.bind(console));
     </script>
 </head>
