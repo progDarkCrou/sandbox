@@ -8,12 +8,41 @@ import {NgFor} from 'angular2/common';
   directives: [NgFor]
 })
 export class AppComponent implements OnInit {
-  elements:any[];
+
+  newHero: Hero = {};
+
+  selectedHero: Hero;
+
+  heroes:Hero[];
+
+  addNewHero() {
+    if (this.newHero.name && this.newHero.surname) {
+      this.heroes.push(this.newHero);
+      this.newHero = {};
+    }
+  }
+
+  selectHero(hero: Hero) {
+    this.selectedHero = hero;
+  }
 
   ngOnInit():any {
-    this.elements = [
-      1, 2, 3, 4
-    ];
     console.log('Hello from the app.component');
+    this._initHeroes();
   }
+
+  private _initHeroes() {
+    this.heroes = [
+      {
+        name: "Magenta",
+        surname: "Clara"
+      }
+    ];
+  }
+}
+
+interface Hero {
+  name?: string;
+  surname?: string;
+  age?: number;
 }

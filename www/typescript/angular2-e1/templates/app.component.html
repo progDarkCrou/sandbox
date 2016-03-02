@@ -1,5 +1,46 @@
-<ul class="hero-list">
-    <li *ngFor="#elem of elements"
-        [innerText]="elem"
-        class="hero-list_item"></li>
+<ul class="list-group"
+    *ngIf="heroes">
+    <li *ngFor="#hero of heroes; #id = index"
+        class="list-group-item"
+        [ngClass]="{'active': selectedHero === hero}"
+        (click)="selectHero(hero)">
+        <a href="" class=""></a>
+        <span [innerText]="id"></span>
+        <span>{{hero.name + ' ' + hero.surname}}</span>
+        <span *ngIf="hero.age">{{hero.age}}</span>
+    </li>
 </ul>
+
+<form onsubmit="return;"
+      *ngIf="selectedHero"
+      class="form form-horizontal">
+    <label>
+        Hero edit
+        <input type="text"
+               class="form-control form-control-sm"
+               [(ngModel)]="selectedHero.name">
+    </label>
+</form>
+
+<form (ngSubmit)="addNewHero()"
+      *ngIf="newHero"
+      action=""
+      class="form">
+    <div>New hero</div>
+    <label>
+        Name
+        <input type="text"
+               class="form-control form-control-sm"
+               [(ngModel)]="newHero.name">
+    </label>
+
+    <label>
+        Surname
+        <input type="text"
+               class="form-control form-control-sm"
+               [(ngModel)]="newHero.surname">
+    </label>
+    <input type="submit"
+           class="btn btn-default"
+           value="Add hero">
+</form>
