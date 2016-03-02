@@ -1,5 +1,13 @@
 {
   "port": 8000,
-  "files": ["./.tmp/**/*.{html,htm,css,js}", "./templates/**/*.html"],
-  "server": { "baseDir": "./" }
+  "files": [
+    "./.tmp/**/*.{html,htm,css,js}",
+    "./index.html"
+  ],
+  "server": {
+    "baseDir": "./",
+    "routes": {
+      "/": "./.tmp"
+    }
+  }
 }

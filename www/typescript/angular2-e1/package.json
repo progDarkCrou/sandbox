@@ -2,14 +2,16 @@
   "name": "angular2-e1",
   "version": "0.0.1",
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" \"npm run watch-less\"",
+    "start": "concurrently \"npm run templates\" \"npm run less\"  \"npm run tsc:w\" \"npm run lite\" \"npm run watch-less\" \"npm run watch-templates\"",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "lite": "lite-server -c server.json",
     "typings": "typings",
     "postinstall": "typings install",
     "less": "lessc app/styles/main.less -ru .tmp/main.css",
-    "watch-less": "watch-run -p 'app/styles/**/*.less' npm run less"
+    "templates": "copyfiles -u 1 'app/**/*.html' .tmp/",
+    "watch-less": "watch-run -p 'app/styles/**/*.less' npm run less",
+    "watch-templates": "watch-run -p 'app/**/*.html' npm run templates"
   },
   "license": "ISC",
   "dependencies": {
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "copyfiles": "^0.2.1",
     "less": "^2.6.0",
     "lite-server": "^2.1.0",
     "typescript": "^1.8.2",
