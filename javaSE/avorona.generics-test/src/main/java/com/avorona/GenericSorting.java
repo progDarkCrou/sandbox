@@ -45,10 +45,10 @@ public class GenericSorting {
 
     static class SharedUtils {
         public static <T, U extends Comparable> Function<T, U> getComparableKeyExtractor(Class<T> clazz,
-                                                                                                      String keyName) {
+                                                                                         String keyName) {
             try {
                 Method getKeyMethod = clazz.getMethod(keyName);
-                if  (!Comparable.class.isAssignableFrom(getKeyMethod.getReturnType())) {
+                if (!Comparable.class.isAssignableFrom(getKeyMethod.getReturnType())) {
                     throw new IllegalArgumentException("Can return extractor key which return type is instance of " +
                             "Comparable");
                 }
@@ -59,10 +59,9 @@ public class GenericSorting {
                     public U apply(T t) {
                         try {
                             return (U) getKeyMethod.invoke(t);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                            return (U) Boolean.FALSE;
+                        } catch (IllegalAccessException | InvocationTargetException ignored) {
                         }
+                        return null;
                     }
                 };
             } catch (NoSuchMethodException e) {
@@ -89,7 +88,7 @@ public class GenericSorting {
         // ~ After sorting
         System.out.println(String.format("Person list after sorting: %s", personList));
 
-        Function<Person, Comparable> keyExtractor = SharedUtils.getComparableKeyExtractor(Person.class, "getSurname");
+        Function<Person, Comparable> keyExtractor = SharedUtils.getComparableKeyExtractor(Person.class, "getKira");
 
         personComparator = Comparator.comparing(keyExtractor);
 
