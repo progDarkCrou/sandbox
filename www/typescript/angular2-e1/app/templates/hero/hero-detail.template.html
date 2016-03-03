@@ -1,0 +1,10 @@
+<form onsubmit="return;"
+      *ngIf="selectedHero"
+      class="form form-horizontal">
+    <label>
+        Hero edit
+        <input type="text"
+               class="form-control form-control-sm"
+               [(ngModel)]="selectedHero.name">
+    </label>
+</form>
