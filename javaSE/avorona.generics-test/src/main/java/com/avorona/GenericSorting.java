@@ -90,8 +90,8 @@ public class GenericSorting {
 
         Function<Person, Comparable> keyExtractor = SharedUtils.getComparableKeyExtractor(Person.class, "getName");
 
-        personComparator = Comparator.nullsLast(Comparator.<Person, Comparable>comparing(keyExtractor)); //Will compile
-        // without explicit type reference, but it is added for more code clarity
+        //Will compile without explicit type reference, but it is added for more code clarity
+        personComparator = Comparator.nullsLast(Comparator.<Person, Comparable>comparing(keyExtractor));
 
         personList = personList.stream()
                 .sorted(personComparator)
