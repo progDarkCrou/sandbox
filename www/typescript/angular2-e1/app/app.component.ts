@@ -1,10 +1,10 @@
-import {Component} from 'angular2/core';
-import {OnInit} from 'angular2/core';
-import {NgFor} from 'angular2/common';
+import {Component} from "angular2/core";
+import {OnInit} from "angular2/core";
+import {NgFor} from "angular2/common";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: '/templates/app.component.html',
+  selector: "my-app",
+  templateUrl: "/templates/app.component.html",
   directives: [NgFor]
 })
 export class AppComponent implements OnInit {
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit():any {
-    console.log('Hello from the app.component');
+    console.log("Hello from the app.component");
     this._initHeroes();
   }
 
