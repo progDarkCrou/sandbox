@@ -10,6 +10,9 @@ public class WildcardCollection {
     static class Lawyer extends GenericSorting.Person {
     }
 
+    static class SubLawyer extends Lawyer {
+    }
+
     public static void main(String[] args) {
         List<? extends GenericSorting.Person> list = new ArrayList<>();
 //        Has error
@@ -24,5 +27,6 @@ public class WildcardCollection {
 //        Works fine for Covariances
         personList.add(new Lawyer());
         personList.add(new GenericSorting.Person());
+        personList.add(new SubLawyer()); //Capture even 3-d layer extension
     }
 }

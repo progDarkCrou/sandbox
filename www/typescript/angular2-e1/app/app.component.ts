@@ -8,7 +8,6 @@ import {NgFor} from "angular2/common";
   directives: [NgFor]
 })
 export class AppComponent implements OnInit {
-
   newHero: Hero = {};
 
   selectedHero: Hero;
