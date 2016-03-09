@@ -44,8 +44,8 @@ public class GenericSorting {
     }
 
     static class SharedUtils {
-        public static <T, U extends Comparable> Function<T, U> getComparableKeyExtractor(Class<T> clazz,
-                                                                                         String keyName) {
+        public static <T, U extends Comparable<?>> Function<T, U> getComparableKeyExtractor
+                (Class<T> clazz, String keyName) {
             try {
                 Method getKeyMethod = clazz.getMethod(keyName);
                 if (!Comparable.class.isAssignableFrom(getKeyMethod.getReturnType())) {
@@ -59,9 +59,9 @@ public class GenericSorting {
                     public U apply(T t) {
                         try {
                             return (U) getKeyMethod.invoke(t);
-                        } catch (IllegalAccessException | InvocationTargetException ignored) {
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            throw new RuntimeException(e);
                         }
-                        return null;
                     }
                 };
             } catch (NoSuchMethodException e) {
@@ -75,8 +75,9 @@ public class GenericSorting {
 
         personList.add(new Person());
         personList.add(new Person("Bohn", "Travolta"));
-        personList.add(new Person("Aarah", "Conor"));
-        personList.add(new Person("Cusan", "Miller"));
+        personList.add(new Person("Aarah", "Bonor"));
+        personList.add(new Person("Cusan", "Ailler"));
+        personList.add(new Person("Milah", null));
 
         // ~ Before sorting
         System.out.println(String.format("Person list before sorting: %s", personList));
@@ -88,13 +89,15 @@ public class GenericSorting {
         // ~ After sorting
         System.out.println(String.format("Person list after sorting: %s", personList));
 
-        Function<Person, Comparable> keyExtractor = SharedUtils.getComparableKeyExtractor(Person.class, "getName");
+        Function<Person, Comparable> keyExtractor = SharedUtils.getComparableKeyExtractor(Person.class,
+                "getSurname");
 
         //Will compile without explicit type reference, but it is added for more code clarity
-        personComparator = Comparator.nullsLast(Comparator.<Person, Comparable>comparing(keyExtractor));
+        @SuppressWarnings("unchecked")
+        Comparator<Person> comparator = Comparator.comparing(keyExtractor, Comparator.nullsLast(Comparable::compareTo));
 
         personList = personList.stream()
-                .sorted(personComparator)
+                .sorted(comparator)
                 .collect(Collectors.toList());
 
         System.out.println(String.format("Person list after second sorting: %s", personList));
