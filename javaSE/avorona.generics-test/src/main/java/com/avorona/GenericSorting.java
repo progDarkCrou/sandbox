@@ -44,7 +44,7 @@ public class GenericSorting {
     }
 
     static class SharedUtils {
-        public static <T, U extends Comparable<?>> Function<T, U> getComparableKeyExtractor
+        public static <T, U extends Comparable<? super U>> Function<T, U> getComparableKeyExtractor
                 (Class<T> clazz, String keyName) {
             try {
                 Method getKeyMethod = clazz.getMethod(keyName);
