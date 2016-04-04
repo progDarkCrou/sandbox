@@ -1,0 +1,9 @@
+{
+	"server": true,
+	"bootstrap": true,
+	"advertise_addr": "192.168.50.10",
+	"ports": {
+		"dns": 53	
+	},
+	"bind_addr": "0.0.0.0"
+}
