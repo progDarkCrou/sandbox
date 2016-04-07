@@ -18,24 +18,36 @@ done
 
 TMP_CONFIG=""
 
+array_index=1;
+
 if [[ "$#" -ge 2 ]]; then
-	TMP_CONFIG="$(printf '[SAN]\nsubjectAltName=IP:'$2'\n')"
+	# TMP_CONFIG="$(printf '[alt_names]\n')"
+	TMP_CONFIG="\nsubjectAltName = "
 	
-	for ip in ${@:3}; do
-		TMP_CONFIG="$TMP_CONFIG $(printf '\nsubjectAltName=IP:'$ip)"
+	for ip in ${@:2}; do
+		TMP_CONFIG="$TMP_CONFIG""IP:$ip"
+		if [[ $array_index -lt $(($# - 1)) ]]; then
+			TMP_CONFIG="$TMP_CONFIG,"
+		fi
+		array_index=$(($array_index + 1))
 	done
 
 	echo "*** Alternative names will be added to the config ***"
-	echo "$TMP_CONFIG"
+	printf "$TMP_CONFIG"
+fi
+
+CONFIG=$(sed 's/\#\s*x509_extensions\s*=\s*v3_req/x509_extensions = v3_req/;' $CONFIG_PATH | sed 's/\[ v3_req \]/\[ v3_req \]\n'"$TMP_CONFIG"'/')
+
+if [[ -z "$CONFIG" ]]; then
+	exit 1;
 fi
 
 echo
+echo
 echo "*** Generating new key... ***"
 
-CONFIG="$(sudo cat $CONFIG_PATH)$(printf '\n'$TMP_CONFIG)"
+openssl genrsa -out "$NAME-priv-key.pem" 2048; 
+openssl req -subj "/CN=$NAME" -new -key "$NAME-priv-key.pem" -out "$NAME.csr" -config <(echo "$CONFIG"); 
+openssl x509 -req -days 1825 -in "$NAME.csr" -CA ca.pem -CAkey ca-priv-key.pem -CAcreateserial -out "$NAME-cert.pem" -extensions v3_req -extfile <(echo "$CONFIG");
 
-openssl genrsa -out "$NAME-priv-key.pem" 2048 > /dev/null; 
-openssl req -subj "/CN=$NAME" -new -key "$NAME-priv-key.pem" -out "$NAME.csr" -reqexts SAN -config <(echo "$CONFIG") > /dev/null; 
-openssl x509 -req -days 1825 -in "$NAME.csr" -CA ca.pem -CAkey ca-prib-key.pem -CAcreateserial -out "$NAME-cert.pem" -extensions v3_req -extfile <(echo "$CONFIG") > /dev/null;
-
-echo "*** Generation keys ended. ***"
+echo "*** Generation keys ended ***"
