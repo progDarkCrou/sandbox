@@ -9,12 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.httpBasic();
-//        http.headers()
-//                .defaultsDisabled()
-//                .contentTypeOptions().and()
-//                .httpStrictTransportSecurity().and();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic();
+        http.headers()
+                .defaultsDisabled()
+                .contentTypeOptions().and()
+                .httpStrictTransportSecurity().and();
+        http.authorizeRequests().anyRequest().authenticated();
+    }
 }
