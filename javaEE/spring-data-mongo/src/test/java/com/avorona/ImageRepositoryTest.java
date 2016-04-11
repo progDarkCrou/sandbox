@@ -23,15 +23,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ImageRepositoryTest {
 
     @Autowired
-    private ImageRepository repository;
+    protected ImageRepository repository;
 
-    private int generatedCount = 10;
+    protected final int generatedCount = 10;
 
     @Before
     public void before() {
         repository.deleteAll();
         for (int i = 0; i < generatedCount; i++) {
-            Image image = new Image("title" + LocalDateTime.now().getNano(), "JPG");
+            Image image = dummyImage();
             repository.save(image);
         }
     }
@@ -50,5 +50,10 @@ public class ImageRepositoryTest {
     @Test
     public void findContainsTitle() {
         assertThat(repository.findContainsTitle(".*title.*").size()).isEqualTo(generatedCount);
+    }
+
+
+    public static Image dummyImage() {
+        return new Image("title" + LocalDateTime.now().getNano(), "JPG");
     }
 }

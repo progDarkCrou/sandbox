@@ -15,4 +15,7 @@ public interface ImageRepository extends MongoRepository<Image, Long> {
 
     @Query("{title: {$regex: ?0}}")
     List<Image> findContainsTitle(String title);
+
+    @Query("{originalImage: {$ne: null}}")
+    List<Image> findByOriginalImage();
 }

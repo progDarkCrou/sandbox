@@ -14,7 +14,7 @@ public class Image {
     @Id
     private BigInteger id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Image originalImage;
 
     private String title;
