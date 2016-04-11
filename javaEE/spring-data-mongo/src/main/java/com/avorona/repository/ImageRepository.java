@@ -18,4 +18,7 @@ public interface ImageRepository extends MongoRepository<Image, Long> {
 
     @Query("{originalImage: {$ne: null}}")
     List<Image> findByOriginalImage();
+
+    @Query("{originalImage: {$ne: null}}")
+    void deleteWithOriginalImage();
 }

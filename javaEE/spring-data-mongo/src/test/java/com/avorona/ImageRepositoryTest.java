@@ -18,14 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by avorona on 11.04.16.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
-public class ImageRepositoryTest {
-
-    @Autowired
-    protected ImageRepository repository;
-
-    protected final int generatedCount = 10;
+public class ImageRepositoryTest extends ImageRepositoryTestBase {
 
     @Before
     public void before() {
@@ -50,10 +43,5 @@ public class ImageRepositoryTest {
     @Test
     public void findContainsTitle() {
         assertThat(repository.findContainsTitle(".*title.*").size()).isEqualTo(generatedCount);
-    }
-
-
-    public static Image dummyImage() {
-        return new Image("title" + LocalDateTime.now().getNano(), "JPG");
     }
 }

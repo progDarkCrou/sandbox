@@ -1,6 +1,10 @@
 package com.avorona.entity;
 
+import org.springframework.data.annotation.*;
+import org.springframework.data.annotation.Version;
+
 import javax.persistence.*;
+import javax.persistence.Id;
 import javax.persistence.metamodel.StaticMetamodel;
 import java.math.BigInteger;
 
@@ -58,5 +62,14 @@ public class Image {
 
     public void setOriginalImage(Image originalImage) {
         this.originalImage = originalImage;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", extension='" + extension + '\'' +
+                '}';
     }
 }
