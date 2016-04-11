@@ -69,7 +69,7 @@ function selectElement(event) {
 
 var defaultCaptchaWaiting = 5000;
 var defaultElementAmount = 40;
-var defaultTimeout = 2000;
+var defaultTimeout = 1000;
 
 function startClicking(exampleButton) {
     if (!exampleButton) {
