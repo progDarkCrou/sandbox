@@ -1,11 +1,9 @@
 package com.avorona.entity;
 
-import org.springframework.data.annotation.*;
-import org.springframework.data.annotation.Version;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.metamodel.StaticMetamodel;
+import javax.persistence.ManyToOne;
 import java.math.BigInteger;
 
 /**
@@ -68,6 +66,7 @@ public class Image {
     public String toString() {
         return "Image{" +
                 "id=" + id +
+                ", originalImage=#" + System.identityHashCode(originalImage) +
                 ", title='" + title + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';

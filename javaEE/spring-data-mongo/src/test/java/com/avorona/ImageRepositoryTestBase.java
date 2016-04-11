@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Ignore
 public class ImageRepositoryTestBase {
 
-    final int generatedCount = 10;
+    final int generatedCount = 1000000;
 
     @Autowired
     protected ImageRepository repository;
