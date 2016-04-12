@@ -29,14 +29,8 @@ page.open(address, function(status) {
       };
 
       if ($ || window.$) {
-        $('link[href]').filter(function(n, elem) {
-          var href = elem.attributes.href.value;
-          return !!href? !urlPattern.test(href): false;
-        }).each(urlCompletion('href', config));
-        $('script[src]').filter(function(n, elem) {
-          var src = elem.attributes.src.value;
-          return !!src? !urlPattern.test(src): false;
-        }).each(urlCompletion('src', config));
+        $('link[href]').each(urlCompletion('href', config));
+        $('script[src]').each(urlCompletion('src', config));
       }
     }, urlPattern.source, urlCompletion.toString());
     console.log(page.content);
@@ -46,7 +40,7 @@ page.open(address, function(status) {
 
 function urlCompletion(attrName, config) {
   return function (n, elem) {
-    var attr = elem[attrName];
+    var attr = elem.attributes[attrName].value;
     if (attr && !urlPattern.test(attr)) {
       elem[attrName] = config.protocol + '//' + config.host + (attr.charAt(0) === '/'?'':'/') + attr;
     }
