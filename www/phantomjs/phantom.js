@@ -19,22 +19,24 @@ page.open(address, function(status) {
     console.log('Failed to load the address: ' + address);
     phantom.exit(1);
   } else {
-    page.evaluate(function (urlPatternString, urlCompletionFunc) {
-      eval(urlCompletionFunc);
-      var urlPattern = new RegExp(urlPatternString);
+    setTimeout(function () {
+      page.evaluate(function (urlPatternString, urlCompletionFunc) {
+        eval(urlCompletionFunc);
+        var urlPattern = new RegExp(urlPatternString);
 
-      var config = {
-        host: window.location.host,
-        protocol: window.location.protocol
-      };
+        var config = {
+          host: window.location.host,
+          protocol: window.location.protocol
+        };
 
-      if ($ || window.$) {
-        $('link[href]').each(urlCompletion('href', config));
-        $('script[src]').each(urlCompletion('src', config));
-      }
-    }, urlPattern.source, urlCompletion.toString());
-    console.log(page.content);
-    phantom.exit(0);
+        if ($ || window.$) {
+          $('link[href]').each(urlCompletion('href', config));
+          $('script').remove();
+        }
+      }, urlPattern.source, urlCompletion.toString());
+      console.log(page.content);
+      phantom.exit(0);
+    }, 3 * 1000)
   }
 });
 
