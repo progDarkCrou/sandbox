@@ -1,20 +1,33 @@
 package com.avorona.web;
 
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import java.time.Instant;
 
 /**
  * Created by avorona on 12.04.16.
  */
 
-@Entity
+@Document
 public class Image {
+
     @Id
     private BigInteger id;
 
+    @NotNull
     private byte[] data;
+
+    @NotNull
     private String title;
+
+    @NotNull
+    private String extension;
+
+    @NotNull
+    private Instant dateCreated;
 
     public Image() {
     }
@@ -41,5 +54,21 @@ public class Image {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Instant dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }
