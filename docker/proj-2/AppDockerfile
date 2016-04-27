@@ -1,5 +1,0 @@
-FROM java:8
-WORKDIR /home/app/
-COPY ["app.jar", "/home/app/app.jar"]
-ENV app.port 8080
-ENTRYPOINT ["java", "-Dserver.port=${app.port}","-jar","app.jar", "--spring.profiles.active=dev"]
