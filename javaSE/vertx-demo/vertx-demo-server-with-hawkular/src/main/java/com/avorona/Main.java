@@ -25,7 +25,7 @@ public class Main {
         JoinConfig joinConfig = new JoinConfig()
                 .setMulticastConfig(new MulticastConfig().setEnabled(false));
 
-        String joinAddress = System.getProperty("cluster.join");
+        String joinAddress = System.getenv("CLUSTER_JOIN");
         if (joinAddress != null) {
             TcpIpConfig tcpIpConfig = new TcpIpConfig()
                     .addMember(joinAddress)
@@ -44,8 +44,8 @@ public class Main {
         HazelcastClusterManager clusterManager = new HazelcastClusterManager(hazelcastInstance);
 
         VertxHawkularOptions metrics = new VertxHawkularOptions()
-                .setHost("127.0.0.1")
-                .setPort(8080)
+                .setHost(System.getenv("HAWKULAR_HOST"))
+                .setPort(Integer.valueOf(System.getenv("HAWKULAR_PORT")))
                 .setEnabled(true)
                 .setMetricsBridgeAddress("metrics")
                 .setMetricsBridgeEnabled(true);
@@ -65,7 +65,7 @@ public class Main {
                 CalculateRequestHandler handler = new CalculateRequestHandler(hazelcastInstance, vertx);
                 router.route().method(HttpMethod.GET).path("/calculate").handler(handler);
 
-                httpServer.requestHandler(router::accept).listen(8001);
+                httpServer.requestHandler(router::accept).listen(8080);
 
             } else if (var.failed()) {
                 log.info("Start failed");

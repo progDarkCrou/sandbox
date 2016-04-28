@@ -1,8 +1,7 @@
-package com.avorona;
+package com.avorona.vertx;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.Verticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.eventbus.MessageConsumer;
@@ -15,10 +14,8 @@ import io.vertx.core.logging.LoggerFactory;
 
 class ReceiverVerticle extends AbstractVerticle {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
-
     private static final String increaseEventAddress = "com.avorona.actual-number.increase";
-
+    private Logger log = LoggerFactory.getLogger(getClass());
     private int messagesReceived = 0;
 
     private int actualNumber = 0;

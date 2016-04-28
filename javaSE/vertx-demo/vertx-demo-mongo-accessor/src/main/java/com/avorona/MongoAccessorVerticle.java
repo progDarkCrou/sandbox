@@ -13,7 +13,7 @@ import io.vertx.ext.mongo.MongoClient;
 public class MongoAccessorVerticle extends AbstractVerticle {
 
     public static final String DB_MODEL = "calculation";
-    public static final String MONGO_ADDRESS = "vertx.demo-calculation.mongo";
+    public static final String MONGO_ADDRESS = "vertx.demo.mongo-calculate";
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

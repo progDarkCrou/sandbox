@@ -18,22 +18,31 @@ import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
  */
 public class Main {
     public static void main(String[] args) {
+        JoinConfig joinConfig = new JoinConfig();
 
-
-        JoinConfig joinConfig = new JoinConfig()
-                .setMulticastConfig(new MulticastConfig().setEnabled(false));
-
-        String joinAddress = System.getProperty("cluster.join");
+        String joinAddress = System.getenv("CLUSTER_JOIN");
         if (joinAddress != null) {
             TcpIpConfig tcpIpConfig = new TcpIpConfig()
                     .addMember(joinAddress)
                     .setEnabled(true);
-            joinConfig.setTcpIpConfig(tcpIpConfig);
+
+            joinConfig.setMulticastConfig(new MulticastConfig().setEnabled(false))
+                    .setAwsConfig(new AwsConfig().setEnabled(false))
+                    .setTcpIpConfig(tcpIpConfig);
+        } else {
+            MulticastConfig multicastConfig = new MulticastConfig()
+                    .setEnabled(true)
+                    .setMulticastGroup("172.18.0.255");
+
+            joinConfig.setMulticastConfig(multicastConfig)
+                    .setAwsConfig(new AwsConfig().setEnabled(false));
         }
 
         NetworkConfig nconfig = new NetworkConfig()
+                .setReuseAddress(false)
                 .setPortAutoIncrement(true)
                 .setJoin(joinConfig);
+        nconfig.setPortCount(100);
 
         Config config = new Config()
                 .setNetworkConfig(nconfig);

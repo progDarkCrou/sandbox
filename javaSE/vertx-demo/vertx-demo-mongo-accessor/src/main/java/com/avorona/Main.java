@@ -18,7 +18,7 @@ public class Main {
         JoinConfig joinConfig = new JoinConfig()
                 .setMulticastConfig(new MulticastConfig().setEnabled(false));
 
-        String joinAddress = System.getProperty("cluster.join");
+        String joinAddress = System.getenv("CLUSTER_JOIN");
         if (joinAddress != null) {
             TcpIpConfig tcpIpConfig = new TcpIpConfig()
                     .addMember(joinAddress)
@@ -46,7 +46,7 @@ public class Main {
         vertxOptions.setClusterManager(clusterManager);
 
         ApplicationContext context = new ApplicationContext()
-                .addDeployment(new MongoAccessorVerticle())
+                .addDeployment(new MongoAccessorVerticle(System.getenv("MONGO_HOST")))
                 .addPreDeploy(v -> v.eventBus().registerDefaultCodec(MongoCommand.class, new MongoCommandCodec()));
 
         Vertx.clusteredVertx(vertxOptions, context);
