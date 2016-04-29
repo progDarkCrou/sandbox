@@ -25,25 +25,20 @@ public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
+        JoinConfig joinConfig = new JoinConfig();
+
+        MulticastConfig multicastConfig = new MulticastConfig()
+                .setEnabled(true)
+                .setMulticastGroup("224.2.2.3");
+
+        joinConfig.setMulticastConfig(multicastConfig)
+                .setTcpIpConfig(new TcpIpConfig().setEnabled(false))
+                .setAwsConfig(new AwsConfig().setEnabled(false));
+
         NetworkConfig nconfig = new NetworkConfig()
+                .setReuseAddress(true)
                 .setPortAutoIncrement(true)
-                .setReuseAddress(true);
-
-        JoinConfig joinConfig = new JoinConfig()
-                .setTcpIpConfig(new TcpIpConfig().setEnabled(true))
-                .setAwsConfig(new AwsConfig().setEnabled(false))
-                .setMulticastConfig(new MulticastConfig().setEnabled(false));
-
-        String joinAddress = System.getenv("CLUSTER_JOIN");
-        if (joinAddress != null) {
-            TcpIpConfig tcpIpConfig = new TcpIpConfig()
-                    .addMember(joinAddress)
-                    .setEnabled(true);
-
-            joinConfig.setTcpIpConfig(tcpIpConfig);
-        }
-
-        nconfig.setJoin(joinConfig);
+                .setJoin(joinConfig);
 
         String interfacesIpAddresses = System.getenv("BIND_INTERFACES");
         if (interfacesIpAddresses != null) {

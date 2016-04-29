@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.com.avorona</groupId>
+        <groupId>com.avorona</groupId>
         <artifactId>vertx-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -17,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.com.avorona</groupId>
+            <groupId>com.avorona</groupId>
             <artifactId>vertx-demo-shared</artifactId>
             <version>LATEST</version>
         </dependency>
