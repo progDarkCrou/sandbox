@@ -6,7 +6,7 @@ import io.vertx.core.eventbus.MessageCodec;
 import java.util.UUID;
 
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 public class CalculateCommandCodec implements MessageCodec<CalculateCommand, CalculateCommand> {
 

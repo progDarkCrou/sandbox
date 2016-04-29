@@ -2,27 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>com.com.avorona</groupId>
         <artifactId>vertx-demo</artifactId>
+        <groupId>com.avorona</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <artifactId>vertx-demo-calculator</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>vertx-demo-server-xml-config</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.com.avorona</groupId>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.avorona</groupId>
             <artifactId>vertx-demo-shared</artifactId>
             <version>LATEST</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -32,5 +33,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

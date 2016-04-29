@@ -15,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /**
- * Created by avorona on 22.04.16.
+ * Created by com.avorona on 22.04.16.
  */
 public class ApplicationContext implements Handler<AsyncResult<Vertx>> {
 

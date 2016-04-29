@@ -8,7 +8,7 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.ext.mongo.MongoClient;
 
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 public class MongoAccessorVerticle extends AbstractVerticle {
 

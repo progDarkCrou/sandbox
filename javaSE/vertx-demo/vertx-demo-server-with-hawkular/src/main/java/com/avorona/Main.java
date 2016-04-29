@@ -16,7 +16,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
 /**
- * Created by avorona on 18.04.16.
+ * Created by com.avorona on 18.04.16.
  */
 public class Main {
     private static Logger log = LoggerFactory.getLogger(Main.class);

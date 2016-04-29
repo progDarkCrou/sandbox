@@ -3,7 +3,7 @@ package com.avorona.vo;
 import io.vertx.core.json.JsonObject;
 
 /**
- * Created by avorona on 21.04.16.
+ * Created by com.avorona on 21.04.16.
  */
 public class CalcResVO {
     private JsonObject json = new JsonObject();

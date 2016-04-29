@@ -9,14 +9,14 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 /**
- * Created by avorona on 19.04.16.
+ * Created by com.avorona on 19.04.16.
  */
 
 class ReceiverVerticle extends AbstractVerticle {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
-    private static final String increaseEventAddress = "com.avorona.actual-number.increase";
+    private static final String increaseEventAddress = "com.com.avorona.actual-number.increase";
 
     private int messagesReceived = 0;
 

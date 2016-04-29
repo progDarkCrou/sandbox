@@ -13,12 +13,16 @@ import io.vertx.core.VertxOptions;
 import io.vertx.ext.dropwizard.DropwizardMetricsOptions;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 public class Main {
     public static void main(String[] args) {
-        JoinConfig joinConfig = new JoinConfig();
+        JoinConfig joinConfig = new JoinConfig()
+                .setAwsConfig(new AwsConfig().setEnabled(false));
 
         String joinAddress = System.getenv("CLUSTER_JOIN");
         if (joinAddress != null) {
@@ -27,22 +31,24 @@ public class Main {
                     .setEnabled(true);
 
             joinConfig.setMulticastConfig(new MulticastConfig().setEnabled(false))
-                    .setAwsConfig(new AwsConfig().setEnabled(false))
                     .setTcpIpConfig(tcpIpConfig);
         } else {
             MulticastConfig multicastConfig = new MulticastConfig()
-                    .setEnabled(true)
-                    .setMulticastGroup("172.18.0.255");
+                    .setEnabled(true);
 
-            joinConfig.setMulticastConfig(multicastConfig)
-                    .setAwsConfig(new AwsConfig().setEnabled(false));
+            joinConfig.setMulticastConfig(multicastConfig);
         }
 
         NetworkConfig nconfig = new NetworkConfig()
-                .setReuseAddress(false)
+                .setReuseAddress(true)
                 .setPortAutoIncrement(true)
                 .setJoin(joinConfig);
-        nconfig.setPortCount(100);
+
+        InterfacesConfig interfacesConfig = new InterfacesConfig()
+                .setEnabled(true)
+                .setInterfaces(Arrays.asList("172.30.30.64", "172.18.0.*"));
+
+        nconfig.setInterfaces(interfacesConfig).setPortCount(100);
 
         Config config = new Config()
                 .setNetworkConfig(nconfig);
@@ -52,7 +58,8 @@ public class Main {
 
         VertxOptions vertxOptions = new VertxOptions();
 
-        vertxOptions.setMetricsOptions(new DropwizardMetricsOptions()
+        vertxOptions.setClusterHost("172.18.0.2")
+                .setMetricsOptions(new DropwizardMetricsOptions()
                 .setJmxDomain("demo.vertx.calculator-handler")
                 .setEnabled(true)
                 .setJmxEnabled(true));

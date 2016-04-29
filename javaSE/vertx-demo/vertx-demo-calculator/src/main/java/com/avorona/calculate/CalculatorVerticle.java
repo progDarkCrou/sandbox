@@ -4,7 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.MessageConsumer;
 
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 public class CalculatorVerticle extends AbstractVerticle {
 

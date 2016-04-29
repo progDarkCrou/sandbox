@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>vertx-demo</artifactId>
-        <groupId>com.avorona</groupId>
+        <groupId>com.com.avorona</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.avorona</groupId>
+            <groupId>com.com.avorona</groupId>
             <artifactId>vertx-demo-shared</artifactId>
             <version>LATEST</version>
         </dependency>
@@ -29,5 +29,15 @@
             <version>3.2.1</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

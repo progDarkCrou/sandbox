@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import java.util.Objects;
 
 /**
- * Created by avorona on 21.04.16.
+ * Created by com.avorona on 21.04.16.
  */
 public class ErrorRespVO {
     private JsonObject json = new JsonObject();

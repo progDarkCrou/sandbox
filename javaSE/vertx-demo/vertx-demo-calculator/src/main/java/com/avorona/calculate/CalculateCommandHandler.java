@@ -11,7 +11,7 @@ import io.vertx.core.logging.LoggerFactory;
 import java.util.stream.LongStream;
 
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 class CalculateCommandHandler implements Handler<Message<CalculateCommand>> {
 

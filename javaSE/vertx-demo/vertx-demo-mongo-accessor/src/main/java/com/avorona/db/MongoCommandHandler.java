@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.MongoClient;
 
 /**
- * Created by avorona on 21.04.16.
+ * Created by com.avorona on 21.04.16.
  */
 public class MongoCommandHandler implements Handler<Message<MongoCommand>> {
 

@@ -11,7 +11,7 @@ import io.vertx.ext.dropwizard.DropwizardMetricsOptions;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
 /**
- * Created by avorona on 21.04.16.
+ * Created by com.avorona on 21.04.16.
  */
 public class Main {
     public static void main(String[] args) {

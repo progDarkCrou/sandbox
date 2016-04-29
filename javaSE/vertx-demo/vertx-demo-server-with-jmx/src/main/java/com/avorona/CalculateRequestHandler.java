@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 /**
- * Created by avorona on 21.04.16.
+ * Created by com.avorona on 21.04.16.
  */
 public class CalculateRequestHandler implements Handler<RoutingContext> {
 

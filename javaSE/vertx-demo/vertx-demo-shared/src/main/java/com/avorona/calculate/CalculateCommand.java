@@ -3,7 +3,7 @@ package com.avorona.calculate;
 import java.io.Serializable;
 
 /**
- * Created by avorona on 20.04.16.
+ * Created by com.avorona on 20.04.16.
  */
 public class CalculateCommand implements Serializable {
 
