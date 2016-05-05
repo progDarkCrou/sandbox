@@ -1,0 +1,29 @@
+html {
+	color: green;
+}
+
+table tbody tr td:last-child {
+}
+
+table tbody tr td {
+	position: relative;
+}
+
+table tbody tr td span.remove-user {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	transition: all 0.2s ease-in-out;
+	/*display: none;*/
+	width: 0;
+	cursor: pointer;
+	overflow: hidden;
+	text-align: rigth;
+}
+
+table tbody tr:hover td span.remove-user {
+	display: block;
+	transform: translateY(-50%) translateX(100%);
+	width: 10px;
+}

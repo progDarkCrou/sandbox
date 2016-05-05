@@ -1,0 +1,14 @@
+{
+    "server": true,
+    "bootstrap": true,
+    "client_addr": "0.0.0.0",
+    "advertise_addr": "192.168.50.10",
+    "ports": {
+        "dns": 53
+    },
+    "recursors": ["8.8.8.8"],
+    "bind_addr": "0.0.0.0",
+    "ui": true,
+    "disable_update_check": true,
+    "enable_syslog": true
+}

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "VSA-2",
+  "description": "This is an extension, which helps to check out visas available tade",
+  "version": "0.2",
+
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "declarativeContent",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "http://www.polandvisa-ukraine.com/",
+    "*://*/"
+  ],
+  "page_action": {
+    "default_icon": "vsa.png"
+  },
+  "content_scripts": [{
+    "matches": ["http://www.polandvisa-ukraine.com/scheduleappointment_2.html", "http://polandvisa-ukraine.com/scheduleappointment_2.html"],
+    "js": ["content.js"]
+  }, {
+    "matches": ["https://polandonline.vfsglobal.com/*/AppScheduling.aspx*"],
+    "js": ["gatherData.js"],
+    "css": ["gatherData.css"]
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}

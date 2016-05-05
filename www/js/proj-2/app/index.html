@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>This is start page</title>
+  <!-- vendor:css -->
+  <!-- endinject -->
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+
+<body>
+  <div data-ng-app="app"
+    class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1><a href="#/">My site</a></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#/">Home</a></li>
+          <li><a href="#/user">Users</a></li>
+        </ul>
+      </div>
+    </div>
+    <div ui-view="main">
+      <div ui-view="submain"></div>
+    </div>
+  </div>
+  <!-- vendor:js -->
+  <!-- endinject -->
+  <!-- inject:js -->
+  <!-- endinject -->
+</body>
+
+</html>

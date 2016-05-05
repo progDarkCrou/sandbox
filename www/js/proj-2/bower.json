@@ -1,0 +1,29 @@
+{
+  "name": "proj-2",
+  "version": "0.0.0",
+  "homepage": "https://github.com/progDarkCrou/sandbox",
+  "authors": [
+    "Andriy Vorona <avorona@betacom.com.pl>"
+  ],
+  "main": [
+    "app/index.html"
+  ],
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.min.js"
+      ]
+    }
+  }
+}
