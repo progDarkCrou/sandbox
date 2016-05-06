@@ -52,7 +52,6 @@
     <modules>
         <module>vertx-demo-shared</module>
         <module>vertx-demo-calculator</module>
-        <module>vertx-demo-server-with-jmx</module>
         <module>vertx-demo-mongo-accessor</module>
         <module>vertx-server-xml-config</module>
     </modules>

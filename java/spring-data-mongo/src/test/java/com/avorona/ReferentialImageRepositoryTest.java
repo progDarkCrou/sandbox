@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,17 +14,21 @@ import java.util.List;
 
 public class ReferentialImageRepositoryTest extends ImageRepositoryTestBase {
 
-    @Before
+    @Test
     public void fillWithReference() {
-        repository.deleteWithOriginalImage();
+        repository.deleteAll();
 
         Image image = new Image();
+        List<Image> images = new ArrayList<>();
         for (int i = 0; i < generatedCount; i++) {
             Image currentImage = dummyImage();
-            currentImage.setOriginalImage(image);
-            repository.save(currentImage);
+//            currentImage.setOriginalImage(image);
+
+            images.add(currentImage);
             image = currentImage;
         }
+
+        repository.save(images);
     }
 
     @Test

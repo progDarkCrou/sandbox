@@ -9,6 +9,7 @@ import io.vertx.core.VertxOptions;
 import io.vertx.ext.dropwizard.DropwizardMetricsOptions;
 import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
+import java.io.File;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -51,7 +52,8 @@ public class VertxConfigurer {
     }
 
     public VertxOptions build() throws SocketException, NoSuchInterfaceException {
-        VertxOptions vertxOptions = new VertxOptions();
+        VertxOptions vertxOptions = new VertxOptions()
+                .setClustered(true);
         NetworkConfig nconfig = new NetworkConfig();
         Config config = new Config();
 
@@ -120,9 +122,13 @@ public class VertxConfigurer {
 
         nconfig.setJoin(joinConfig).setPortAutoIncrement(hazelPortAutoincrement);
 
-        config.setProperty("hazelcast.local.localAddress", hazelHost)
-                .setProperty("hazelcast.socket.server.bind.any", "false")
-                .setProperty("hazelcast.socket.client.bind", "false")
+        config
+                .setProperty("hazelcast.local.localAddress", hazelHost)
+                .setProperty("hazelcast.socket.bind.any", "false")
+                .setProperty("hazelcast.socket.connect.timeout.seconds", "2")
+                .setProperty("hazelcast.client.heartbeat.timeout", "5000")
+//                .setProperty("hazelcast.socket.keep.alive", "false")
+                .setProperty("hazelcast.max.no.heartbeat.seconds", "1")
                 .setNetworkConfig(nconfig);
 
         if (vertxMetricsJmx) {
@@ -137,7 +143,7 @@ public class VertxConfigurer {
         HazelcastClusterManager clusterManager = new HazelcastClusterManager(hazelcastInstance);
         vertxOptions.setClusterManager(clusterManager);
 
-        return vertxOptions;
+        return vertxOptions.setClusterPingInterval(1000).setClusterPingReplyInterval(1000);
     }
 
     public String getHazelJoinEnvName() {
