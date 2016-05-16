@@ -29,14 +29,25 @@
         <property name="hazelcast.memcache.enabled">false</property>
         <property name="hazelcast.rest.enabled">false</property>
         <property name="hazelcast.wait.seconds.before.join">5</property>
-        <property name="hazelcast.logging.type">jdk</property>
-        <property name="hazelcast.socket.connect.timeout.seconds">2</property>
-        <property name="hazelcast.client.heartbeat.timeout">5000</property>
-        <property name="hazelcast.socket.keep.alive">false</property>
-        <property name="hazelcast.max.no.heartbeat.seconds">2</property>
-        <property name="hazelcast.socket.bind.any">false</property>
+        <!--<property name="hazelcast.logging.type">jdk</property>-->
+        <property name="hazelcast.max.no.heartbeat.seconds">10</property>
+        <!--<property name="hazelcast.client.heartbeat.timeout">5000</property>-->
+        <!--<property name="hazelcast.heartbeat.interval.seconds">1</property>-->
+        <!--<property name="hazelcast.socket.keep.alive">false</property>-->
+        <!--<property name="hazelcast.socket.bind.any">false</property>-->
+        <property name="hazelcast.socket.connect.timeout.seconds">10</property>
         <property name="hazelcast.socket.client.bind.any">false</property>
+        <property name="hazelcast.map.invalidation.batch.enabled">true</property>
     </properties>
+
+    <network>
+        <join>
+            <multicast>
+                <multicast-time-to-live>32</multicast-time-to-live>
+                <multicast-timeout-seconds>2</multicast-timeout-seconds>
+            </multicast>
+        </join>
+    </network>
 
     <map name="__vertx.subs">
 
@@ -45,21 +56,21 @@
             then all entries of the map will be copied to another JVM for
             fail-safety. 0 means no backup.
         -->
-        <backup-count>1</backup-count>
+        <backup-count>5</backup-count>
         <!--
       Maximum number of seconds for each entry to stay in the map. Entries that are
       older than <time-to-live-seconds> and not updated for <time-to-live-seconds>
       will get automatically evicted from the map.
       Any integer between 0 and Integer.MAX_VALUE. 0 means infinite. Default is 0.
     -->
-        <time-to-live-seconds>0</time-to-live-seconds>
+        <time-to-live-seconds>10</time-to-live-seconds>
         <!--
       Maximum number of seconds for each entry to stay idle in the map. Entries that are
       idle(not touched) for more than <max-idle-seconds> will get
       automatically evicted from the map. Entry is touched if get, put or containsKey is called.
       Any integer between 0 and Integer.MAX_VALUE. 0 means infinite. Default is 0.
     -->
-        <max-idle-seconds>0</max-idle-seconds>
+        <max-idle-seconds>10</max-idle-seconds>
         <!--
             Valid values are:
             NONE (no eviction),
@@ -67,7 +78,7 @@
             LFU (Least Frequently Used).
             NONE is the default.
         -->
-        <eviction-policy>NONE</eviction-policy>
+        <eviction-policy>LRU</eviction-policy>
         <!--
             Maximum size of the map. When max size is reached,
             map is evicted based on the policy defined.
@@ -98,6 +109,29 @@
         -->
         <merge-policy>com.hazelcast.map.merge.LatestUpdateMapMergePolicy</merge-policy>
 
+        <near-cache>
+            <time-to-live-seconds>10</time-to-live-seconds>
+            <max-idle-seconds>10</max-idle-seconds>
+            <max-size>100</max-size>
+            <in-memory-format>OBJECT</in-memory-format>
+            <eviction-policy>LRU</eviction-policy>
+        </near-cache>
+    </map>
+
+    <map name="__vertx.haInfo">
+        <backup-count>5</backup-count>
+        <eviction-percentage>25</eviction-percentage>
+        <eviction-policy>LRU</eviction-policy>
+        <max-idle-seconds>60</max-idle-seconds>
+        <time-to-live-seconds>60</time-to-live-seconds>
+
+        <near-cache>
+            <time-to-live-seconds>60</time-to-live-seconds>
+            <max-idle-seconds>60</max-idle-seconds>
+            <max-size>100</max-size>
+            <in-memory-format>OBJECT</in-memory-format>
+            <eviction-policy>LRU</eviction-policy>
+        </near-cache>
     </map>
 
     <!-- Used internally in Vert.x to implement async locks -->

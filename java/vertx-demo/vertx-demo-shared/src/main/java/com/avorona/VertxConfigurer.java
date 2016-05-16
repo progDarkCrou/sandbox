@@ -55,7 +55,7 @@ public class VertxConfigurer {
         VertxOptions vertxOptions = new VertxOptions()
                 .setClustered(true);
         NetworkConfig nconfig = new NetworkConfig();
-        Config config = new Config();
+        Config config = new ClasspathXmlConfig("hazelcast.xml");
 
         String hazelIface = System.getenv(hazelIfaceEnvName);
         if (hazelIface == null) {
@@ -123,12 +123,12 @@ public class VertxConfigurer {
         nconfig.setJoin(joinConfig).setPortAutoIncrement(hazelPortAutoincrement);
 
         config
-                .setProperty("hazelcast.local.localAddress", hazelHost)
-                .setProperty("hazelcast.socket.bind.any", "false")
-                .setProperty("hazelcast.socket.connect.timeout.seconds", "2")
-                .setProperty("hazelcast.client.heartbeat.timeout", "5000")
-//                .setProperty("hazelcast.socket.keep.alive", "false")
-                .setProperty("hazelcast.max.no.heartbeat.seconds", "1")
+//                .setProperty("hazelcast.local.localAddress", hazelHost)
+//                .setProperty("hazelcast.socket.bind.any", "false")
+//                .setProperty("hazelcast.socket.connect.timeout.seconds", "2")
+//                .setProperty("hazelcast.client.heartbeat.timeout", "10000")
+////                .setProperty("hazelcast.socket.keep.alive", "false")
+//                .setProperty("hazelcast.max.no.heartbeat.seconds", "10")
                 .setNetworkConfig(nconfig);
 
         if (vertxMetricsJmx) {

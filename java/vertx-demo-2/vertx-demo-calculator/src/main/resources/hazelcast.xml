@@ -25,18 +25,30 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <properties>
-        <property name="hazelcast.mancenter.enabled">false</property>
-        <property name="hazelcast.memcache.enabled">false</property>
-        <property name="hazelcast.rest.enabled">false</property>
-        <property name="hazelcast.wait.seconds.before.join">5</property>
-        <property name="hazelcast.logging.type">jdk</property>
-        <property name="hazelcast.socket.connect.timeout.seconds">2</property>
-        <property name="hazelcast.client.heartbeat.timeout">5000</property>
-        <property name="hazelcast.socket.keep.alive">false</property>
-        <property name="hazelcast.max.no.heartbeat.seconds">2</property>
-        <property name="hazelcast.socket.bind.any">false</property>
-        <property name="hazelcast.socket.client.bind.any">false</property>
+        <!--<property name="hazelcast.mancenter.enabled">false</property>-->
+        <!--<property name="hazelcast.memcache.enabled">false</property>-->
+        <!--<property name="hazelcast.rest.enabled">false</property>-->
+        <!--<property name="hazelcast.wait.seconds.before.join">5</property>-->
+        <!--<property name="hazelcast.logging.type">jdk</property>-->
+        <!--<property name="hazelcast.socket.connect.timeout.seconds">5</property>-->
+        <property name="hazelcast.max.no.heartbeat.seconds">5</property>
+        <!--<property name="hazelcast.client.heartbeat.timeout">5000</property>-->
+        <!--<property name="hazelcast.heartbeat.interval.seconds">1</property>-->
+        <!--<property name="hazelcast.socket.keep.alive">false</property>-->
+        <!--<property name="hazelcast.socket.bind.any">false</property>-->
+        <!--<property name="hazelcast.socket.client.bind.any">false</property>-->
     </properties>
+
+    <!--<network>-->
+    <!--<join>-->
+    <!--<aws enabled="false"></aws>-->
+    <!--<multicast enabled="false"></multicast>-->
+    <!--<tcp-ip enabled="true">-->
+    <!--<interface>${hazel.join.iface}</interface>-->
+    <!--<members>${hazel.join.members}</members>-->
+    <!--</tcp-ip>-->
+    <!--</join>-->
+    <!--</network>-->
 
     <map name="__vertx.subs">
 
