@@ -1,8 +1,13 @@
 import {Component} from 'angular2/core';
+import {Hero} from './hero.model';
+import {HeroEditorComponent} from './hero-editor.component';
 
 @Component({
+    moduleId: 'app/',
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    templateUrl: 'app.component.html',
+    directives: [HeroEditorComponent]
 })
 export class AppComponent {
+    hero: Hero = new Hero('Robert');
 }

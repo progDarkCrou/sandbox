@@ -1,0 +1,50 @@
+version: '2'
+
+services: 
+  graphana:
+    image: grafana/grafana
+  mongo:
+    image: mongo
+    mem_limit: 512m
+    cpuset: "1"
+    ports:
+      - 27017:27017
+  mongo-accessor:
+    build: 
+      context: ./vertx-demo-mongo-accessor
+      dockerfile: Dockerfile
+    expose:
+     - 4000
+     - 5701
+    environment:
+      - HAZEL_JOIN=$CLUSTER_MASTER
+      - HAZEL_IFACE_NAME=eth0
+      - HAZEL_PUBLIC_PORT=4000
+      - VERTX_PORT=5701
+      - MONGO_HOST=$MONGO_HOST
+  calculator:
+    expose:
+     - 4000
+     - 5701
+    build: 
+      context: ./vertx-demo-calculator
+      dockerfile: Dockerfile
+    environment:
+      - HAZEL_JOIN=$CLUSTER_MASTER
+      - HAZEL_IFACE_NAME=eth0
+      - HAZEL_PUBLIC_PORT=4000
+      - VERTX_PORT=5701
+  server-xml:
+    ports:
+      - 8081:8080
+    expose:
+     - 4000
+     - 5701
+    build: 
+      context: ./vertx-server-xml-config
+      dockerfile: Dockerfile
+    environment:
+      - HAZEL_JOIN=$CLUSTER_MASTER
+      - HAZEL_IFACE_NAME=eth0
+      - HAZEL_PUBLIC_PORT=4000
+      - VERTX_PORT=5701
