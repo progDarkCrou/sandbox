@@ -45,6 +45,7 @@ public class BaseTest {
                 .orderByProcessDefinitionKey().asc()
                 .orderByProcessDefinitionVersion().desc()
                 .list();
+
         logger.info(new FormattedMessage("Process definitions amount: %s", definitions.size()));
         ProcessDefinition processDefinition = definitions.get(0);
 
