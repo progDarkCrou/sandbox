@@ -43,7 +43,7 @@ public class App {
         Optional<Map.Entry<String, List<ProcessDefinition>>> demoProcOpt = processDefinitions.stream()
                 .collect(Collectors.groupingBy(ProcessDefinition::getName))
                 .entrySet()
-                .stream()
+                .parallelStream()
                 .filter(definition -> definition.getKey().toLowerCase().contains("demo"))
                 .findFirst();
 
@@ -59,7 +59,9 @@ public class App {
 
         ProcessDefinition demoProc = demoProcDefVersion.get(0);
 
-        ProcessInstance demoProcInst = runtimeService.startProcessInstanceById(demoProc.getId());
+        ProcessInstance demoProcInst = runtimeService.createProcessInstanceBuilder()
+                .processDefinitionId(demoProc.getId())
+                .start();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Integer claimUserId;
@@ -81,7 +83,7 @@ public class App {
             engine.close();
             System.exit(2);
         }
-        taskService.claim(task.getExecutionId(), claimUserId.toString());
+        taskService.claim(task.getId(), claimUserId.toString());
 
         System.out.println(task.getAssignee());
 
