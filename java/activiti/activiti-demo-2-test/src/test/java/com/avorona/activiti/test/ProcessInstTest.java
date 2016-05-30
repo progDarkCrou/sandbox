@@ -1,14 +1,9 @@
 package com.avorona.activiti.test;
 
-import org.activiti.engine.identity.User;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.test.ActivitiRule;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.FormattedMessage;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,24 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by avorona on 27.05.16.
  */
 
-public class ProcessInstTest {
-
-    private Logger logger = LogManager.getLogger(ProcessInstTest.class);
-
-    @Rule
-    public ActivitiRule rule = new ActivitiRule();
-
-    @Before
-    public void before_authenticate_user() {
-        List<User> userList = rule.getIdentityService().createUserQuery().list();
-        if (userList.size() > 0) {
-            User user = userList.get(0);
-            logger.info("Authenticated user id: " + user.getId());
-            rule.getIdentityService().setAuthenticatedUserId(user.getId());
-        } else {
-            logger.info("No user to authenticate. Be careful in the further tests!!!");
-        }
-    }
+public class ProcessInstTest extends TestBase {
 
     @Before
     public void before_create_1_process_instance() {

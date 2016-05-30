@@ -9,9 +9,10 @@
         <property name="jdbcUsername" value="alfresco" />
         <property name="jdbcPassword" value="alfresco" />
 
-        <property name="databaseSchemaUpdate" value="false" />
+        <property name="databaseSchemaUpdate" value="update" />
 
         <property name="jobExecutorActivate" value="false" />
+        <property name="createDiagramOnDeploy" value="true" />
     </bean>
 
 </beans>

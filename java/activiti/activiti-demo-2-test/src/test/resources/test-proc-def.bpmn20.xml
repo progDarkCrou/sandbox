@@ -5,13 +5,12 @@
              xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:activiti="http://activiti.org/bpmn">
-    <process id="test-proc-spec" isExecutable="true" processType="Public" name="Test deployment process">
-
-        <startEvent name="startEvent" id="startEvent"/>
+    <process id="test-proc-spec" isExecutable="true" processType="Public" name="Test deployment process 1" activiti:candidateUsers="kermit">
+    <startEvent name="startEvent" id="startEvent"/>
 
         <sequenceFlow sourceRef="startEvent" targetRef="task1" id="flow1"/>
 
-        <userTask id="task1" name="name and surname task">
+        <userTask id="task1" name="name and surname task" activiti:candidateUsers="kermit">
             <documentation>
                 This is the description on the task
             </documentation>
@@ -29,11 +28,29 @@
                 Please provide your age.
             </documentation>
             <extensionElements>
-                <activiti:formProperty id="age" required="false" type="int" name="Provide you age"/>
+                <activiti:formProperty id="age" required="false" type="long" name="Provide you age"/>
             </extensionElements>
         </userTask>
 
-        <sequenceFlow sourceRef="task2" targetRef="endEvent"/>
+        <sequenceFlow sourceRef="task2" targetRef="parallel1"/>
+
+        <parallelGateway id="parallel1" name="First parallel gateway" activiti:candidateUsers="1,1000"/>
+
+        <sequenceFlow sourceRef="parallel1" targetRef="endEvent"/>
+
+        <sequenceFlow sourceRef="parallel1" targetRef="task3"/>
+
+        <userTask id="task3">
+            <documentation>
+                Your name is ${name}.
+                Please provide your age.
+            </documentation>
+            <extensionElements>
+                <activiti:formProperty id="age" required="false" type="long" name="Provide you age"/>
+            </extensionElements>
+        </userTask>
+
+        <sequenceFlow sourceRef="task3" targetRef="endEvent"/>
 
         <endEvent id="endEvent"/>
     </process>
