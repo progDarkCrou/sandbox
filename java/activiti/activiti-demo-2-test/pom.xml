@@ -8,7 +8,6 @@
     <artifactId>activiti-demo-2-test</artifactId>
     <version>1.0</version>
 
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

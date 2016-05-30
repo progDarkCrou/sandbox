@@ -19,15 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by avorona on 27.05.16.
  */
 
-public class BaseTest {
+public class ProcessInstTest {
 
-    private Logger logger = LogManager.getLogger(BaseTest.class);
+    private Logger logger = LogManager.getLogger(ProcessInstTest.class);
 
     @Rule
     public ActivitiRule rule = new ActivitiRule();
 
     @Before
-    public void beforeTestAuthenticate() {
+    public void before_authenticate_user() {
         List<User> userList = rule.getIdentityService().createUserQuery().list();
         if (userList.size() > 0) {
             User user = userList.get(0);
@@ -39,7 +39,7 @@ public class BaseTest {
     }
 
     @Before
-    public void creatingSomeProcessInstances() {
+    public void before_create_1_process_instance() {
         List<ProcessDefinition> definitions = rule.getRepositoryService()
                 .createProcessDefinitionQuery()
                 .orderByProcessDefinitionKey().asc()
@@ -54,14 +54,14 @@ public class BaseTest {
     }
 
     @Test
-    public void firstTest() {
+    public void is_at_least_1_process_instance() {
         List<ProcessInstance> processInstances = rule.getRuntimeService().createProcessInstanceQuery().list();
         assertThat(processInstances.size()).isGreaterThanOrEqualTo(1);
         logger.info("Processes instances are: " + processInstances.size());
     }
 
     @Test
-    public void secondTest() {
+    public void can_delete_1_process_instance() {
         List<ProcessInstance> processInstances1 = rule.getRuntimeService().createProcessInstanceQuery().list();
         logger.info("Processes instances: " + processInstances1);
 
@@ -75,5 +75,19 @@ public class BaseTest {
         } else {
             logger.info("No process instances to delete. Skipping test...");
         }
+    }
+
+    @Test
+    public void can_delete_all_process_instances() {
+        List<ProcessInstance> processInstances = rule.getRuntimeService().createProcessInstanceQuery().list();
+
+        processInstances.forEach(processInstance -> {
+            rule.getRuntimeService().deleteProcessInstance(processInstance.getId(), null);
+        });
+
+        List<ProcessInstance> processInstances1 = rule.getRuntimeService().createProcessInstanceQuery().list();
+
+        assertThat(processInstances1.size()).isEqualTo(0);
+        assertThat(processInstances.size()).isGreaterThan(processInstances1.size());
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions id="definitions"
+             name="Test app 1"
+             targetNamespace="http://activiti.org/bpmn20"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:activiti="http://activiti.org/bpmn">
+    <process id="test-proc-spec" isExecutable="true" processType="Public" name="Test deployment process">
+
+        <startEvent name="startEvent" id="startEvent"/>
+
+        <sequenceFlow sourceRef="startEvent" targetRef="task1" id="flow1"/>
+
+        <userTask id="task1" name="name and surname task">
+            <documentation>
+                This is the description on the task
+            </documentation>
+            <extensionElements>
+                <activiti:formProperty id="name" name="Provide your name" required="true" type="string"/>
+                <activiti:formProperty id="surname" name="Provide your surname" required="true" type="string"/>
+            </extensionElements>
+        </userTask>
+
+        <sequenceFlow sourceRef="task1" targetRef="task2"/>
+
+        <userTask id="task2">
+            <documentation>
+                Your name is ${name}.
+                Please provide your age.
+            </documentation>
+            <extensionElements>
+                <activiti:formProperty id="age" required="false" type="int" name="Provide you age"/>
+            </extensionElements>
+        </userTask>
+
+        <sequenceFlow sourceRef="task2" targetRef="endEvent"/>
+
+        <endEvent id="endEvent"/>
+    </process>
+</definitions>
