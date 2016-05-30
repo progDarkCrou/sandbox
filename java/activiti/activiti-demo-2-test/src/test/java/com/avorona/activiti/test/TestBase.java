@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by avorona on 30.05.16.
  */
-class TestBase {
+public class TestBase {
 
     protected Logger logger = LogManager.getLogger(this.getClass());
 
