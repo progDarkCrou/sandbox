@@ -8,10 +8,12 @@ import com.avorona.web.UserRequest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 /**
  * Created by avorona on 01.06.16.
  */
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;

@@ -23,7 +23,7 @@ public class UserResponse {
         this.active = user.getActive();
         this.firstName = user.getFirstName();
         this.birthYear = user.getBirthYear();
-        this.login = user.getLogin();
+        this.login = user.getUsername();
         this.lastName = user.getLastName();
         this.active = user.getActive();
     }

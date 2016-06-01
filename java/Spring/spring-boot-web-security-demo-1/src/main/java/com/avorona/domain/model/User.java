@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
-    private String login;
+    private String username;
     private String password;
     private String email;
 
@@ -51,7 +51,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override
@@ -84,10 +84,6 @@ public class User implements UserDetails {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public String getEmail() {
@@ -123,7 +119,7 @@ public class User implements UserDetails {
     }
 
     public void setUsername(String login) {
-        this.login = login;
+        this.username = login;
     }
 
     public void setPassword(String password) {

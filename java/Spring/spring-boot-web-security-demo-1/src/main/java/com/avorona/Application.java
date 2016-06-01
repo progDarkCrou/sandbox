@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -33,6 +34,7 @@ public class Application extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
+        CookieCsrfTokenRepository csrfTokenRepository = new CookieCsrfTokenRepository();
         http.httpBasic()
             .and()
             .authorizeRequests()
@@ -43,7 +45,7 @@ public class Application extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
             .and()
-            .csrf();
+            .csrf().csrfTokenRepository(csrfTokenRepository);
         // @formatter:on
     }
 
