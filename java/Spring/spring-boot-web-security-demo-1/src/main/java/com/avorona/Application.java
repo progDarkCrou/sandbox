@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @ImportResource("classpath:context.xml")
 @EnableJpaRepositories(basePackages = "com.avorona.domain.repo")
-public class SpringBootWebSecurityDemo1Application extends WebSecurityConfigurerAdapter {
+public class Application extends WebSecurityConfigurerAdapter {
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
@@ -58,7 +58,7 @@ public class SpringBootWebSecurityDemo1Application extends WebSecurityConfigurer
         dataSource.setDriverClass(Driver.class);
         dataSource.setUsername("root");
         dataSource.setPassword("root");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:4306/spring-test-db");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:4306/spring-test-db?useSSL=false");
 
         return dataSource;
     }
@@ -74,6 +74,6 @@ public class SpringBootWebSecurityDemo1Application extends WebSecurityConfigurer
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootWebSecurityDemo1Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
