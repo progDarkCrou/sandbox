@@ -14,10 +14,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -35,7 +33,6 @@ public class SpringBootWebSecurityDemo1Application extends WebSecurityConfigurer
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-        CookieCsrfTokenRepository csrfTokenRepository = new CookieCsrfTokenRepository();
         http.httpBasic()
             .and()
             .authorizeRequests()
