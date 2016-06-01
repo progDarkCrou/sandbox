@@ -1,0 +1,35 @@
+Vert.x investigation rapport:
+
+	Clustering
+	
+	1. Clustering is now in normal condition works fine only with Hazelcast library.
+		a) checked on open-source version
+		b) do not checked on enterprise version, and do not sure is there reason for using enterprise only for clustering
+	2. Clustering with Hazelcast can be done on two ways:
+		a) Multicasting - works out-box without any configuration
+		b) Client-Master joins - required 1 live node (cluster member) to join to. When join to that node, that live node will send
+			list of all known nodes to the new node, to join with. Than 1 master node will be chosen (usually that is the oldest living node)
+
+
+	Metrics
+
+	1. There is (now) 2 available ways to collect metrics:
+		1.1) Hawkular - now is only in Alpha versions, up to 1.0.0.Alpha11
+			a) Pros and cones:
+				IT IS IN ALPHA VERSION NOW!!!
+
+				1) Is a standalone server. Vert.x application sends defined list of statistics to the server.
+				2) Vert.x integration is a bit harder than for Dropwizard.
+				3) This is Alpha version, so there are few mistakes with startup process (sometimes auth server cannot be found, but, it is embed in the standalone) - 
+					http://www.hawkular.org/docs/user/quick-start.html#_troubleshooting
+				4) Do not support Vert.x statistics visualizing out-box. The only way to visualize metrics is to integrate InfluxDB v0.8.x with "Graphana" (read next).
+				5) Graphana - is another standalone server for integration with well-known products, for instance - Hawkular, and visualize it's metrics. It has not any direct integration with,
+					Hawkular API, so now it only can work only with Hawkular's embedded database InfluxDB v0.8.x.
+				6) Graphana needs to configure all necessary statistics by your own - that means, it has not any available statistics list to chose to visualize, but, Vert.x documentation 
+					has list of all statistics' names sent to the Hawkular server.
+
+		1.2) Dropwizard:
+			a) Has stable version.
+			b) works only with JMX
+			c) Needs Jolokia JMX client to 
+
