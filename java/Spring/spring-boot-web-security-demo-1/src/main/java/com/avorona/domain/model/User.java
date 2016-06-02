@@ -1,5 +1,8 @@
 package com.avorona.domain.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,6 +24,7 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
 
+    @NaturalId
     private String username;
     private String password;
     private String email;
@@ -37,6 +41,7 @@ public class User implements UserDetails {
     }
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
     private Set<Authority> authorities = new HashSet<>();
 
     @Override

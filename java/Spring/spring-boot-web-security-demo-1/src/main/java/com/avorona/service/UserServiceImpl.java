@@ -4,8 +4,13 @@ import com.avorona.domain.model.User;
 import com.avorona.domain.repo.UserRepository;
 import com.avorona.exception.AlreadyDefined;
 import com.avorona.exception.UnableToFindException;
+import com.avorona.exception.UserAlreadyDefined;
 import com.avorona.web.UserRequest;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -21,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private Session session;
+
     @Override
     public boolean exists(String username) {
         return entityManager.createQuery("select count(u) from User u where u.username = :username", Long.class)
@@ -33,8 +41,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User find(String username) throws UnableToFindException {
+        return session.byNaturalId(User.class).using("username", username).load();
+    }
+
+    @Override
     public User create(UserRequest request) throws AlreadyDefined {
-        if (exists(request.getUsername())) throw new AlreadyDefined();
+        if (exists(request.getUsername())) throw new UserAlreadyDefined(request.getUsername());
         User user = map(request);
         entityManager.persist(user);
         entityManager.flush();

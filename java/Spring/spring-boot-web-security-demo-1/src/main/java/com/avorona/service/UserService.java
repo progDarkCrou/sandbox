@@ -14,6 +14,8 @@ public interface UserService {
 
     User find(Long id) throws UnableToFindException;
 
+    User find(String username) throws UnableToFindException;
+
     User create(UserRequest request) throws AlreadyDefined;
 
     User update(Long id, UserRequest request) throws UnableToFindException;

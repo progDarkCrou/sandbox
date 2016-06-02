@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by avorona on 01.06.16.
  */
-public class DemoUserDetailsService implements UserDetailsService {
+public class DemoAuthUserDetailsServiceImpl implements UserDetailsService {
 
     private Map<String, User> users = new HashMap<>();
 
