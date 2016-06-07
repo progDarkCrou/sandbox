@@ -19,7 +19,7 @@ if (prod) {
         resolveLoader: {root: path.join(__dirname, 'node_modules')},
         plugins: [
             new webpack.optimize.DedupePlugin(),
-            new webpack.optimize.UglifyJsPlugin(),
+            // new webpack.optimize.UglifyJsPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
                 template: './src/main/index.html'
@@ -28,12 +28,12 @@ if (prod) {
         module: {
             loaders: [
                 {
-                    test: /\.html$/,
-                    loader: "html"
-                },
-                {
                     test: /\.ts$/,
                     loader: 'ts-loader'
+                },
+                {
+                    test: /\.html$/,
+                    loader: "html-minify!html"
                 }
             ]
         }
@@ -59,6 +59,7 @@ if (prod) {
             new webpack.HotModuleReplacementPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
+                template: './src/main/index.html',
                 devServer: 'http://localhost:3000'
             })
         ],
@@ -69,7 +70,7 @@ if (prod) {
             loaders: [
                 {
                     test: /\.html$/,
-                    loader: "html"
+                    loader: "raw!html-minify"
                 },
                 {
                     test: /\.ts$/,

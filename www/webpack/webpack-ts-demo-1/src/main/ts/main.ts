@@ -2,27 +2,26 @@
  * Created by avorona on 06.06.16.
  */
 
-require('angular/angular');
-require('jquery/dist/jquery');
-require('angular-ui-router/release/angular-ui-router');
 
-import {HelloSayer} from "./utils";
+import vendors from './vendor';
+vendors();
+
+import viewModule from './view.module';
+import serviceModule from './service/service.module';
 import ILogService = angular.ILogService;
 
-var helloSayer = new HelloSayer("My name is Andriy");
-helloSayer.sayHello();
+let app = angular.module('app', [
+    'ui.router',
+    viewModule.name,
+    serviceModule.name
+]);
 
-// $('body').text('Hello');
-
-let app = angular.module('app', ['ui.router']);
-
-let run = ($log: ILogService)=> {
-  $log.debug('Hello from Angular + WebPack');
+let run = ($log:ILogService)=> {
+    $log.debug('Hello World, from Angular + WebPack');
 };
-
 run.$inject = ["$log"];
 
 app.run(run);
 
-angular.bootstrap(window.document, ['app']);
+angular.bootstrap($(document), [app.name]);
 export default app;
