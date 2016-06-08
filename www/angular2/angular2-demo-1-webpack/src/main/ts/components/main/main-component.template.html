@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="col-xs-12">
+        <label>
+            Hover color
+            <input type="text"
+                   name="color"
+                   [(ngModel)]="color">
+        </label>
+    </div>
+    <div class="col-xs-12" [avHighlight]="color">
+        Hover me to change my color
+    </div>
+</div>
