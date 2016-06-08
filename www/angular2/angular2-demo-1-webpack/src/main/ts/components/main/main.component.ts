@@ -8,11 +8,11 @@ import {FORM_DIRECTIVES} from "@angular/common";
 @Component({
     selector: 'av-main-component',
     template: require('./main-component.template.html'),
-    directives: [FORM_DIRECTIVES, HighlightDirective]
+    directives: [FORM_DIRECTIVES, [HighlightDirective]]
 })
 export class MainComponent {
 
-    public color = 'red';
+    public color = 'lightblue';
 
     constructor() {
     }
