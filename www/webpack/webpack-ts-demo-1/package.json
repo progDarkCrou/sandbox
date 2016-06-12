@@ -1,0 +1,34 @@
+{
+  "name": "webpack-ts-demo-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "webpack-dev-server --content-base .build/ --hot --display-modules",
+    "prod": "webpack --display-modules",
+    "build": "webpack --display-modules"
+  },
+  "keywords": [
+    "webpack",
+    "typescript",
+    "demo",
+    "1"
+  ],
+  "author": "darkcrou",
+  "license": "ISC",
+  "devDependencies": {
+    "html-loader": "^0.4.3",
+    "ts-loader": "^0.8.2",
+    "webpack-dev-server": "^1.14.1",
+    "html-minify-loader": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.6",
+    "jquery": "^2.2.4",
+    "raw-loader": "^0.5.1",
+    "rxjs": "^5.0.0-beta.8",
+    "webpack": "^1.13.1",
+    "zone.js": "^0.6.12"
+  }
+}

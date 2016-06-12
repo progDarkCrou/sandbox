@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userService" class="com.avorona.service.UserServiceImpl"/>
+
+
+    <beans profile="default">
+        <bean id="userDetailsService" class="com.avorona.auth.DemoAuthUserDetailsServiceImpl"/>
+    </beans>
+
+    <beans profile="prod">
+        <bean id="userDetailsService" class="com.avorona.auth.DaoAuthUserDetailsServiceImpl">
+            <property name="userService" ref="userService"/>
+        </bean>
+    </beans>
+
+</beans>
