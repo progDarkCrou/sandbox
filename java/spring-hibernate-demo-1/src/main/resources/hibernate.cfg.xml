@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- DB schema will be updated if needed -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/spring-hibernate-demo-1?useSSL=false</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="generate_statistics">true</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="c3p0.min_size">5</property>
+        <property name="c3p0.max_size">3</property>
+        <property name="c3p0.max_statements">1</property>
+        <property name="c3p0.acquire_increment">1</property>
+        <!--<property name="c3p0.unreturnedConnectionTimeout" value="9"/>-->
+        <!--<property name="c3p0.checkoutTimeout" value="9"/>-->
+        <property name="c3p0.maxIdleTime">9</property>
+        <!--<property name="c3p0.idleConnectionTestPeriod">0</property>-->
+        <!--<property name="c3p0.maxIdleTimeExcessConnections" value="2"/>-->
+        <!--<property name="c3p0.maxConnectionAge">0</property>-->
+        <!--<property name="c3p0.preferredTestQuery" value="SELECT 1;"/>-->
+        <!--<property name="c3p0.debugUnreturnedConnectionStackTraces" value="true"/>-->
+    </session-factory>
+</hibernate-configuration>
