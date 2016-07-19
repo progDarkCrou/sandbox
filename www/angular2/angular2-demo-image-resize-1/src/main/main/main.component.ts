@@ -21,7 +21,9 @@ import {ComponentRef} from "@angular/core";
 export class MainComponent implements OnInit {
 
     @ViewChild('modalContainer', {read: ViewContainerRef})
-    private modalContainer:ViewContainerRef;
+    public modalContainer:ViewContainerRef;
+
+    public numberToRemove: number;
 
     constructor(private componentResolver:ComponentResolver, private componentBuilder:ComponentBuilder) {
 
@@ -32,12 +34,14 @@ export class MainComponent implements OnInit {
     }
 
     createComponent() {
-        var customComponent = this.componentBuilder.createComponent('hello from the custom built component');
+        var customComponent = this.componentBuilder.createComponent('<span>{{number + ": " + text}}</span>');
         this.componentResolver
             .resolveComponent(customComponent)
             .then((factory:ComponentFactory<CustomComponent>)=> {
                 var component = this.modalContainer.createComponent(factory);
-                component.instance.text = 'hello';
+                var inst = component.instance;
+                inst.text = 'hello';
+                inst.number = this.modalContainer.length;
             });
     }
 

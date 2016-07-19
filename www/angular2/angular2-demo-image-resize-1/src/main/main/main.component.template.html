@@ -1,5 +1,6 @@
 <button (click)="createComponent()" >Create new component</button>
 <br>
 <button (click)="removeAllComponents()">Remove all components</button>
+<input type="number" [(ngModel)]="numberToRemove" [max]="modalContainer.length" min="0">
 <br>
 <div #modalContainer></div>

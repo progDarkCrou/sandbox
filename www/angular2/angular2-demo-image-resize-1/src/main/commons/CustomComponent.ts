@@ -4,4 +4,5 @@
 
 export interface CustomComponent {
     text: string;
+    number: number;
 }

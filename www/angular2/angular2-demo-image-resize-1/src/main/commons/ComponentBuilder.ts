@@ -14,6 +14,7 @@ export class ComponentBuilder {
             template: template
         })
         class CustomComponentClass implements CustomComponent {
+            number:number;
             text:string;
         }
 

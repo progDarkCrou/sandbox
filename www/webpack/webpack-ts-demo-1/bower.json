@@ -1,0 +1,24 @@
+{
+  "name": "webpack-ts-demo-1",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "darkcrou"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "webpack",
+    "typescript",
+    "demo",
+    "1"
+  ],
+  "homepage": "https://github.com/progDarkCrou/sandbox",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
