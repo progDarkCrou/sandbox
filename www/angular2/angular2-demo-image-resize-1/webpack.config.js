@@ -7,7 +7,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        main: './src/main/app.ts'
+        main: './src/main/app.ts',
+        vendor: './src/main/vendor.ts',
+        pollyfil: './src/main/pollyfil.ts'
     },
     output: {
         path: './build',
@@ -18,11 +20,11 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['main']
+            name: ['main', 'vendor', 'pollyfil']
         }),
         new HtmlWebpackPlugin({
             template: './src/main/index.html',
-            chunks: ['main']
+            // chunks: ['main', 'vendor', 'pollyfil']
         })
     ],
     module: {
@@ -33,11 +35,15 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: 'css'
+                loader: 'style!css'
             },
             {
                 test: /\.less$/,
-                loader: 'css!less'
+                loader: 'style!css!less'
+            },
+            {
+                test: /\.html$/,
+                loader: 'html'
             }
         ]
     }
