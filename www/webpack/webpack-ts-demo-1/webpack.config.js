@@ -6,19 +6,22 @@ var prod = process.env.NODE_ENV === 'prod';
 
 if (prod) {
     module.exports = {
-        entry: [
-            './src/main/ts/main.ts'
-        ],
+        entry: {
+            vendor: './src/main/ts/vendor.ts',
+            main: './src/main/ts/main.ts'
+        },
         output: {
-            path: './.build',
-            filename: 'bundle.js'
+            path: './build/',
+            filename: '[name].js'
         },
         resolve: {
-            extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
+            extensions: ['', '.html', '.css', '.ts', '.js']
         },
-        resolveLoader: {root: path.join(__dirname, 'node_modules')},
+        resolveLoader: {
+            root: path.join(__dirname, 'node_modules')
+        },
         plugins: [
-            new webpack.optimize.DedupePlugin(),
+            // new webpack.optimize.DedupePlugin(),
             // new webpack.optimize.UglifyJsPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
@@ -40,13 +43,13 @@ if (prod) {
     };
 } else {
     module.exports = {
-        entry: [
-            'webpack/hot/dev-server',
-            './src/main/ts/main.ts'
-        ],
+        entry: {
+            vendor: './src/main/ts/vendor.ts',
+            main: './src/main/ts/main.ts'
+        },
         output: {
-            path: './.build',
-            filename: 'bundle.js'
+            path: './build',
+            filename: '[name].js'
         },
         resolve: {
             extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
@@ -56,11 +59,11 @@ if (prod) {
         },
         devtool: 'source-map',
         plugins: [
-            new webpack.HotModuleReplacementPlugin(),
+            // new webpack.HotModuleReplacementPlugin(),
             new HtmlWebpackPlugin({
                 filename: "index.html",
                 template: './src/main/index.html',
-                devServer: 'http://localhost:3000'
+                devServer: 'http://localhost:3000/'
             })
         ],
         devServer: {
@@ -70,7 +73,7 @@ if (prod) {
             loaders: [
                 {
                     test: /\.html$/,
-                    loader: "raw!html-minify"
+                    loader: "html"
                 },
                 {
                     test: /\.ts$/,
