@@ -2,7 +2,7 @@
   "name": "angular2-demo-1-webpack",
   "version": "0.0.1",
   "scripts": {
-    "start": "webpack-dev-server --port 8000 --display-modules --content-base .bundle/"
+    "start": "webpack-dev-server --display-modules --inline"
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
