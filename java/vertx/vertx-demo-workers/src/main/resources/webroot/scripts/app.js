@@ -1,5 +1,4 @@
-
-(function() {
+(function () {
   'use strict';
 
   var initialWeatherForecast = {
@@ -48,17 +47,17 @@
    *
    ****************************************************************************/
 
-  document.getElementById('butRefresh').addEventListener('click', function() {
+  document.getElementById('butRefresh').addEventListener('click', function () {
     // Refresh all of the forecasts
     app.updateForecasts();
   });
 
-  document.getElementById('butAdd').addEventListener('click', function() {
+  document.getElementById('butAdd').addEventListener('click', function () {
     // Open/show the add new city dialog
     app.toggleAddDialog(true);
   });
 
-  document.getElementById('butAddCity').addEventListener('click', function() {
+  document.getElementById('butAddCity').addEventListener('click', function () {
     // Add the newly selected city
     var select = document.getElementById('selectCityToAdd');
     var selected = select.options[select.selectedIndex];
@@ -70,7 +69,7 @@
     app.toggleAddDialog(false);
   });
 
-  document.getElementById('butAddCancel').addEventListener('click', function() {
+  document.getElementById('butAddCancel').addEventListener('click', function () {
     // Close the add new city dialog
     app.toggleAddDialog(false);
   });
@@ -83,7 +82,7 @@
    ****************************************************************************/
 
   // Toggles the visibility of the add new city dialog.
-  app.toggleAddDialog = function(visible) {
+  app.toggleAddDialog = function (visible) {
     if (visible) {
       app.addDialog.classList.add('dialog-container--visible');
     } else {
@@ -93,7 +92,7 @@
 
   // Updates a weather card with the latest weather forecast. If the card
   // doesn't already exist, it's cloned from the template.
-  app.updateForecastCard = function(data) {
+  app.updateForecastCard = function (data) {
     var card = app.visibleCards[data.key];
     if (!card) {
       card = app.cardTemplate.cloneNode(true);
@@ -105,20 +104,20 @@
     }
     card.querySelector('.description').textContent = data.currently.summary;
     card.querySelector('.date').textContent =
-      new Date(data.currently.time * 1000);
+        new Date(data.currently.time * 1000);
     card.querySelector('.current .icon').classList.add(data.currently.icon);
     card.querySelector('.current .temperature .value').textContent =
-      Math.round(data.currently.temperature);
+        Math.round(data.currently.temperature);
     card.querySelector('.current .feels-like .value').textContent =
-      Math.round(data.currently.apparentTemperature);
+        Math.round(data.currently.apparentTemperature);
     card.querySelector('.current .precip').textContent =
-      Math.round(data.currently.precipProbability * 100) + '%';
+        Math.round(data.currently.precipProbability * 100) + '%';
     card.querySelector('.current .humidity').textContent =
-      Math.round(data.currently.humidity * 100) + '%';
+        Math.round(data.currently.humidity * 100) + '%';
     card.querySelector('.current .wind .value').textContent =
-      Math.round(data.currently.windSpeed);
+        Math.round(data.currently.windSpeed);
     card.querySelector('.current .wind .direction').textContent =
-      data.currently.windBearing;
+        data.currently.windBearing;
     var nextDays = card.querySelectorAll('.future .oneday');
     var today = new Date();
     today = today.getDay();
@@ -127,12 +126,12 @@
       var daily = data.daily.data[i];
       if (daily && nextDay) {
         nextDay.querySelector('.date').textContent =
-          app.daysOfWeek[(i + today) % 7];
+            app.daysOfWeek[(i + today) % 7];
         nextDay.querySelector('.icon').classList.add(daily.icon);
         nextDay.querySelector('.temp-high .value').textContent =
-          Math.round(daily.temperatureMax);
+            Math.round(daily.temperatureMax);
         nextDay.querySelector('.temp-low .value').textContent =
-          Math.round(daily.temperatureMin);
+            Math.round(daily.temperatureMin);
       }
     }
     if (app.isLoading) {
@@ -150,13 +149,13 @@
    ****************************************************************************/
 
   // Gets a forecast for a specific city and update the card with the data
-  app.getForecast = function(key, label) {
+  app.getForecast = function (key, label) {
     var url = 'https://publicdata-weather.firebaseio.com/';
     url += key + '.json';
     if ('caches' in window) {
-      caches.match(url).then(function(response) {
+      caches.match(url).then(function (response) {
         if (response) {
-          response.json().then(function(json) {
+          response.json().then(function (json) {
             // Only update if the XHR is still pending, otherwise the XHR
             // has already returned and provided the latest data.
             if (app.hasRequestPending) {
@@ -172,7 +171,7 @@
     // Make the XHR to get the data, then update the card
     app.hasRequestPending = true;
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function () {
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200) {
           var response = JSON.parse(request.response);
@@ -188,15 +187,15 @@
   };
 
   // Iterate all of the cards and attempt to get the latest forecast data
-  app.updateForecasts = function() {
+  app.updateForecasts = function () {
     var keys = Object.keys(app.visibleCards);
-    keys.forEach(function(key) {
+    keys.forEach(function (key) {
       app.getForecast(key);
     });
   };
 
   // Save list of cities to localStorage, see note below about localStorage.
-  app.saveSelectedCities = function() {
+  app.saveSelectedCities = function () {
     var selectedCities = JSON.stringify(app.selectedCities);
     // IMPORTANT: See notes about use of localStorage.
     localStorage.selectedCities = selectedCities;
@@ -216,7 +215,7 @@
   app.selectedCities = localStorage.selectedCities;
   if (app.selectedCities) {
     app.selectedCities = JSON.parse(app.selectedCities);
-    app.selectedCities.forEach(function(city) {
+    app.selectedCities.forEach(function (city) {
       app.getForecast(city.key, city.label);
     });
   } else {
@@ -227,9 +226,11 @@
     app.saveSelectedCities();
   }
 
-  if('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-             .register('./service-worker.js')
-             .then(function() { console.log('Service Worker Registered'); });
+        .register('./service-worker.js')
+        .then(function () {
+          console.log('Service Worker Registered');
+        });
   }
 })();

@@ -1,8 +1,8 @@
 package com.avorona.rxjava;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,7 +24,7 @@ public class Demo2 {
     }
 
     System.out.println("Waiting...");
-    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+    Thread.sleep(TimeUnit.SECONDS.toMillis(2) + 10);
     System.out.println("Stopping tickers");
 
     for (Ticker ticker : tickers) {
@@ -37,8 +37,7 @@ public class Demo2 {
   private static class NumberBuffer {
 
     private ReentrantLock lock = new ReentrantLock();
-
-    private Map<Integer, Integer> counter = new HashMap<>();
+    private Map<Integer, Integer> counter = new ConcurrentHashMap<>();
 
     public void add(int number) {
       String threadName = Thread.currentThread().getName();
@@ -46,7 +45,8 @@ public class Demo2 {
 
       try {
         lock.lock();
-        counter.put(number, counter.get(number) != null ? counter.get(number) + 1 : 1);
+        int count = counter.get(number) != null ? counter.get(number) + 1 : 1;
+        counter.put(number, count);
       } finally {
         lock.unlock();
       }

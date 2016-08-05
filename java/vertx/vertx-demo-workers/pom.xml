@@ -6,7 +6,11 @@
 
     <groupId>com.avorona</groupId>
     <artifactId>vertex-demo-workers</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>../vertx-service-worker-2</module>
+    </modules>
 
     <dependencies>
         <dependency>

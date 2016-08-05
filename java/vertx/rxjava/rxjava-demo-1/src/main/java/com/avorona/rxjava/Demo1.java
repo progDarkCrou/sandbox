@@ -18,7 +18,11 @@ public class Demo1 {
         .buffer(3)
         .forEach(integers -> System.out.println("Arrays: " + integers));
 
-    source.forEach(integer -> System.out.println("Just listen value: " + integer));
+    source
+        .doOnEach(notification -> {
+          System.out.println(notification.getValue());
+        })
+        /*.forEach(integer -> System.out.println("Just listen value: " + integer))*/;
 
     Thread.sleep(TimeUnit.SECONDS.toMillis(10));
   }
